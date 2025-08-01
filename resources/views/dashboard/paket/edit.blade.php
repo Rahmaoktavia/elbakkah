@@ -53,6 +53,30 @@
                 @enderror
             </div>
 
+            <!-- Hotel Makkah -->
+            <div class="mb-3">
+                <label for="hotel_makkah" class="form-label fw-semibold">Hotel di Makkah</label>
+                <input type="text" class="form-control @error('hotel_makkah') is-invalid @enderror"
+                    name="hotel_makkah" id="hotel_makkah"
+                    placeholder="Masukkan nama hotel di Makkah"
+                    value="{{ old('hotel_makkah', $paket->hotel_makkah) }}">
+                @error('hotel_makkah')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
+
+            <!-- Hotel Madinah -->
+            <div class="mb-3">
+                <label for="hotel_madinah" class="form-label fw-semibold">Hotel di Madinah</label>
+                <input type="text" class="form-control @error('hotel_madinah') is-invalid @enderror"
+                    name="hotel_madinah" id="hotel_madinah"
+                    placeholder="Masukkan nama hotel di Madinah"
+                    value="{{ old('hotel_madinah', $paket->hotel_madinah) }}">
+                @error('hotel_madinah')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
+
             <!-- Fasilitas -->
             <div class="mb-3">
                 <label for="fasilitas" class="form-label fw-semibold">Fasilitas</label>

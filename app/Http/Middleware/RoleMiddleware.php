@@ -31,6 +31,6 @@ class RoleMiddleware
         }
 
         // Jika role tidak cocok, arahkan ke halaman tertentu (misalnya beranda) dengan pesan error
-        return redirect('/')->with('error', 'Anda tidak memiliki izin untuk mengakses halaman ini.');
+        abort(403, 'Forbidden - Anda tidak memiliki izin untuk mengakses halaman ini.');
     }
 }

@@ -48,4 +48,9 @@ class User extends Authenticatable
             'role' => 'string',
         ];
     }
+
+    public function jamaah()
+    {
+        return $this->hasOne(Jamaah::class);
+    }
 }

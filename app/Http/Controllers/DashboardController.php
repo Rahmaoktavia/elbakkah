@@ -3,19 +3,53 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
+use App\Models\PaketUmrah;
+use App\Models\Jamaah;
+use App\Models\Pemesanan;
+use App\Models\DistribusiPerlengkapan;
 
 class DashboardController extends Controller
 {
+  
     public function dashboard()
     {
-        return view('dashboard.index');
+        $totalPaket = PaketUmrah::count();
+        $totalJamaah = Jamaah::count();
+        $totalPemesanan = Pemesanan::count();
+        $totalDistribusi = DistribusiPerlengkapan::count();
+
+        $topPaket = PaketUmrah::withCount('pemesanan')
+                ->orderByDesc('pemesanan_count')
+                ->take(3)
+                ->get();
+
+        return view('dashboard.index', compact(
+            'totalPaket',
+            'totalJamaah',
+            'totalPemesanan',
+            'totalDistribusi',
+            'topPaket'
+        ));
     }
+
     /**
      * Display a listing of the resource.
      */
     public function index()
     {
-        //
+        $totalPaket = PaketUmrah::count();
+        $totalJamaah = Jamaah::count();
+        $totalPemesanan = Pemesanan::count();
+        $totalDistribusi = DistribusiPerlengkapan::count();
+
+        $topPaket = PaketUmrah::withCount('pemesanan')
+                    ->orderByDesc('pemesanan_count')
+                    ->take(3)
+                    ->get();
+
+        return view('dashboard.index', compact(
+            'totalPaket', 'totalJamaah', 'totalPemesanan', 'totalDistribusi', 'topPaket'
+        ));
     }
 
     /**

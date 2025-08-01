@@ -56,8 +56,12 @@
 
 
     <!-- Vendors CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
 
     <link rel="stylesheet" href="{{ asset('vendor/fonts/boxicons.css') }}" />
+
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
 
 
     <link rel="stylesheet" href="{{ asset('vendor/libs/perfect-scrollbar/perfect-scrollbar.css') }}">
@@ -67,7 +71,7 @@
     <link rel="stylesheet" href="{{ asset('vendor/libs/apex-charts/apex-charts.css') }}">
 
     <!-- Page CSS -->
-
+      
 
     <!-- Helpers -->
     <script src="{{ asset('vendor/js/helpers.js') }}"></script><style type="text/css">

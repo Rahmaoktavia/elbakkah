@@ -19,8 +19,8 @@
 				<li class="nav-item {{ Request::is('/') ? 'active' : '' }}">
 					<a href="/" class="nav-link">Home</a>
 				</li>
-				<li class="nav-item {{ Request::is('paketumrah') ? 'active' : '' }}">
-					<a href="/paketumrah" class="nav-link">Paket Umrah</a>
+				<li class="nav-item {{ Request::is('paket-umrah*') ? 'active' : '' }}">
+					<a href="/paket-umrah" class="nav-link">Paket Umrah</a>
 				</li>
 				<li class="nav-item {{ Request::is('galeri*') ? 'active' : '' }}">
 					<a href="/galeri" class="nav-link">Galeri</a>
@@ -28,7 +28,7 @@
 				<li class="nav-item {{ Request::is('artikel*') ? 'active' : '' }}">
 					<a href="/artikel" class="nav-link">Artikel</a>
 				</li>
-				<li class="nav-item {{ Request::is('tentangkami') ? 'active' : '' }}">
+				<li class="nav-item {{ Request::is('tentangkami*') ? 'active' : '' }}">
 					<a href="/tentangkami" class="nav-link">Tentang Kami</a>
 				</li>
 
@@ -36,20 +36,28 @@
 					<li class="nav-item {{ Request::is('login') ? 'active' : '' }}">
 						<a href="{{ route('login') }}" class="nav-link">Login</a>
 					</li>
-				@else
+					@else
+					@php
+						$user = Auth::user();
+						$hasJamaah = $user->jamaah()->exists();
+					@endphp
 					<li class="nav-item dropdown">
 						<a class="nav-link dropdown-toggle d-flex align-items-center" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
 							<i class="fa fa-user-circle" style="font-size: 20px; margin-right: 6px;"></i>
-							<span style="text-transform: capitalize;">{{ Auth::user()->name }}</span>
+							<span style="text-transform: capitalize;">{{ $user->name }}</span>
 						</a>
 						<div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
+							@if($hasJamaah)
+								<a href="{{ route('riwayat.reservasi') }}" class="dropdown-item">Riwayat Reservasi</a>
+								<a href="{{ route('riwayat.perlengkapan') }}" class="dropdown-item">Riwayat Perlengkapan</a>
+							@endif
 							<form id="logout-form" action="{{ route('logout') }}" method="POST" class="dropdown-item p-0 m-0">
 								@csrf
 								<button type="button" class="btn btn-link dropdown-item" onclick="swalLogout()">Logout</button>
 							</form>
 						</div>
 					</li>
-				@endguest
+				@endguest				
 			</ul>
 		</div>
 	</div>

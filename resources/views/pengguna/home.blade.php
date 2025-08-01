@@ -1,669 +1,266 @@
 @extends('pengguna.layouts.main')
 @section('content')
 
-    <div class="hero-wrap js-fullheight" style="background-image: url('{{ asset('images/image_home.png') }}');">
-		<div class="overlay"></div>
-		<div class="container">
-			<div class="row no-gutters slider-text js-fullheight align-items-center" data-scrollax-parent="true">
-				<div class="col-md-7 ftco-animate">
-					<span class="subheading">Welcome to Pacific</span>
-					<h1 class="mb-4">Discover Your Favorite Place with Us</h1>
-					<p class="caps">Travel to the any corner of the world, without going around in circles</p>
+		<div class="hero-wrap js-fullheight" style="background-image: url('{{ asset('images/image_home.png') }}');">
+			<div class="overlay"></div>
+			<div class="container">
+				<div class="row no-gutters slider-text js-fullheight align-items-center" data-scrollax-parent="true">
+					<div class="col-md-7 ftco-animate">
+						<span class="subheading">Selamat Datang di El-Bakkah Travel</span>
+						<h1 class="mb-4">Temani Langkah Suci Anda Menuju Tanah Haram</h1>
+						<p class="caps">Perjalanan spiritual yang nyaman, aman, dan penuh keberkahan</p>
+					</div>
 				</div>
 			</div>
 		</div>
-	</div>
 
-	<section class="ftco-section ftco-no-pb ftco-no-pt">
-		<div class="container">
-			<div class="row">
-				<div class="col-md-12">
-					<div class="ftco-search d-flex justify-content-center">
-						<div class="row">
-							<div class="col-md-12 nav-link-wrap">
-								<div class="nav nav-pills text-center" id="v-pills-tab" role="tablist" aria-orientation="vertical">
-									<a class="nav-link active mr-md-1" id="v-pills-1-tab" data-toggle="pill" href="#v-pills-1" role="tab" aria-controls="v-pills-1" aria-selected="true">Search Tour</a>
-
-									<a class="nav-link" id="v-pills-2-tab" data-toggle="pill" href="#v-pills-2" role="tab" aria-controls="v-pills-2" aria-selected="false">Hotel</a>
-
-								</div>
-							</div>
-							<div class="col-md-12 tab-wrap">
-
-								<div class="tab-content" id="v-pills-tabContent">
-
-									<div class="tab-pane fade show active" id="v-pills-1" role="tabpanel" aria-labelledby="v-pills-nextgen-tab">
-										<form action="#" class="search-property-1">
-											<div class="row no-gutters">
-												<div class="col-md d-flex">
-													<div class="form-group p-4 border-0">
-														<label for="#">Destination</label>
-														<div class="form-field">
-															<div class="icon"><span class="fa fa-search"></span></div>
-															<input type="text" class="form-control" placeholder="Search place">
-														</div>
-													</div>
-												</div>
-												<div class="col-md d-flex">
-													<div class="form-group p-4">
-														<label for="#">Check-in date</label>
-														<div class="form-field">
-															<div class="icon"><span class="fa fa-calendar"></span></div>
-															<input type="text" class="form-control checkin_date" placeholder="Check In Date">
-														</div>
-													</div>
-												</div>
-												<div class="col-md d-flex">
-													<div class="form-group p-4">
-														<label for="#">Check-out date</label>
-														<div class="form-field">
-															<div class="icon"><span class="fa fa-calendar"></span></div>
-															<input type="text" class="form-control checkout_date" placeholder="Check Out Date">
-														</div>
-													</div>
-												</div>
-												<div class="col-md d-flex">
-													<div class="form-group p-4">
-														<label for="#">Price Limit</label>
-														<div class="form-field">
-															<div class="select-wrap">
-																<div class="icon"><span class="fa fa-chevron-down"></span></div>
-																<select name="" id="" class="form-control">
-																	<option value="">$100</option>
-																	<option value="">$10,000</option>
-																	<option value="">$50,000</option>
-																	<option value="">$100,000</option>
-																	<option value="">$200,000</option>
-																	<option value="">$300,000</option>
-																	<option value="">$400,000</option>
-																	<option value="">$500,000</option>
-																	<option value="">$600,000</option>
-																	<option value="">$700,000</option>
-																	<option value="">$800,000</option>
-																	<option value="">$900,000</option>
-																	<option value="">$1,000,000</option>
-																	<option value="">$2,000,000</option>
-																</select>
-															</div>
-														</div>
-													</div>
-												</div>
-												<div class="col-md d-flex">
-													<div class="form-group d-flex w-100 border-0">
-														<div class="form-field w-100 align-items-center d-flex">
-															<input type="submit" value="Search" class="align-self-stretch form-control btn btn-primary">
-														</div>
-													</div>
-												</div>
-											</div>
-										</form>
-									</div>
-
-									<div class="tab-pane fade" id="v-pills-2" role="tabpanel" aria-labelledby="v-pills-performance-tab">
-										<form action="#" class="search-property-1">
-											<div class="row no-gutters">
-												<div class="col-lg d-flex">
-													<div class="form-group p-4 border-0">
-														<label for="#">Destination</label>
-														<div class="form-field">
-															<div class="icon"><span class="fa fa-search"></span></div>
-															<input type="text" class="form-control" placeholder="Search place">
-														</div>
-													</div>
-												</div>
-												<div class="col-lg d-flex">
-													<div class="form-group p-4">
-														<label for="#">Check-in date</label>
-														<div class="form-field">
-															<div class="icon"><span class="fa fa-calendar"></span></div>
-															<input type="text" class="form-control checkin_date" placeholder="Check In Date">
-														</div>
-													</div>
-												</div>
-												<div class="col-lg d-flex">
-													<div class="form-group p-4">
-														<label for="#">Check-out date</label>
-														<div class="form-field">
-															<div class="icon"><span class="fa fa-calendar"></span></div>
-															<input type="text" class="form-control checkout_date" placeholder="Check Out Date">
-														</div>
-													</div>
-												</div>
-												<div class="col-lg d-flex">
-													<div class="form-group p-4">
-														<label for="#">Price Limit</label>
-														<div class="form-field">
-															<div class="select-wrap">
-																<div class="icon"><span class="fa fa-chevron-down"></span></div>
-																<select name="" id="" class="form-control">
-																	<option value="">$100</option>
-																	<option value="">$10,000</option>
-																	<option value="">$50,000</option>
-																	<option value="">$100,000</option>
-																	<option value="">$200,000</option>
-																	<option value="">$300,000</option>
-																	<option value="">$400,000</option>
-																	<option value="">$500,000</option>
-																	<option value="">$600,000</option>
-																	<option value="">$700,000</option>
-																	<option value="">$800,000</option>
-																	<option value="">$900,000</option>
-																	<option value="">$1,000,000</option>
-																	<option value="">$2,000,000</option>
-																</select>
-															</div>
-														</div>
-													</div>
-												</div>
-												<div class="col-lg d-flex">
-													<div class="form-group d-flex w-100 border-0">
-														<div class="form-field w-100 align-items-center d-flex">
-															<input type="submit" value="Search" class="align-self-stretch form-control btn btn-primary p-0">
-														</div>
-													</div>
-												</div>
-											</div>
-										</form>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-
-		<section class="ftco-section services-section">
+		{{-- PAKET UMRAH DI HOMEPAGE --}}
+		<section class="py-5 bg-light" id="paket-umrah-home">
 			<div class="container">
-				<div class="row d-flex">
-					<div class="col-md-6 order-md-last heading-section pl-md-5 ftco-animate d-flex align-items-center">
-						<div class="w-100">
-							<span class="subheading">Welcome to Pacific</span>
-							<h2 class="mb-4">It's time to start your adventure</h2>
-							<p>A small river named Duden flows by their place and supplies it with the necessary regelialia. It is a paradisematic country, in which roasted parts of sentences fly into your mouth.</p>
-							<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.
-							A small river named Duden flows by their place and supplies it with the necessary regelialia.</p>
-							<p><a href="#" class="btn btn-primary py-3 px-4">Search Destination</a></p>
+				<h2 class="text-center mb-2 fw-bold text-dark">
+					Paket Umrah yang Tersedia
+				</h2>				
+				  <p class="text-center text-muted mb-4" style="max-width: 600px; margin: 0 auto;">
+					Pilih paket umrah terbaik sesuai kebutuhan Anda. Dengan bimbingan profesional dan pelayanan terbaik, kami siap menemani langkah ibadah Anda menuju Tanah Suci dengan aman, nyaman, dan penuh keberkahan.
+				  </p>				  
+		
+			<div class="row g-4">
+				@foreach($paketUmrahs->take(3) as $paket)
+				<div class="col-md-6 col-lg-4">
+				<div class="card h-100 border-0 paket-card shadow-lg">
+					{{-- Gambar --}}
+					<img src="{{ asset('img/'.$paket->gambar_paket) }}" class="card-img-top card-img-custom" alt="Gambar Paket">
+		
+					{{-- Konten --}}
+					<div class="card-body p-4 d-flex flex-column">
+					{{-- Nama Paket --}}
+					<h5 class="nama-paket text-uppercase text-center mb-4">{{ $paket->nama_paket }}</h5>
+		
+					{{-- Info Rows --}}
+					<div class="d-flex flex-column">
+						<div class="d-flex justify-content-between align-items-center mb-3">
+						<div class="icon-pill bg-soft-warning text-warning">
+							<i class='bx bx-time-five'></i>
+							<span class="icon-text">Durasi</span>
+						</div>
+						<span class="info-text text-end">{{ $paket->jumlah_hari }} Hari</span>
+						</div>
+		
+						<div class="d-flex justify-content-between align-items-center mb-3">
+						<div class="icon-pill bg-soft-primary text-primary">
+							<i class="fas fa-kaaba"></i>
+							<span class="icon-text">Makkah</span>
+						</div>
+						<span class="info-text text-end">{{ $paket->hotel_makkah }}</span>
+						</div>
+		
+						<div class="d-flex justify-content-between align-items-center mb-3">
+						<div class="icon-pill bg-soft-danger text-danger">
+							<i class="fas fa-mosque"></i>
+							<span class="icon-text">Madinah</span>
+						</div>
+						<span class="info-text text-end">{{ $paket->hotel_madinah }}</span>
 						</div>
 					</div>
-					<div class="col-md-6">
-						<div class="row">
-							<div class="col-md-12 col-lg-6 d-flex align-self-stretch ftco-animate">
-								<div class="services services-1 color-1 d-block img" style="background-image: url(images/services-1.jpg);">
-									<div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-paragliding"></span></div>
-									<div class="media-body">
-										<h3 class="heading mb-3">Activities</h3>
-										<p>A small river named Duden flows by their place and supplies it with the necessary</p>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-12 col-lg-6 d-flex align-self-stretch ftco-animate">
-								<div class="services services-1 color-2 d-block img" style="background-image: url(images/services-2.jpg);">
-									<div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-route"></span></div>
-									<div class="media-body">
-										<h3 class="heading mb-3">Travel Arrangements</h3>
-										<p>A small river named Duden flows by their place and supplies it with the necessary</p>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-12 col-lg-6 d-flex align-self-stretch ftco-animate">
-								<div class="services services-1 color-3 d-block img" style="background-image: url(images/services-3.jpg);">
-									<div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-tour-guide"></span></div>
-									<div class="media-body">
-										<h3 class="heading mb-3">Private Guide</h3>
-										<p>A small river named Duden flows by their place and supplies it with the necessary</p>
-									</div>
-								</div>
-							</div>
-							<div class="col-md-12 col-lg-6 d-flex align-self-stretch ftco-animate">
-								<div class="services services-1 color-4 d-block img" style="background-image: url(images/services-4.jpg);">
-									<div class="icon d-flex align-items-center justify-content-center"><span class="flaticon-map"></span></div>
-									<div class="media-body">
-										<h3 class="heading mb-3">Location Manager</h3>
-										<p>A small river named Duden flows by their place and supplies it with the necessary</p>
-									</div>
-								</div>
-							</div>
+		
+					<hr class="my-3 garis-halus">
+		
+					<div class="mt-auto text-center">
+						<div class="harga-text mb-3">
+						Rp {{ number_format($paket->harga, 0, ',', '.') }}
 						</div>
+						<a href="{{ route('pengguna.detail_paket', $paket->id) }}" class="btn btn-detail-paket w-100">Detail Paket</a>
+					</div>
 					</div>
 				</div>
+				</div>
+				@endforeach
+			</div>
+		
+			<div class="text-center mt-5">
+				<a href="{{ route('pengguna.paket') }}" class="btn btn-primary shadow-sm px-4 py-2">Lihat Semua Paket</a>
+			</div>
 			</div>
 		</section>
-
-		<section class="ftco-section img ftco-select-destination" style="background-image: url(images/bg_3.jpg);">
+  
+		<section class="ftco-section bg-light py-5">
 			<div class="container">
-				<div class="row justify-content-center pb-4">
-					<div class="col-md-12 heading-section text-center ftco-animate">
-						<span class="subheading">Pacific Provide Places</span>
-						<h2 class="mb-4">Select Your Destination</h2>
+			  <div class="text-center mb-5">
+				<h2 class="font-weight-bold text-dark">Alasan Kenapa Harus Memilih El-Bakkah Travel</h2>
+				<p class="text-muted" style="max-width: 700px; margin: 0 auto;">
+				  El-Bakkah Travel berkomitmen menjadi mitra perjalanan spiritual Anda dengan pelayanan terbaik, amanah, dan penuh keberkahan.
+				</p>
+			  </div>
+		  
+			  <div class="row">
+				<!-- Card -->
+				<div class="col-md-4 mb-4">
+				  <div class="card-gradient text-center p-4 h-100">
+					<div class="icon-circle mb-3">
+					  <i class="fas fa-check-circle fa-2x"></i>
 					</div>
+					<h5 class="fw-bold text-dark">Resmi & Terpercaya</h5>
+					<p class="text-muted">Terdaftar resmi di Kemenag RI, menjamin perjalanan yang aman dan sesuai regulasi.</p>
+				  </div>
 				</div>
-			</div>
-			<div class="container container-2">
-				<div class="row">
-					<div class="col-md-12">
-						<div class="carousel-destination owl-carousel ftco-animate">
-							<div class="item">
-								<div class="project-destination">
-									<a href="#" class="img" style="background-image: url(images/place-1.jpg);">
-										<div class="text">
-											<h3>Philippines</h3>
-											<span>8 Tours</span>
-										</div>
-									</a>
-								</div>
-							</div>
-							<div class="item">
-								<div class="project-destination">
-									<a href="#" class="img" style="background-image: url(images/place-2.jpg);">
-										<div class="text">
-											<h3>Canada</h3>
-											<span>2 Tours</span>
-										</div>
-									</a>
-								</div>
-							</div>
-							<div class="item">
-								<div class="project-destination">
-									<a href="#" class="img" style="background-image: url(images/place-3.jpg);">
-										<div class="text">
-											<h3>Thailand</h3>
-											<span>5 Tours</span>
-										</div>
-									</a>
-								</div>
-							</div>
-							<div class="item">
-								<div class="project-destination">
-									<a href="#" class="img" style="background-image: url(images/place-4.jpg);">
-										<div class="text">
-											<h3>Autralia</h3>
-											<span>5 Tours</span>
-										</div>
-									</a>
-								</div>
-							</div>
-							<div class="item">
-								<div class="project-destination">
-									<a href="#" class="img" style="background-image: url(images/place-5.jpg);">
-										<div class="text">
-											<h3>Greece</h3>
-											<span>7 Tours</span>
-										</div>
-									</a>
-								</div>
-							</div>
-						</div>
+		  
+				<div class="col-md-4 mb-4">
+				  <div class="card-gradient text-center p-4 h-100">
+					<div class="icon-circle mb-3">
+					  <i class="fas fa-plane-departure fa-2x"></i>
 					</div>
+					<h5 class="fw-bold text-dark">Jaminan Pasti Berangkat</h5>
+					<p class="text-muted">Keberangkatan sesuai jadwal, tanpa penundaan. Kepastian untuk ibadah yang tenang.</p>
+				  </div>
 				</div>
+		  
+				<div class="col-md-4 mb-4">
+				  <div class="card-gradient text-center p-4 h-100">
+					<div class="icon-circle mb-3">
+					  <i class="fas fa-user-graduate fa-2x"></i>
+					</div>
+					<h5 class="fw-bold text-dark">Pembimbing Bersertifikat</h5>
+					<p class="text-muted">Dampingi oleh pembimbing umrah bersertifikat dan sesuai sunnah untuk ibadah yang berkualitas.</p>
+				  </div>
+				</div>
+		  
+				<div class="col-md-4 mb-4">
+				  <div class="card-gradient text-center p-4 h-100">
+					<div class="icon-circle mb-3">
+					  <i class="fas fa-hotel fa-2x"></i>
+					</div>
+					<h5 class="fw-bold text-dark">Fasilitas Nyaman & Lengkap</h5>
+					<p class="text-muted">Hotel dekat Masjidil Haram/Nabawi, transportasi AC, dan makanan sesuai cita rasa Indonesia.</p>
+				  </div>
+				</div>
+		  
+				<div class="col-md-4 mb-4">
+				  <div class="card-gradient text-center p-4 h-100">
+					<div class="icon-circle mb-3">
+					  <i class="fas fa-calendar-check fa-2x"></i>
+					</div>
+					<h5 class="fw-bold text-dark">Pengalaman Bertahun-tahun</h5>
+					<p class="text-muted">Ribuan jamaah telah diberangkatkan sejak awal berdiri, dengan kepuasan yang tinggi.</p>
+				  </div>
+				</div>
+		  
+				<div class="col-md-4 mb-4">
+				  <div class="card-gradient text-center p-4 h-100">
+					<div class="icon-circle mb-3">
+					  <i class="fas fa-hands-helping fa-2x"></i>
+					</div>
+					<h5 class="fw-bold text-dark">Pendampingan Sepanjang Perjalanan</h5>
+					<p class="text-muted">Mulai dari manasik hingga pulang ke tanah air, kami selalu ada untuk Anda.</p>
+				  </div>
+				</div>
+			  </div>
 			</div>
-		</section>
-
-		<section class="ftco-section">
+		  </section>
+		  
+		  <section class="ftco-section bg-light py-5">
 			<div class="container">
-				<div class="row justify-content-center pb-4">
-					<div class="col-md-12 heading-section text-center ftco-animate">
-						<span class="subheading">Destination</span>
-						<h2 class="mb-4">Tour Destination</h2>
-					</div>
+			  <div class="row justify-content-center mb-4">
+				<div class="col-md-10 text-center">
+				  <h2 class="font-weight-bold text-dark">Galeri Kegiatan Jamaah Umrah</h2>
+				  <p class="text-muted">Potret momen kebersamaan, ibadah penuh makna, dan perjalanan spiritual para jamaah El-Bakkah Travel.</p>
 				</div>
-				<div class="row">
-					<div class="col-md-4 ftco-animate">
-						<div class="project-wrap">
-							<a href="#" class="img" style="background-image: url(images/destination-1.jpg);">
-								<span class="price">$550/person</span>
-							</a>
-							<div class="text p-4">
-								<span class="days">8 Days Tour</span>
-								<h3><a href="#">Banaue Rice Terraces</a></h3>
-								<p class="location"><span class="fa fa-map-marker"></span> Banaue, Ifugao, Philippines</p>
-								<ul>
-									<li><span class="flaticon-shower"></span>2</li>
-									<li><span class="flaticon-king-size"></span>3</li>
-									<li><span class="flaticon-mountains"></span>Near Mountain</li>
-								</ul>
-							</div>
+			  </div>
+		  
+			  <div class="row g-4">
+				@forelse ($galeris as $galeri)
+				  <div class="col-md-4 col-sm-6">
+					<div class="galeri-item" style="background-image: url('{{ asset('img/' . $galeri->file_foto) }}');" onclick="openLightbox('{{ asset('img/' . $galeri->file_foto) }}')">
+					  <div class="overlay-info">
+						<h5 class="judul">{{ $galeri->judul_foto }}</h5>
+						<p class="deskripsi">{{ $galeri->deskripsi ?? 'Tidak ada deskripsi.' }}</p>
+						<div class="tanggal">
+						  <i class="fa fa-calendar mr-1"></i>
+						  {{ \Carbon\Carbon::parse($galeri->tanggal_upload)->translatedFormat('d M Y') }}
 						</div>
+					  </div>
 					</div>
-					<div class="col-md-4 ftco-animate">
-						<div class="project-wrap">
-							<a href="#" class="img" style="background-image: url(images/destination-2.jpg);">
-								<span class="price">$550/person</span>
-							</a>
-							<div class="text p-4">
-								<span class="days">10 Days Tour</span>
-								<h3><a href="#">Banaue Rice Terraces</a></h3>
-								<p class="location"><span class="fa fa-map-marker"></span> Banaue, Ifugao, Philippines</p>
-								<ul>
-									<li><span class="flaticon-shower"></span>2</li>
-									<li><span class="flaticon-king-size"></span>3</li>
-									<li><span class="flaticon-sun-umbrella"></span>Near Beach</li>
-								</ul>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4 ftco-animate">
-						<div class="project-wrap">
-							<a href="#" class="img" style="background-image: url(images/destination-3.jpg);">
-								<span class="price">$550/person</span>
-							</a>
-							<div class="text p-4">
-								<span class="days">7 Days Tour</span>
-								<h3><a href="#">Banaue Rice Terraces</a></h3>
-								<p class="location"><span class="fa fa-map-marker"></span> Banaue, Ifugao, Philippines</p>
-								<ul>
-									<li><span class="flaticon-shower"></span>2</li>
-									<li><span class="flaticon-king-size"></span>3</li>
-									<li><span class="flaticon-sun-umbrella"></span>Near Beach</li>
-								</ul>
-							</div>
-						</div>
-					</div>
-
-					<div class="col-md-4 ftco-animate">
-						<div class="project-wrap">
-							<a href="#" class="img" style="background-image: url(images/destination-4.jpg);">
-								<span class="price">$550/person</span>
-							</a>
-							<div class="text p-4">
-								<span class="days">8 Days Tour</span>
-								<h3><a href="#">Banaue Rice Terraces</a></h3>
-								<p class="location"><span class="fa fa-map-marker"></span> Banaue, Ifugao, Philippines</p>
-								<ul>
-									<li><span class="flaticon-shower"></span>2</li>
-									<li><span class="flaticon-king-size"></span>3</li>
-									<li><span class="flaticon-sun-umbrella"></span>Near Beach</li>
-								</ul>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4 ftco-animate">
-						<div class="project-wrap">
-							<a href="#" class="img" style="background-image: url(images/destination-5.jpg);">
-								<span class="price">$550/person</span>
-							</a>
-							<div class="text p-4">
-								<span class="days">10 Days Tour</span>
-								<h3><a href="#">Banaue Rice Terraces</a></h3>
-								<p class="location"><span class="fa fa-map-marker"></span> Banaue, Ifugao, Philippines</p>
-								<ul>
-									<li><span class="flaticon-shower"></span>2</li>
-									<li><span class="flaticon-king-size"></span>3</li>
-									<li><span class="flaticon-sun-umbrella"></span>Near Beach</li>
-								</ul>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4 ftco-animate">
-						<div class="project-wrap">
-							<a href="#" class="img" style="background-image: url(images/destination-6.jpg);">
-								<span class="price">$550/person</span>
-							</a>
-							<div class="text p-4">
-								<span class="days">7 Days Tour</span>
-								<h3><a href="#">Banaue Rice Terraces</a></h3>
-								<p class="location"><span class="fa fa-map-marker"></span> Banaue, Ifugao, Philippines</p>
-								<ul>
-									<li><span class="flaticon-shower"></span>2</li>
-									<li><span class="flaticon-king-size"></span>3</li>
-									<li><span class="flaticon-sun-umbrella"></span>Near Beach</li>
-								</ul>
-							</div>
-						</div>
-					</div>
+				  </div>
+				@empty
+				  <div class="col-12 text-center">
+					<p>Belum ada galeri yang tersedia.</p>
+				  </div>
+				@endforelse
+			  </div>
+		  
+			  {{-- Pagination --}}
+			  <div class="row mt-5">
+				<div class="col d-flex justify-content-center">
+				  <div class="block-27">
+					{{ $galeris->links('vendor.pagination.bootstrap-4') }}
+				  </div>
 				</div>
+			  </div>
 			</div>
-		</section>
+		  </section>		  
 
-		<section class="ftco-section ftco-about img"style="background-image: url(images/bg_4.jpg);">
-			<div class="overlay"></div>
-			<div class="container py-md-5">
-				<div class="row py-md-5">
-					<div class="col-md d-flex align-items-center justify-content-center">
-						<a href="https://vimeo.com/45830194" class="icon-video popup-vimeo d-flex align-items-center justify-content-center mb-4">
-							<span class="fa fa-play"></span>
-						</a>
-					</div>
-				</div>
-			</div>
-		</section>
-
-		<section class="ftco-section ftco-about ftco-no-pt img">
+		  <section class="ftco-section">
 			<div class="container">
-				<div class="row d-flex">
-					<div class="col-md-12 about-intro">
-						<div class="row">
-							<div class="col-md-6 d-flex align-items-stretch">
-								<div class="img d-flex w-100 align-items-center justify-content-center" style="background-image:url(images/about-1.jpg);">
-								</div>
-							</div>
-							<div class="col-md-6 pl-md-5 py-5">
-								<div class="row justify-content-start pb-3">
-									<div class="col-md-12 heading-section ftco-animate">
-										<span class="subheading">About Us</span>
-										<h2 class="mb-4">Make Your Tour Memorable and Safe With Us</h2>
-										<p>Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts. Separated they live in Bookmarksgrove right at the coast of the Semantics, a large language ocean.</p>
-										<p><a href="#" class="btn btn-primary">Book Your Destination</a></p>
-									</div>
-								</div>
-							</div>
+			  <div class="row justify-content-center pb-4">
+				<div class="col-md-12 heading-section text-center ftco-animate">
+				  <span class="subheading">Artikel</span>
+				  <h2 class="mb-4">Artikel Terbaru Kami</h2>
+				  <p class="text-muted">Dapatkan wawasan dan inspirasi terbaru seputar perjalanan ibadah dan pengalaman jamaah.</p>
+				</div>
+			  </div>
+			  <div class="row d-flex">
+				@foreach ($artikels->take(3) as $artikel)
+				  <div class="col-md-4 d-flex ftco-animate">
+					<div class="blog-entry justify-content-end">
+					  <a href="{{ route('pengguna.detail_artikel', $artikel->id) }}" class="block-20" style="background-image: url('{{ asset('img/' . $artikel->gambar_sampul) }}');"></a>
+					  <div class="text">
+						<div class="d-flex align-items-center mb-4 topp">
+						  <div class="one">
+							<span class="day">{{ \Carbon\Carbon::parse($artikel->tanggal_terbit)->format('d') }}</span>
+						  </div>
+						  <div class="two">
+							<span class="yr">{{ \Carbon\Carbon::parse($artikel->tanggal_terbit)->format('Y') }}</span>
+							<span class="mos">{{ \Carbon\Carbon::parse($artikel->tanggal_terbit)->format('F') }}</span>
+						  </div>
 						</div>
+						<h3 class="heading">
+						  <a href="{{ route('pengguna.detail_artikel', $artikel->id) }}">{{ $artikel->judul_artikel }}</a>
+						</h3>
+						<p>{{ Str::limit(strip_tags($artikel->isi_artikel), 100, '...') }}</p>
+						<p><a href="{{ route('pengguna.detail_artikel', $artikel->id) }}" class="btn btn-primary">Baca selengkapnya</a></p>
+					  </div>
 					</div>
+				  </div>
+				@endforeach
+			  </div>
+			  <!-- Tombol "Lihat Semua Artikel" -->
+			<div class="row justify-content-center mt-3">
+				<div class="col-auto">
+				<a href="{{ route('pengguna.artikel') }}" class="btn btn-primary shadow-sm px-4 py-2">
+					Lihat Semua Artikel
+				</a>
 				</div>
 			</div>
-		</section>
-
-		<section class="ftco-section testimony-section bg-bottom" style="background-image: url(images/bg_1.jpg);">
-			<div class="overlay"></div>
-			<div class="container">
-				<div class="row justify-content-center pb-4">
-					<div class="col-md-7 text-center heading-section heading-section-white ftco-animate">
-						<span class="subheading">Testimonial</span>
-						<h2 class="mb-4">Tourist Feedback</h2>
-					</div>
-				</div>
-				<div class="row ftco-animate">
-					<div class="col-md-12">
-						<div class="carousel-testimony owl-carousel">
-							<div class="item">
-								<div class="testimony-wrap py-4">
-									<div class="text">
-										<p class="star">
-											<span class="fa fa-star"></span>
-											<span class="fa fa-star"></span>
-											<span class="fa fa-star"></span>
-											<span class="fa fa-star"></span>
-											<span class="fa fa-star"></span>
-										</p>
-										<p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-										<div class="d-flex align-items-center">
-											<div class="user-img" style="background-image: url(images/person_1.jpg)"></div>
-											<div class="pl-3">
-												<p class="name">Roger Scott</p>
-												<span class="position">Marketing Manager</span>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="item">
-								<div class="testimony-wrap py-4">
-									<div class="text">
-										<p class="star">
-											<span class="fa fa-star"></span>
-											<span class="fa fa-star"></span>
-											<span class="fa fa-star"></span>
-											<span class="fa fa-star"></span>
-											<span class="fa fa-star"></span>
-										</p>
-										<p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-										<div class="d-flex align-items-center">
-											<div class="user-img" style="background-image: url(images/person_2.jpg)"></div>
-											<div class="pl-3">
-												<p class="name">Roger Scott</p>
-												<span class="position">Marketing Manager</span>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="item">
-								<div class="testimony-wrap py-4">
-									<div class="text">
-										<p class="star">
-											<span class="fa fa-star"></span>
-											<span class="fa fa-star"></span>
-											<span class="fa fa-star"></span>
-											<span class="fa fa-star"></span>
-											<span class="fa fa-star"></span>
-										</p>
-										<p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-										<div class="d-flex align-items-center">
-											<div class="user-img" style="background-image: url(images/person_3.jpg)"></div>
-											<div class="pl-3">
-												<p class="name">Roger Scott</p>
-												<span class="position">Marketing Manager</span>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="item">
-								<div class="testimony-wrap py-4">
-									<div class="text">
-										<p class="star">
-											<span class="fa fa-star"></span>
-											<span class="fa fa-star"></span>
-											<span class="fa fa-star"></span>
-											<span class="fa fa-star"></span>
-											<span class="fa fa-star"></span>
-										</p>
-										<p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-										<div class="d-flex align-items-center">
-											<div class="user-img" style="background-image: url(images/person_1.jpg)"></div>
-											<div class="pl-3">
-												<p class="name">Roger Scott</p>
-												<span class="position">Marketing Manager</span>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-							<div class="item">
-								<div class="testimony-wrap py-4">
-									<div class="text">
-										<p class="star">
-											<span class="fa fa-star"></span>
-											<span class="fa fa-star"></span>
-											<span class="fa fa-star"></span>
-											<span class="fa fa-star"></span>
-											<span class="fa fa-star"></span>
-										</p>
-										<p class="mb-4">Far far away, behind the word mountains, far from the countries Vokalia and Consonantia, there live the blind texts.</p>
-										<div class="d-flex align-items-center">
-											<div class="user-img" style="background-image: url(images/person_2.jpg)"></div>
-											<div class="pl-3">
-												<p class="name">Roger Scott</p>
-												<span class="position">Marketing Manager</span>
-											</div>
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-
-
-		<section class="ftco-section">
-			<div class="container">
-				<div class="row justify-content-center pb-4">
-					<div class="col-md-12 heading-section text-center ftco-animate">
-						<span class="subheading">Our Blog</span>
-						<h2 class="mb-4">Recent Post</h2>
-					</div>
-				</div>
-				<div class="row d-flex">
-					<div class="col-md-4 d-flex ftco-animate">
-						<div class="blog-entry justify-content-end">
-							<a href="blog-single.html" class="block-20" style="background-image: url('images/image_1.jpg');">
-							</a>
-							<div class="text">
-								<div class="d-flex align-items-center mb-4 topp">
-									<div class="one">
-										<span class="day">11</span>
-									</div>
-									<div class="two">
-										<span class="yr">2020</span>
-										<span class="mos">September</span>
-									</div>
-								</div>
-								<h3 class="heading"><a href="#">Most Popular Place In This World</a></h3>
-								<!-- <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p> -->
-								<p><a href="#" class="btn btn-primary">Read more</a></p>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4 d-flex ftco-animate">
-						<div class="blog-entry justify-content-end">
-							<a href="blog-single.html" class="block-20" style="background-image: url('images/image_2.jpg');">
-							</a>
-							<div class="text">
-								<div class="d-flex align-items-center mb-4 topp">
-									<div class="one">
-										<span class="day">11</span>
-									</div>
-									<div class="two">
-										<span class="yr">2020</span>
-										<span class="mos">September</span>
-									</div>
-								</div>
-								<h3 class="heading"><a href="#">Most Popular Place In This World</a></h3>
-								<!-- <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p> -->
-								<p><a href="#" class="btn btn-primary">Read more</a></p>
-							</div>
-						</div>
-					</div>
-					<div class="col-md-4 d-flex ftco-animate">
-						<div class="blog-entry">
-							<a href="blog-single.html" class="block-20" style="background-image: url('images/image_3.jpg');">
-							</a>
-							<div class="text">
-								<div class="d-flex align-items-center mb-4 topp">
-									<div class="one">
-										<span class="day">11</span>
-									</div>
-									<div class="two">
-										<span class="yr">2020</span>
-										<span class="mos">September</span>
-									</div>
-								</div>
-								<h3 class="heading"><a href="#">Most Popular Place In This World</a></h3>
-								<!-- <p>A small river named Duden flows by their place and supplies it with the necessary regelialia.</p> -->
-								<p><a href="#" class="btn btn-primary">Read more</a></p>
-							</div>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
-
-		<section class="ftco-intro ftco-section ftco-no-pt">
-			<div class="container">
-				<div class="row justify-content-center">
-					<div class="col-md-12 text-center">
-						<div class="img"  style="background-image: url(images/bg_2.jpg);">
-							<div class="overlay"></div>
-							<h2>We Are Pacific A Travel Agency</h2>
-							<p>We can manage your dream building A small river named Duden flows by their place</p>
-							<p class="mb-0"><a href="#" class="btn btn-primary px-4 py-3">Ask For A Quote</a></p>
-						</div>
-					</div>
-				</div>
-			</div>
-		</section>
+		  </section>		  
+		<!-- Lightbox Modal -->
+		<div id="lightbox" style="display:none; position:fixed; top:0; left:0; width:100%; height:100%; background-color:rgba(0,0,0,0.8); z-index:9999; justify-content:center; align-items:center;">
+		
+			<!-- Tombol Close -->
+			<span onclick="closeLightbox()" style="position:absolute; top:20px; right:30px; font-size:40px; color:white; cursor:pointer;">&times;</span>
+		
+			<!-- Gambar -->
+			<img id="lightbox-img" src="" alt="Preview Gambar" style="max-width:90%; max-height:90%; border:5px solid white; border-radius:10px;">
+		</div>
+		<script>
+			function openLightbox(src) {
+			  document.getElementById('lightbox-img').src = src;
+			  document.getElementById('lightbox').style.display = 'block';
+			}
+		  
+			function closeLightbox() {
+			  document.getElementById('lightbox').style.display = 'none';
+			}
+		  </script>
+		  
 
 			<!-- loader -->
 			<div id="ftco-loader" class="show fullscreen"><svg class="circular" width="48px" height="48px"><circle class="path-bg" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke="#eeeeee"/><circle class="path" cx="24" cy="24" r="22" fill="none" stroke-width="4" stroke-miterlimit="10" stroke="#F96D00"/></svg></div>

@@ -23,6 +23,7 @@ class PaketUmrahController extends Controller
 
         $paketUmrahs = $query->orderBy('created_at', 'desc')->paginate(10);
         return view('dashboard.paket.index', compact('paketUmrahs'));
+        
     }
 
     /**
@@ -43,6 +44,8 @@ class PaketUmrahController extends Controller
             'gambar_paket'  => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
             'harga'         => 'required|numeric',
             'jumlah_hari'   => 'required|integer',
+            'hotel_makkah'  => 'required|string|max:255',
+            'hotel_madinah' => 'required|string|max:255',
             'fasilitas'     => 'required|string',
             'deskripsi'     => 'required|string',
         ]);
@@ -90,6 +93,8 @@ class PaketUmrahController extends Controller
             'gambar_paket'  => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
             'harga'         => 'required|numeric',
             'jumlah_hari'   => 'required|integer',
+            'hotel_makkah'  => 'required|string|max:255',
+            'hotel_madinah' => 'required|string|max:255',
             'fasilitas'     => 'required|string',
             'deskripsi'     => 'required|string',
         ]);
@@ -150,5 +155,45 @@ class PaketUmrahController extends Controller
         $pdf = Pdf::loadView('dashboard.paket.cetak_pdf', compact('paketUmrahs'));
         return $pdf->stream('laporan-paket-umrah.pdf');
     }
+
+    public function listPaket(Request $request)
+    {
+        $query = PaketUmrah::query();
+    
+        if ($request->filled('search')) {
+            $search = $request->input('search');
+            $query->where('nama_paket', 'like', "%{$search}%")
+                  ->orWhere('fasilitas', 'like', "%{$search}%");
+        }
+    
+        if ($request->filled('hari')) {
+            $query->where('jumlah_hari', $request->hari);
+        }
+    
+        if ($request->filled('harga')) {
+            $query->where('harga', '<=', $request->harga);
+        }
+    
+        $paketUmrahs = $query->orderBy('created_at', 'desc')->paginate(9)->withQueryString();
+    
+        return view('pengguna.paket', compact('paketUmrahs'));
+    }    
+    
+
+    public function showPaket($id)
+    {
+        $paketUmrahs = PaketUmrah::with('jadwalKeberangkatan')->findOrFail($id);
+        $jadwals = $paketUmrahs->jadwalKeberangkatan;
+    
+        $otherPaketUmrahs = PaketUmrah::where('id', '!=', $paketUmrahs->id)
+            ->latest()
+            ->take(3)
+            ->get();
+    
+        return view('pengguna.detail_paket', compact('paketUmrahs', 'jadwals', 'otherPaketUmrahs'));
+    }
+    
+
+
 
 }

@@ -43,6 +43,46 @@
             </a>
         </li>
 
+        <!-- Jamaah -->
+        <li class="menu-item {{ request()->is('admin/jamaah*') ? 'active-custom' : '' }}">
+            <a href="{{ route('dashboard.jamaah.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bxs-user-detail"></i>
+                <div class="text-truncate">Jamaah</div>
+            </a>
+        </li>
+
+        {{-- <!-- Pemesanan -->
+        <li class="menu-item {{ request()->is('admin/pemesanan*') ? 'active-custom' : '' }}">
+        <a href="{{ route('dashboard.pemesanan.index') }}" class="menu-link">
+            <i class="menu-icon tf-icons bx bx-book"></i>
+            <div class="text-truncate">Pemesanan</div>
+        </a>
+        </li>
+
+      <!-- Pembayaran -->
+        <li class="menu-item {{ request()->is('admin/pembayaran*') ? 'active-custom' : '' }}">
+        <a href="{{ route('dashboard.pembayaran.index') }}" class="menu-link">
+            <i class="menu-icon tf-icons bx bx-money"></i>
+            <div class="text-truncate">Pembayaran</div>
+        </a>
+        </li> --}}
+
+    <!-- Inventaris -->
+    <li class="menu-item {{ request()->is('admin/inventaris*') ? 'active-custom' : '' }}">
+        <a href="{{ route('dashboard.inventaris.index') }}" class="menu-link">
+            <i class="menu-icon tf-icons bx bx-package"></i>
+            <div class="text-truncate">Inventaris</div>
+        </a>
+    </li>
+
+    <!-- Distribusi Perlengkapan -->
+    <li class="menu-item {{ request()->is('admin/distribusi*') ? 'active-custom' : '' }}">
+        <a href="{{ route('dashboard.distribusi.index') }}" class="menu-link">
+            <i class="menu-icon tf-icons bx bx-transfer-alt"></i>
+            <div class="text-truncate">Distribusi</div>
+        </a>
+    </li>
+
         <!-- Galeri -->
         <li class="menu-item {{ request()->is('admin/galeri*') ? 'active-custom' : '' }}">
             <a href="{{ route('dashboard.galeri.index') }}" class="menu-link">
@@ -59,50 +99,47 @@
             </a>
         </li>
 
+        <!-- User -->
+        <li class="menu-item {{ request()->is('admin/user*') ? 'active-custom' : '' }}">
+            <a href="{{ route('dashboard.user.index') }}" class="menu-link">
+                <i class="menu-icon tf-icons bx bx-user"></i>
+                <div class="text-truncate">User</div>
+            </a>
+        </li>
+
     @endif
 
-    <!-- Menu untuk semua pengguna -->
-    <li class="menu-item {{ request()->is('email') ? 'active-custom' : '' }}">
-      <a href="#" class="menu-link">
-        <i class="menu-icon tf-icons bx bx-envelope"></i>
-        <div class="text-truncate">Jamaah</div>
-      </a>
+    <!-- Menu untuk Admin & Direktur Keuangan -->
+    @if (Auth::user()->role === 'Admin' || Auth::user()->role === 'Direktur Keuangan')
+
+    <!-- Pemesanan -->
+    <li class="menu-item {{ request()->is('manajemen/pemesanan*') ? 'active-custom' : '' }}">
+        <a href="{{ route('dashboard.pemesanan.index') }}" class="menu-link">
+            <i class="menu-icon tf-icons bx bx-book"></i>
+            <div class="text-truncate">Pemesanan</div>
+        </a>
     </li>
 
-    <li class="menu-item {{ request()->is('chat') ? 'active-custom' : '' }}">
-      <a href="#" class="menu-link">
-        <i class="menu-icon tf-icons bx bx-chat"></i>
-        <div class="text-truncate">Pemesanan</div>
-      </a>
+    <!-- Pembayaran -->
+    <li class="menu-item {{ request()->is('manajemen/pembayaran*') ? 'active-custom' : '' }}">
+        <a href="{{ route('dashboard.pembayaran.index') }}" class="menu-link">
+            <i class="menu-icon tf-icons bx bx-money"></i>
+            <div class="text-truncate">Pembayaran</div>
+        </a>
     </li>
 
-    <li class="menu-item {{ request()->is('calendar') ? 'active-custom' : '' }}">
-      <a href="#" class="menu-link">
-        <i class="menu-icon tf-icons bx bx-calendar"></i>
-        <div class="text-truncate">Pembayaran</div>
-      </a>
-    </li>
+    @endif
 
-    <li class="menu-item {{ request()->is('kanban') ? 'active-custom' : '' }}">
-      <a href="#" class="menu-link">
-        <i class="menu-icon tf-icons bx bx-grid"></i>
-        <div class="text-truncate">Inventaris</div>
-      </a>
+    <!-- Menu untuk Pimpinan -->
+    @if (Auth::user()->role === 'Pimpinan')
+    <!-- Laporan -->
+    <li class="menu-item {{ request()->is('laporan*') ? 'active-custom' : '' }}">
+        <a href="{{ route('laporan.index') }}" class="menu-link">
+            <i class="menu-icon tf-icons bx bx-bar-chart-alt-2"></i>
+            <div class="text-truncate">Laporan</div>
+        </a>
     </li>
-
-    <li class="menu-item {{ request()->is('settings') ? 'active-custom' : '' }}">
-      <a href="#" class="menu-link">
-        <i class="menu-icon tf-icons bx bx-dock-top"></i>
-        <div class="text-truncate">Distribusi</div>
-      </a>
-    </li>
-
-    <li class="menu-item {{ request()->is('auth') ? 'active-custom' : '' }}">
-      <a href="#" class="menu-link">
-        <i class="menu-icon tf-icons bx bx-lock-open-alt"></i>
-        <div class="text-truncate">User</div>
-      </a>
-    </li>
+    @endif
 
   </ul>
 </aside>

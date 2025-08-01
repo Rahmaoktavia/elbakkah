@@ -18,104 +18,18 @@
   </div>
 </section>
 
-
-{{-- Custom Styling --}}
-<style>
-  .gallery-container {
-    padding: 60px 0;
-    background-color: #f7f9fb;
-  }
-
-  .card-gallery {
-    border: none;
-    border-radius: 15px;
-    overflow: hidden;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.05);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-    background: #fff;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .card-gallery:hover {
-    transform: translateY(-6px);
-    box-shadow: 0 12px 30px rgba(0, 0, 0, 0.15);
-  }
-
-  .card-gallery img {
-    width: 100%;
-    height: 250px;
-    object-fit: cover;
-    border-bottom: 2px solid #eaeaea;
-  }
-
-  .card-body-gallery {
-    padding: 20px;
-    flex-grow: 1;
-    display: flex;
-    flex-direction: column;
-  }
-
-  .judul-foto {
-    font-weight: bold;
-    font-size: 18px;
-    color: #1b1b1b;
-    margin-bottom: 20px;
-    position: relative;
-  }
-
-  .judul-foto::after {
-    content: "";
-    position: absolute;
-    bottom: -10px;
-    left: 0;
-    width: 100%;
-    height: 1px;
-    background-color: #ddd;
-  }
-
-  .deskripsi-foto {
-    font-size: 14px;
-    color: #555;
-    margin-top: 10px;
-    line-height: 1.6;
-    flex-grow: 1;
-  }
-
-  .tanggal-upload {
-    font-size: 13px;
-    color: #666;
-    margin-top: 15px;
-    display: flex;
-    align-items: center;
-    gap: 6px;
-  }
-
-  .tanggal-upload i {
-    color: #666;
-    font-size: 14px;
-  }
-
-  @media (max-width: 768px) {
-    .card-gallery img {
-      height: 200px;
-    }
-  }
-</style>
-
 {{-- Galeri Section --}}
-<section class="gallery-container">
+<section class="gallery-container py-5" style="background-color: #f7f9fb;">
   <div class="container">
-    <div class="row">
+    <div class="row g-4">
       @forelse ($galeris as $galeri)
-        <div class="col-md-4 mb-4 d-flex align-items-stretch">
-          <div class="card-gallery w-100">
-            <img src="{{ asset('img/' . $galeri->file_foto) }}" alt="{{ $galeri->judul_foto }}">
-            <div class="card-body-gallery">
-              <div class="judul-foto">{{ $galeri->judul_foto }}</div>
-              <div class="deskripsi-foto">{{ $galeri->deskripsi ?? 'Tidak ada deskripsi.' }}</div>
-              <div class="tanggal-upload">
-                <i class="fa fa-calendar"></i>
+        <div class="col-md-4 col-sm-6 mb-4">
+          <div class="galeri-item" style="background-image: url('{{ asset('img/' . $galeri->file_foto) }}');" onclick="openLightbox('{{ asset('img/' . $galeri->file_foto) }}')">
+            <div class="overlay-info">
+              <h5 class="judul">{{ $galeri->judul_foto }}</h5>
+              <p class="deskripsi">{{ $galeri->deskripsi ?? 'Tidak ada deskripsi.' }}</p>
+              <div class="tanggal">
+                <i class="fa fa-calendar mr-1"></i>
                 {{ \Carbon\Carbon::parse($galeri->tanggal_upload)->translatedFormat('d M Y') }}
               </div>
             </div>
@@ -138,5 +52,127 @@
     </div>
   </div>
 </section>
+
+{{-- Lightbox Modal --}}
+<div id="lightbox" onclick="closeLightbox()">
+  <span class="close">&times;</span>
+  <img class="lightbox-content" id="lightbox-img">
+</div>
+
+{{-- CSS --}}
+<style>
+  .galeri-item {
+    position: relative;
+    background-size: cover;
+    background-position: center;
+    height: 300px;
+    border-radius: 12px;
+    overflow: hidden;
+    transition: transform 0.3s ease;
+    cursor: zoom-in;
+  }
+
+  .galeri-item:hover {
+    transform: scale(1.02);
+  }
+
+  .overlay-info {
+    position: absolute;
+    bottom: 0;
+    background: linear-gradient(to top, rgba(0, 0, 50, 0.85), rgba(0, 0, 50, 0.1));
+    color: #fff;
+    padding: 20px;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    transition: opacity 0.3s ease-in-out;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+  }
+
+  .galeri-item:hover .overlay-info {
+    opacity: 1;
+  }
+
+  .judul {
+    font-size: 22px;
+    font-weight: 800;
+    margin-bottom: 10px;
+    letter-spacing: 0.5px;
+    text-shadow: 1px 1px 4px rgba(0,0,0,0.5);
+    color: #ffe;
+  }
+
+  .deskripsi {
+    font-size: 14px;
+    line-height: 1.5;
+    margin-bottom: 12px;
+    color: #ddd;
+  }
+
+  .tanggal {
+    font-size: 13px;
+    color: #ccc;
+  }
+
+  @media (max-width: 768px) {
+    .galeri-item {
+      height: 220px;
+    }
+
+    .judul {
+      font-size: 18px;
+    }
+  }
+
+  /* Lightbox CSS */
+  #lightbox {
+    display: none;
+    position: fixed;
+    z-index: 9999;
+    padding-top: 80px;
+    left: 0;
+    top: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0,0,0,0.9);
+    text-align: center;
+  }
+
+  .lightbox-content {
+    margin: auto;
+    display: block;
+    max-width: 80%;
+    max-height: 80%;
+    border-radius: 8px;
+  }
+
+  .close {
+    position: absolute;
+    top: 30px;
+    right: 50px;
+    color: white;
+    font-size: 35px;
+    font-weight: bold;
+    cursor: pointer;
+  }
+
+  .close:hover {
+    color: #ccc;
+  }
+</style>
+
+{{-- JavaScript --}}
+<script>
+  function openLightbox(src) {
+    document.getElementById('lightbox-img').src = src;
+    document.getElementById('lightbox').style.display = 'block';
+  }
+
+  function closeLightbox() {
+    document.getElementById('lightbox').style.display = 'none';
+  }
+</script>
 
 @endsection

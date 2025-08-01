@@ -7,168 +7,136 @@
 
     <!-- 4 Kartu Atas -->
     <div class="row g-4 mb-4">
-      <!-- Profit -->
+      <!-- Total Paket Umrah -->
       <div class="col-xl-3 col-md-6">
         <div class="card h-100">
           <div class="card-body">
             <div class="d-flex justify-content-between align-items-start mb-4">
-              <div class="avatar flex-shrink-0">
-                <img src="{{ asset('img/icons/unicons/chart-success.png') }}" alt="Profit" class="rounded">
+              <div class="avatar flex-shrink-0 bg-label-primary rounded">
+                <i class="fas fa-kaaba fs-3 text-primary"></i>
               </div>
             </div>
-            <p class="mb-1">Profit</p>
-            <h4 class="card-title mb-3">$12,628</h4>
-            <small class="text-success fw-medium"><i class="bx bx-up-arrow-alt"></i> +72.80%</small>
+            <p class="mb-1">Total Paket Umrah</p>
+            <h4 class="card-title mb-0">{{ $totalPaket }}</h4>
           </div>
         </div>
       </div>
 
-      <!-- Sales -->
+      <!-- Total Jamaah -->
       <div class="col-xl-3 col-md-6">
         <div class="card h-100">
           <div class="card-body">
             <div class="d-flex justify-content-between align-items-start mb-4">
-              <div class="avatar flex-shrink-0">
-                <img src="{{ asset('img/icons/unicons/wallet-info.png') }}" alt="Sales" class="rounded">
+              <div class="avatar flex-shrink-0 bg-label-success rounded">
+                <i class="fas fa-users fs-3 text-success"></i>
               </div>
             </div>
-            <p class="mb-1">Sales</p>
-            <h4 class="card-title mb-3">$4,679</h4>
-            <small class="text-success fw-medium"><i class="bx bx-up-arrow-alt"></i> +28.42%</small>
+            <p class="mb-1">Total Jamaah</p>
+            <h4 class="card-title mb-0">{{ $totalJamaah }}</h4>
           </div>
         </div>
       </div>
 
-      <!-- Payments -->
+      <!-- Total Pemesanan -->
       <div class="col-xl-3 col-md-6">
         <div class="card h-100">
           <div class="card-body">
             <div class="d-flex justify-content-between align-items-start mb-4">
-              <div class="avatar flex-shrink-0">
-                <img src="{{ asset('img/icons/unicons/paypal.png') }}" alt="Payments" class="rounded">
+              <div class="avatar flex-shrink-0 bg-label-warning rounded">
+                <i class="fas fa-clipboard-list fs-3 text-warning"></i>
               </div>
             </div>
-            <p class="mb-1">Payments</p>
-            <h4 class="card-title mb-3">$2,456</h4>
-            <small class="text-danger fw-medium"><i class="bx bx-down-arrow-alt"></i> -14.82%</small>
+            <p class="mb-1">Total Pemesanan</p>
+            <h4 class="card-title mb-0">{{ $totalPemesanan }}</h4>
           </div>
         </div>
       </div>
 
-      <!-- Transactions -->
+      <!-- Total Distribusi -->
       <div class="col-xl-3 col-md-6">
         <div class="card h-100">
           <div class="card-body">
             <div class="d-flex justify-content-between align-items-start mb-4">
-              <div class="avatar flex-shrink-0">
-                <img src="{{ asset('img/icons/unicons/cc-primary.png') }}" alt="Transactions" class="rounded">
+              <div class="avatar flex-shrink-0 bg-label-info rounded">
+                <i class="fas fa-dolly fs-3 text-info"></i>
               </div>
             </div>
-            <p class="mb-1">Transactions</p>
-            <h4 class="card-title mb-3">$14,857</h4>
-            <small class="text-success fw-medium"><i class="bx bx-up-arrow-alt"></i> +28.14%</small>
+            <p class="mb-1">Total Distribusi</p>
+            <h4 class="card-title mb-0">{{ $totalDistribusi }}</h4>
           </div>
         </div>
       </div>
-    </div>
+    </div> <!-- Akhir dari row g-4 -->
 
-    <!-- Profile Report -->
-    <div class="row g-4 mb-4">
-      <div class="col-12">
-        <div class="card h-100">
-          <div class="card-body">
-            <div class="d-flex justify-content-between flex-wrap flex-sm-nowrap">
-              <div>
-                <h5 class="mb-1">Profile Report</h5>
-                <span class="badge bg-label-warning">YEAR 2022</span>
-              </div>
-              <div class="text-end mt-3 mt-sm-0">
-                <span class="text-success fw-medium"><i class="bx bx-up-arrow-alt"></i> 68.2%</span>
-                <h4 class="mb-0">$84,686k</h4>
-              </div>
-            </div>
-            <div id="profileReportChart" class="mt-4" style="min-height: 75px;">
-              <!-- Chart inject here -->
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- Total Revenue -->
+    <!-- Laporan Pembayaran & Paket Umrah Terlaris dalam satu baris -->
     <div class="row g-4">
-      <div class="col-12">
-        <div class="card">
-          <div class="row g-0">
-            <!-- Chart Side -->
-            <div class="col-lg-8">
-              <div class="card-header d-flex justify-content-between align-items-center">
-                <h5 class="m-0">Total Revenue</h5>
-                <div class="dropdown">
-                  <button class="btn p-0" type="button" data-bs-toggle="dropdown">
-                    <i class="bx bx-dots-vertical-rounded"></i>
-                  </button>
-                  <div class="dropdown-menu dropdown-menu-end">
-                    <a class="dropdown-item" href="#">Select All</a>
-                    <a class="dropdown-item" href="#">Refresh</a>
-                    <a class="dropdown-item" href="#">Share</a>
-                  </div>
-                </div>
-              </div>
-              <div id="totalRevenueChart" class="px-3" style="min-height: 315px;"></div>
-            </div>
-
-            <!-- Sidebar -->
-            <div class="col-lg-4">
-              <div class="card-body d-flex flex-column align-items-center justify-content-center">
-                <div class="text-center mb-4">
-                  <div class="btn-group">
-                    <button type="button" class="btn btn-outline-primary">2024</button>
-                    <button type="button" class="btn btn-outline-primary dropdown-toggle dropdown-toggle-split" data-bs-toggle="dropdown">
-                      <span class="visually-hidden">Toggle Dropdown</span>
-                    </button>
-                    <ul class="dropdown-menu">
-                      <li><a class="dropdown-item" href="#">2021</a></li>
-                      <li><a class="dropdown-item" href="#">2020</a></li>
-                      <li><a class="dropdown-item" href="#">2019</a></li>
-                    </ul>
-                  </div>
-                </div>
-                <div id="growthChart" style="min-height: 142px;"></div>
-                <div class="text-center fw-medium my-4">62% Company Growth</div>
-
-                <div class="d-flex gap-3 w-100 justify-content-between">
-                  <div class="d-flex align-items-center">
-                    <div class="avatar me-2">
-                      <span class="avatar-initial rounded-2 bg-label-primary">
-                        <i class="bx bx-dollar icon-lg text-primary"></i>
-                      </span>
-                    </div>
-                    <div>
-                      <small>2024</small>
-                      <h6 class="mb-0">$32.5k</h6>
-                    </div>
-                  </div>
-                  <div class="d-flex align-items-center">
-                    <div class="avatar me-2">
-                      <span class="avatar-initial rounded-2 bg-label-info">
-                        <i class="bx bx-wallet icon-lg text-info"></i>
-                      </span>
-                    </div>
-                    <div>
-                      <small>2023</small>
-                      <h6 class="mb-0">$41.2k</h6>
-                    </div>
-                  </div>
-                </div>
-
-              </div>
-            </div> <!-- col-lg-4 -->
-          </div> <!-- row -->
+      <!-- Laporan Pembayaran (grafik garis) -->
+      <div class="col-md-6">
+        <div class="card h-100">
+          <div class="card-body">
+            <h5 class="card-title">Laporan Pembayaran</h5>
+            <canvas id="paymentChart"></canvas>
+          </div>
         </div>
       </div>
-    </div>
+
+      <!-- Paket Umrah Terlaris -->
+      <div class="col-md-6">
+        <div class="card h-100">
+          <div class="card-body">
+            <h5 class="card-title">Paket Umrah Terlaris</h5>
+            <div class="row">
+              @foreach ($topPaket as $paket)
+                <div class="col-md-12 mb-3">
+                  <div class="d-flex align-items-center border rounded p-2">
+                    <img src="{{ asset('img/' . $paket->gambar_paket) }}" alt="Gambar Paket" class="me-3 rounded" style="width: 80px; height: 80px; object-fit: cover;">
+                    <div class="flex-grow-1">
+                      <h6 class="mb-1">{{ $paket->nama_paket }}</h6>
+                      <span class="badge bg-primary">{{ $paket->pemesanan_count }} pemesanan</span>
+                    </div>
+                  </div>
+                </div>
+              @endforeach
+            </div>
+          </div>
+        </div>
+      </div>
+    </div> <!-- Akhir row grafik & terlaris -->
 
   </div>
 </div>
+
+<!-- Chart.js CDN & Line Chart Script -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+<script>
+  const ctx = document.getElementById('paymentChart').getContext('2d');
+  new Chart(ctx, {
+    type: 'line',
+    data: {
+      labels: ['Jan', 'Feb', 'Mar', 'Apr', 'Mei'],
+      datasets: [{
+        label: 'Pembayaran (Rp)',
+        data: [12000000, 15000000, 9000000, 17000000, 21000000],
+        backgroundColor: 'rgba(54, 162, 235, 0.2)',
+        borderColor: 'rgba(54, 162, 235, 1)',
+        borderWidth: 2,
+        fill: true,
+        tension: 0.4
+      }]
+    },
+    options: {
+      responsive: true,
+      plugins: {
+        legend: {
+          position: 'top'
+        }
+      },
+      scales: {
+        y: {
+          beginAtZero: true
+        }
+      }
+    }
+  });
+</script>
 @endsection

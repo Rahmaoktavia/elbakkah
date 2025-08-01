@@ -22,38 +22,37 @@ class LoginController extends Controller
      */
     public function authenticate(Request $request): RedirectResponse
     {
-        // Validasi input login (email dan password)
         $credentials = $request->validate([
-            'email' => ['required', 'email'], // Email harus ada dan dalam format yang valid
-            'password' => ['required'], // Password harus ada
+            'email' => ['required', 'email'],
+            'password' => ['required'],
         ]);
 
-        // Mencoba autentikasi dengan kredensial yang diberikan (email dan password)
         if (Auth::attempt($credentials)) {
-            // Regenerasi sesi untuk melindungi dari serangan session fixation
             $request->session()->regenerate();
-
-            // Mendapatkan data pengguna yang sedang login
             $user = Auth::user();
 
-            // Redirect berdasarkan peran pengguna (role)
-            if ($user->role === 'Jamaah') {
-                // Jika pengguna adalah customer, redirect ke halaman home customer
-                return redirect()->route('home')->with('success', 'Welcome ' . $user->name);
-            } elseif (in_array($user->role, ['Admin', 'Direktur Keuangan', 'Pimpinan'])) {
-                // Jika pengguna adalah admin, super_admin, atau kurir, redirect ke dashboard
-                return redirect()->route('dashboard.index')->with('success', 'Welcome ' . $user->name);
+            switch ($user->role) {
+                case 'Jamaah':
+                    return redirect()->route('home')->with('success', 'Selamat datang, ' . $user->name);
+                
+                case 'Admin':
+                case 'Direktur Keuangan':
+                case 'Pimpinan':
+                    return redirect()->route('dashboard.index')->with('success', 'Selamat datang, ' . $user->name);
+                
+                default:
+                    Auth::logout();
+                    return redirect()->route('login')->withErrors([
+                        'email' => 'Role pengguna tidak dikenali.',
+                    ]);
             }
-
-            // Default redirect jika peran pengguna tidak dikenali (redirect ke halaman home umum)
-            return redirect()->intended('home')->with('success', 'Welcome ' . $user->name);
         }
 
-        // Jika autentikasi gagal, kembali ke halaman login dengan pesan error
         return back()->withErrors([
-            'email' => 'Email atau password yang dimasukkan tidak cocok.', // Pesan error untuk email yang tidak sesuai
-        ])->withInput($request->only('email')); // Menyertakan input email yang dimasukkan sebelumnya
+            'email' => 'Email atau password yang dimasukkan tidak cocok.',
+        ])->withInput($request->only('email'));
     }
+
 
     /**
      * Menangani logout dan pembersihan sesi.
