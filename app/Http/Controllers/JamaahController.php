@@ -187,4 +187,60 @@ class JamaahController extends Controller
         return $pdf->stream('laporan-jamaah.pdf');
     }
 
+    public function dokumenSaya()
+    {
+        $jamaah = Jamaah::where('user_id', auth()->id())->firstOrFail();
+        return view('pengguna.dokumen_jamaah', compact('jamaah'));
+    }
+
+    public function editDokumenSaya()
+    {
+        $jamaah = Jamaah::where('user_id', auth()->id())->firstOrFail();
+        return view('pengguna.edit_dokumen_jamaah', compact('jamaah'));
+    }
+
+
+    public function updateDokumenSaya(Request $request)
+    {
+        $jamaah = Jamaah::where('user_id', auth()->id())->firstOrFail();
+
+        $validated = $request->validate([
+            'nama_jamaah' => 'required|string|max:255',
+            'nik' => 'required|string|max:255',
+            'tempat_lahir' => 'required|string|max:255',
+            'tanggal_lahir' => 'required|date',
+            'alamat' => 'required|string',
+            'no_telepon' => 'required|string|max:255',
+            'nama_ayah' => 'required|string|max:255',
+            'pekerjaan' => 'required|string|max:255',
+            'jenis_kelamin' => 'required|in:Laki-laki,Perempuan',
+
+            'pas_foto' => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'file_ktp' => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:2048',
+            'file_kk' => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:2048',
+            'file_paspor' => 'nullable|file|mimes:pdf,jpg,jpeg,png|max:2048',
+        ]);
+
+        // File upload handling
+        foreach (['pas_foto', 'file_ktp', 'file_kk', 'file_paspor'] as $field) {
+            if ($request->hasFile($field)) {
+                // Hapus file lama jika ada
+                if ($jamaah->$field && file_exists(public_path('img/' . $jamaah->$field))) {
+                    unlink(public_path('img/' . $jamaah->$field));
+                }
+
+                $file = $request->file($field);
+                $filename = time() . "_{$field}." . $file->getClientOriginalExtension();
+                $file->move(public_path('img'), $filename);
+                $validated[$field] = $filename;
+            }
+        }
+
+        $jamaah->update($validated);
+
+        return redirect()->route('jamaah.dokumenSaya')->with([
+            'success' => 'Dokumen berhasil diperbarui.',
+            'alert_type' => 'edit'
+        ]);        
+    }
 }

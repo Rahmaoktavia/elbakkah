@@ -48,6 +48,7 @@
 						</a>
 						<div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
 							@if($hasJamaah)
+								<a href="{{ route('jamaah.dokumenSaya') }}" class="dropdown-item">Dokumen Saya</a>
 								<a href="{{ route('riwayat.reservasi') }}" class="dropdown-item">Riwayat Reservasi</a>
 								<a href="{{ route('riwayat.perlengkapan') }}" class="dropdown-item">Riwayat Perlengkapan</a>
 							@endif

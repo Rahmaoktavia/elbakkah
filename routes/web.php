@@ -150,3 +150,9 @@ Route::get('/laporan/inventaris', [LaporanPimpinanController::class, 'cetakInven
 Route::get('/laporan/paket', [LaporanPimpinanController::class, 'cetakPaket'])->name('laporan.cetakPaket')->middleware(['auth', 'role:Pimpinan']);
 Route::get('/laporan/distribusi', [LaporanPimpinanController::class, 'cetakDistribusi'])->name('laporan.cetakDistribusi')->middleware(['auth', 'role:Pimpinan']);
 Route::get('/laporan/jadwal', [LaporanPimpinanController::class, 'cetakJadwal'])->name('laporan.cetakJadwal')->middleware(['auth', 'role:Pimpinan']);
+
+Route::middleware(['auth', 'role:Jamaah'])->group(function () {
+    Route::get('/dokumen-saya', [JamaahController::class, 'dokumenSaya'])->name('jamaah.dokumenSaya');
+    Route::get('/dokumen-saya/edit', [JamaahController::class, 'editDokumenSaya'])->name('jamaah.editDokumenSaya');
+    Route::put('/dokumen-saya/update', [JamaahController::class, 'updateDokumenSaya'])->name('jamaah.updateDokumenSaya');
+});
