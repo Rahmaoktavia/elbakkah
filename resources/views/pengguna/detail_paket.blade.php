@@ -174,7 +174,7 @@
                 <li class="list-group-item d-flex justify-content-between align-items-start flex-column">
                   <div class="w-100 d-flex justify-content-between align-items-center">
                     <div>
-                      <strong>{{ \Carbon\Carbon::parse($jadwal->tanggal_berangkat)->translatedFormat('d M Y') }}</strong><br>
+                      <strong>{{ \Carbon\Carbon::parse($jadwal->tanggal_berangkat)->translatedFormat('d F Y') }}</strong><br>
                       <small>Kuota: {{ $jadwal->kuota }}</small>
                     </div>
                     <a href="{{ route('pengguna.formjamaah', ['jadwal_id' => $jadwal->id, 'paket_id' => $paketUmrahs->id]) }}"

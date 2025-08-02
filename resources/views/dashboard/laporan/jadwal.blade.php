@@ -114,7 +114,7 @@
                 <tr>
                     <td class="text-center">{{ $index + 1 }}</td>
                     <td>{{ $jadwal->paket->nama_paket ?? '-' }}</td>
-                    <td class="text-center">{{ \Carbon\Carbon::parse($jadwal->tanggal_berangkat)->format('d F Y') }}</td>
+                    <td class="text-center">{{ \Carbon\Carbon::parse($jadwal->tanggal_berangkat)->translatedFormat('d F Y') }}</td>
                     <td class="text-center">{{ $jadwal->kuota ?? '-' }}</td>
                 </tr>
             @endforeach
@@ -123,7 +123,7 @@
 
     <!-- Footer -->
     <div class="footer">
-        Dicetak pada: {{ \Carbon\Carbon::now()->format('d-m-Y') }}
+        Dicetak pada: {{ \Carbon\Carbon::now()->translatedFormat('d F Y') }}
     </div>
 
 </body>

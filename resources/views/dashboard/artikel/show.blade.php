@@ -22,7 +22,7 @@
             <div class="col-md-6 mb-4">
                 <label class="fw-bold text-dark">Tanggal Terbit</label>
                 <div class="text-secondary border-bottom pb-1">
-                    {{ \Carbon\Carbon::parse($artikel->tanggal_terbit)->format('d-m-Y') }}
+                    {{ \Carbon\Carbon::parse($artikel->tanggal_terbit)->translatedFormat('d F Y') }}
                 </div>
             </div>
 

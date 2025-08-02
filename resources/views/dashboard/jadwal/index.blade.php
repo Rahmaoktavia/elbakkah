@@ -73,7 +73,7 @@
                 <tr>
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $jadwal->paket->nama_paket ?? '-' }}</td>
-                    <td>{{ \Carbon\Carbon::parse($jadwal->tanggal_berangkat)->format('d M Y') }}</td>
+                    <td>{{ \Carbon\Carbon::parse($jadwal->tanggal_berangkat)->translatedFormat('d F Y') }}</td>
                     <td>{{ $jadwal->kuota ?? '-' }}</td>
                     <td class="text-nowrap text-center">
                         <div class="btn-group" role="group">

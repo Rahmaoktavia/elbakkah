@@ -35,8 +35,8 @@
 
                 <div class="col-md-6 mb-3">
                     <label class="form-label fw-bold text-dark">Tanggal Lahir</label>
-                    <input type="text" class="form-control" value="{{ $jamaah->tanggal_lahir }}" readonly>
-                </div>
+                    <input type="text" class="form-control" value="{{ \Carbon\Carbon::parse($jamaah->tanggal_lahir)->translatedFormat('d F Y') }}" readonly>
+                  </div>                  
 
                 <div class="col-md-6 mb-3">
                     <label class="form-label fw-bold text-dark">Jenis Kelamin</label>

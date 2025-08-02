@@ -72,7 +72,7 @@
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $pemesanan->jamaah->nama_jamaah ?? '-' }}</td>
                     <td>{{ $pemesanan->jadwalKeberangkatan->paket->nama_paket ?? '-' }}</td>
-                    <td>{{ \Carbon\Carbon::parse($pemesanan->tanggal_pesan)->format('d-m-Y') }}</td>
+                    <td>{{ \Carbon\Carbon::parse($pemesanan->tanggal_pesan)->translatedFormat('d F Y') }}</td>
                     <td>Rp {{ number_format($pemesanan->total_tagihan, 0, ',', '.') }}</td>
                     <td>
                         <span class="badge bg-{{ $pemesanan->status_pembayaran === 'Lunas' ? 'success' : 'warning' }}">

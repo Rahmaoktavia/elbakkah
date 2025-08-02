@@ -28,7 +28,7 @@
                 </div>
                 <div class="two">
                   <span class="yr">{{ \Carbon\Carbon::parse($artikel->tanggal_terbit)->format('Y') }}</span>
-                  <span class="mos">{{ \Carbon\Carbon::parse($artikel->tanggal_terbit)->format('F') }}</span>
+                  <span class="mos">{{ \Carbon\Carbon::parse($artikel->tanggal_terbit)->translatedFormat('F') }}</span>
                 </div>
               </div>
               <h3 class="heading">

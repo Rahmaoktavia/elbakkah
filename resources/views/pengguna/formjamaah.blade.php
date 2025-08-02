@@ -68,7 +68,7 @@
               ['icon' => 'fa-calendar', 'label' => 'Durasi', 'value' => $paketUmrahs->jumlah_hari . ' Hari'],
               ['icon' => 'fa-hotel', 'label' => 'Hotel Makkah', 'value' => $paketUmrahs->hotel_makkah],
               ['icon' => 'fa-hotel', 'label' => 'Hotel Madinah', 'value' => $paketUmrahs->hotel_madinah],
-              ['icon' => 'fa-plane', 'label' => 'Keberangkatan', 'value' => \Carbon\Carbon::parse($jadwal->tanggal_berangkat)->format('d M Y')],
+              ['icon' => 'fa-plane', 'label' => 'Keberangkatan', 'value' => \Carbon\Carbon::parse($jadwal->tanggal_berangkat)->translatedFormat('d F Y')],
               ['icon' => 'fa-users', 'label' => 'Kuota', 'value' => $jadwal->kuota . ' jamaah']
             ] as $item)
               <div class="col-md-6 d-flex align-items-start gap-3">

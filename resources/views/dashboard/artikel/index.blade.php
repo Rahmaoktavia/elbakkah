@@ -87,7 +87,7 @@
                     <td>
                         <img src="{{ asset('img/' . $artikel->gambar_sampul) }}" alt="{{ $artikel->judul_artikel }}" class="img-thumbnail" width="100">
                     </td>
-                    <td>{{ \Carbon\Carbon::parse($artikel->tanggal_terbit)->format('d M Y') }}</td>
+                    <td>{{ \Carbon\Carbon::parse($artikel->tanggal_terbit)->translatedFormat('d F Y') }}</td>
                     <td class="text-nowrap text-center">
                         <div class="btn-group" role="group">
                             <a href="{{ route('dashboard.artikel.show', $artikel->id) }}" class="btn btn-success btn-sm me-1" title="Lihat Detail">

@@ -175,7 +175,7 @@
 						<p class="deskripsi">{{ $galeri->deskripsi ?? 'Tidak ada deskripsi.' }}</p>
 						<div class="tanggal">
 						  <i class="fa fa-calendar mr-1"></i>
-						  {{ \Carbon\Carbon::parse($galeri->tanggal_upload)->translatedFormat('d M Y') }}
+						  {{ \Carbon\Carbon::parse($galeri->tanggal_upload)->translatedFormat('d F Y') }}
 						</div>
 					  </div>
 					</div>
@@ -219,7 +219,7 @@
 						  </div>
 						  <div class="two">
 							<span class="yr">{{ \Carbon\Carbon::parse($artikel->tanggal_terbit)->format('Y') }}</span>
-							<span class="mos">{{ \Carbon\Carbon::parse($artikel->tanggal_terbit)->format('F') }}</span>
+							<span class="mos">{{ \Carbon\Carbon::parse($artikel->tanggal_terbit)->translatedFormat('F') }}</span>
 						  </div>
 						</div>
 						<h3 class="heading">

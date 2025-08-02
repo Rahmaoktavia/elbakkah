@@ -73,7 +73,7 @@
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $jamaah->nama_jamaah }}</td>
                     <td>{{ $jamaah->nik }}</td>
-                    <td>{{ $jamaah->tempat_lahir }}, {{ \Carbon\Carbon::parse($jamaah->tanggal_lahir)->format('d-m-Y') }}</td>
+                    <td>{{ $jamaah->tempat_lahir }}, {{ \Carbon\Carbon::parse($jamaah->tanggal_lahir)->translatedFormat('d F Y') }}</td>
                     <td>{{ $jamaah->no_telepon }}</td>
                     <td>{{ $jamaah->jenis_kelamin }}</td>
                     <td class="text-nowrap text-center">

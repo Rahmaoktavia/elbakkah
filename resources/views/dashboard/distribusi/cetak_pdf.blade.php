@@ -127,7 +127,7 @@
 
     <!-- Footer -->
     <div class="footer">
-        Dicetak pada: {{ \Carbon\Carbon::now()->format('d-m-Y') }}
+        Dicetak pada: {{ \Carbon\Carbon::now()->translatedFormat('d F Y') }}
     </div>
 
 </body>

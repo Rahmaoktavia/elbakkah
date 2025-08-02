@@ -128,7 +128,7 @@
                     <td class="text-center">{{ $index + 1 }}</td>
                     <td>{{ $jamaah->nama_jamaah }}</td>
                     <td>{{ $jamaah->nik }}</td>
-                    <td>{{ $jamaah->tempat_lahir }}, {{ \Carbon\Carbon::parse($jamaah->tanggal_lahir)->format('d-m-Y') }}</td>
+                    <td>{{ $jamaah->tempat_lahir }}, {{ \Carbon\Carbon::parse($jamaah->tanggal_lahir)->translatedFormat('d F Y') }}</td>
                     <td class="text-center">{{ $jamaah->jenis_kelamin }}</td>
                     <td>{{ $jamaah->alamat }}</td>
                     <td>{{ $jamaah->no_telepon }}</td>
@@ -152,7 +152,7 @@
 
     <!-- Footer -->
     <div class="footer">
-        Dicetak pada: {{ \Carbon\Carbon::now()->format('d-m-Y') }}
+        Dicetak pada: {{ \Carbon\Carbon::now()->translatedFormat('d F Y') }}
     </div>
 
 </body>

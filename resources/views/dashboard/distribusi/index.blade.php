@@ -76,7 +76,7 @@
                     <td>{{ $item->jamaah->nama_jamaah ?? '-' }}</td>
                     <td>{{ $item->perlengkapan->nama_perlengkapan ?? '-' }}</td>
                     <td>{{ $item->jumlah_diberikan }}</td>
-                    <td>{{ \Carbon\Carbon::parse($item->tanggal_distribusi)->format('d M Y') }}</td>
+                    <td>{{ \Carbon\Carbon::parse($item->tanggal_distribusi)->translatedFormat('d F Y') }}</td>
                     <td class="text-nowrap text-center">
                         <div class="btn-group" role="group">
                             <a href="{{ route('dashboard.distribusi.show', $item->id) }}" class="btn btn-success btn-sm me-1" title="Lihat Detail">

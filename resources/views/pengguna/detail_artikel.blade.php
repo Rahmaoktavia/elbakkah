@@ -60,7 +60,7 @@
                     {{ Str::limit($item->judul_artikel, 50) }}
                     </a>
                 </h6>
-                <small class="text-muted">{{ \Carbon\Carbon::parse($item->tanggal_terbit)->translatedFormat('d M Y') }}</small>
+                <small class="text-muted">{{ \Carbon\Carbon::parse($item->tanggal_terbit)->translatedFormat('d F Y') }}</small>
                 </div>
             </div>
             @endforeach

@@ -128,7 +128,7 @@
                     <td class="text-center">{{ $index + 1 }}</td>
                     <td>{{ $artikel->judul_artikel }}</td>
                     <td>{{ strip_tags($artikel->isi_artikel) }}</td>
-                    <td class="text-center">{{ \Carbon\Carbon::parse($artikel->tanggal_terbit)->format('d-m-Y') }}</td>
+                    <td class="text-center">{{ \Carbon\Carbon::parse($artikel->tanggal_terbit)->translatedFormat('d F Y') }}</td>
                     <td class="text-center">
                         @php
                             $imagePath = public_path('img/' . $artikel->gambar_sampul);
@@ -147,7 +147,7 @@
 
     <!-- Footer Tanggal Cetak -->
     <div class="footer">
-        Dicetak pada: {{ \Carbon\Carbon::now()->format('d-m-Y') }}
+        Dicetak pada: {{ \Carbon\Carbon::now()->translatedFormat('d F Y') }}
     </div>
 
 </body>

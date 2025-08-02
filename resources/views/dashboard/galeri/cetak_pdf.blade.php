@@ -123,7 +123,7 @@
                     <td class="text-center">{{ $index + 1 }}</td>
                     <td>{{ $galeri->judul_foto }}</td>
                     <td>{{ $galeri->deskripsi ?? '-' }}</td>
-                    <td class="text-center">{{ \Carbon\Carbon::parse($galeri->tanggal_upload)->format('d-m-Y') }}</td>
+                    <td class="text-center">{{ \Carbon\Carbon::parse($galeri->tanggal_upload)->translatedFormat('d F Y') }}</td>
                     <td class="text-center">
                         @php
                             $imagePath = public_path('img/' . $galeri->file_foto);
@@ -142,7 +142,7 @@
 
     <!-- Footer Tanggal Cetak -->
     <div class="footer">
-        Dicetak pada: {{ \Carbon\Carbon::now()->format('d-m-Y') }}
+        Dicetak pada: {{ \Carbon\Carbon::now()->translatedFormat('d F Y') }}
     </div>
 
 </body>

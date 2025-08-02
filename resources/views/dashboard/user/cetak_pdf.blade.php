@@ -119,7 +119,7 @@
                     <td>{{ $user->username }}</td>
                     <td>{{ $user->email }}</td>
                     <td>{{ $user->role }}</td>
-                    <td class="text-center">{{ \Carbon\Carbon::parse($user->created_at)->format('d-m-Y H:i') }}</td>
+                    <td class="text-center">{{ \Carbon\Carbon::parse($user->created_at)->translatedFormat('d F Y H:i') }}</td>
                 </tr>
             @endforeach
         </tbody>
@@ -127,7 +127,7 @@
 
     <!-- Footer -->
     <div class="footer">
-        Dicetak pada: {{ \Carbon\Carbon::now()->format('d-m-Y') }}
+        Dicetak pada: {{ \Carbon\Carbon::now()->translatedFormat('d F Y') }}
     </div>
 
 </body>

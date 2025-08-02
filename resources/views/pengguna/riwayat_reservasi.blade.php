@@ -26,17 +26,48 @@
             <h4 class="fw-bold mb-4 border-bottom pb-2">Detail Pemesanan</h4>
             <div class="row">
                 <div class="col-md-6">
-                    <p><strong>Nama Jamaah:</strong> {{ $pemesanan->jamaah->nama_jamaah }}</p>
-                    <p><strong>Nama Paket:</strong> {{ $pemesanan->jadwalKeberangkatan->paket->nama_paket }}</p>
-                    <p><strong>Tanggal Keberangkatan:</strong> {{ \Carbon\Carbon::parse($pemesanan->jadwalKeberangkatan->tanggal_berangkat)->format('d-m-Y') }}</p>
+                    <table class="table table-borderless" style="margin-bottom: 0; line-height: 1.2;">
+                        <tr>
+                            <th style="width: 45%;">Nama Jamaah</th>
+                            <td>: {{ $pemesanan->jamaah->nama_jamaah }}</td>
+                        </tr>
+                        <tr>
+                            <th>Nama Paket</th>
+                            <td>: {{ $pemesanan->jadwalKeberangkatan->paket->nama_paket }}</td>
+                        </tr>
+                        <tr>
+                            <th>Hotel Makkah</th>
+                            <td>: {{ $pemesanan->jadwalKeberangkatan->paket->hotel_makkah ?? '-' }}</td>
+                        </tr>
+                        <tr>
+                            <th>Hotel Madinah</th>
+                            <td>: {{ $pemesanan->jadwalKeberangkatan->paket->hotel_madinah ?? '-' }}</td>
+                        </tr>
+                    </table>
                 </div>
                 <div class="col-md-6">
-                    <p><strong>Total Harga:</strong> Rp {{ number_format($pemesanan->total_tagihan, 0, ',', '.') }}</p>
-                    <p><strong>Status Pembayaran:</strong>
-                        <span class="badge bg-{{ $pemesanan->status_pembayaran == 'Lunas' ? 'success' : 'warning' }}">
-                            {{ $pemesanan->status_pembayaran }}
-                        </span>
-                    </p>
+                    <table class="table table-borderless" style="margin-bottom: 0; line-height: 1.2;">
+                        <tr>
+                            <th style="width: 45%;">Total Harga</th>
+                            <td>: Rp {{ number_format($pemesanan->total_tagihan, 0, ',', '.') }}</td>
+                        </tr>
+                        <tr>
+                            <th>Tanggal Keberangkatan</th>
+                            <td>: {{ \Carbon\Carbon::parse($pemesanan->jadwalKeberangkatan->tanggal_berangkat)->translatedFormat('d F Y') }}</td>
+                        </tr>
+                        <tr>
+                            <th>Durasi</th>
+                            <td>: {{ $pemesanan->jadwalKeberangkatan->paket->jumlah_hari ?? '-' }} Hari</td>
+                        </tr>
+                        <tr>
+                            <th>Status Pembayaran</th>
+                            <td>:
+                                <span class="badge bg-{{ $pemesanan->status_pembayaran == 'Lunas' ? 'success' : 'warning' }}">
+                                    {{ $pemesanan->status_pembayaran }}
+                                </span>
+                            </td>
+                        </tr>
+                    </table>
                 </div>
             </div>
         </div>
@@ -80,7 +111,7 @@
                         @forelse ($pemesanan->pembayarans as $index => $bayar)
                             <tr>
                                 <td>{{ $index + 1 }}</td>
-                                <td>{{ \Carbon\Carbon::parse($bayar->tanggal_bayar)->format('d-m-Y') }}</td>
+                                <td>{{ \Carbon\Carbon::parse($bayar->tanggal_bayar)->translatedFormat('d F Y') }}</td>
                                 <td>Rp {{ number_format($bayar->jumlah_bayar, 0, ',', '.') }}</td>
                                 <td>
                                     @if ($bayar->bukti_transfer)

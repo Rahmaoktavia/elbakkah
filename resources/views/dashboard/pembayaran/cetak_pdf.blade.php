@@ -118,7 +118,7 @@
                     <td class="text-center">{{ $index + 1 }}</td>
                     <td>{{ $pembayaran->pemesanan->jamaah->nama_jamaah ?? '-' }}</td>
                     <td>{{ $pembayaran->pemesanan->jadwalKeberangkatan->paket->nama_paket ?? '-' }}</td>
-                    <td>{{ \Carbon\Carbon::parse($pembayaran->tanggal_bayar)->format('d-m-Y') }}</td>
+                    <td>{{ \Carbon\Carbon::parse($pembayaran->tanggal_bayar)->translatedFormat('d F Y') }}</td>
                     <td>Rp {{ number_format($pembayaran->jumlah_bayar, 0, ',', '.') }}</td>
                     <td class="text-center">{{ $pembayaran->status_verifikasi }}</td>
                     <td>{{ $pembayaran->catatan ?? '-' }}</td>
@@ -129,7 +129,7 @@
 
     <!-- Footer -->
     <div class="footer">
-        Dicetak pada: {{ \Carbon\Carbon::now()->format('d-m-Y') }}
+        Dicetak pada: {{ \Carbon\Carbon::now()->translatedFormat('d F Y') }}
     </div>
 
 </body>
