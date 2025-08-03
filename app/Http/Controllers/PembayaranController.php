@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 use App\Models\Pemesanan;
 use Illuminate\Support\Facades\Auth;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Illuminate\Support\Facades\DB;
 
 class PembayaranController extends Controller
 {
@@ -218,4 +219,31 @@ class PembayaranController extends Controller
         return view('pengguna.riwayat_reservasi', compact('pemesanan'));
     }
 
+    public function getMonthlyChartData()
+    {
+        $monthlyPayments = Pembayaran::select(
+                DB::raw("MONTH(tanggal_bayar) as month"),
+                DB::raw("SUM(jumlah_bayar) as total")
+            )
+            ->whereYear('tanggal_bayar', now()->year)
+            ->where('status_verifikasi', 'Diterima') // opsional filter
+            ->groupBy(DB::raw("MONTH(tanggal_bayar)"))
+            ->orderBy(DB::raw("MONTH(tanggal_bayar)"))
+            ->get();
+
+        $labels = [];
+        $totals = [];
+
+        // Biar urut dan lengkap dari Jan - Dec
+        for ($i = 1; $i <= 12; $i++) {
+            $labels[] = \Carbon\Carbon::create()->month($i)->format('M');
+            $bulanIni = $monthlyPayments->firstWhere('month', $i);
+            $totals[] = $bulanIni ? (int) $bulanIni->total : 0;
+        }
+
+        return response()->json([
+            'labels' => $labels,
+            'data' => $totals
+        ]);
+    }
 }

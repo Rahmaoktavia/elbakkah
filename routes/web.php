@@ -156,3 +156,5 @@ Route::middleware(['auth', 'role:Jamaah'])->group(function () {
     Route::get('/dokumen-saya/edit', [JamaahController::class, 'editDokumenSaya'])->name('jamaah.editDokumenSaya');
     Route::put('/dokumen-saya/update', [JamaahController::class, 'updateDokumenSaya'])->name('jamaah.updateDokumenSaya');
 });
+
+Route::get('/dashboard/chart/pembayaran', [PembayaranController::class, 'getMonthlyChartData'])->name('dashboard.chart.pembayaran')->middleware(['auth', 'role:Admin,Direktur Keuangan,Pimpinan']);
