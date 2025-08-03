@@ -110,12 +110,12 @@ Route::get('/artikel/{id}', [ArtikelController::class, 'detailArtikel'])->name('
 Route::get('/galeri', [GaleriController::class, 'tampilPenggunaGaleri'])->name('pengguna.galeri');
 
 Route::get('/paket-umrah', [PaketUmrahController::class, 'listPaket'])->name('pengguna.paket');
-Route::get('/paket-umrah/{id}', [PaketUmrahController::class, 'showPaket'])->name('pengguna.detail_paket')->middleware(['auth', 'role:Jamaah']);
+Route::get('/paket-umrah/{id}', [PaketUmrahController::class, 'showPaket'])->name('pengguna.detail_paket');
 
 
-Route::get('/form-jamaah', [JamaahController::class, 'create'])->name('pengguna.formjamaah')->middleware(['auth', 'role:Jamaah']);
+Route::get('/form-jamaah', [JamaahController::class, 'create'])->name('pengguna.formjamaah');
 Route::post('/jamaah', [JamaahController::class, 'store'])->name('jamaah.store')->middleware(['auth', 'role:Jamaah']);
-Route::post('/pemesanan', [PemesananController::class, 'store'])->name('pemesanan.store')->middleware(['auth', 'role:Jamaah']);
+Route::post('/pemesanan', [PemesananController::class, 'store'])->name('pemesanan.store');
 
 Route::get('/reservasi/{id}', function ($id) {
     $pemesanan = \App\Models\Pemesanan::with([

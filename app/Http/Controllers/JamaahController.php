@@ -39,18 +39,28 @@ class JamaahController extends Controller
      * Show the form for creating a new resource.
      */
 
-     public function create(Request $request)
-     {
-         $users = User::all();
-         $jadwalId = $request->input('jadwal_id');
-         $paketId = $request->input('paket_id');
+        public function create(Request $request)
+    {
+        // Cek jika user login
+        if (auth()->check()) {
+            $user = auth()->user();
 
-         $paketUmrahs = PaketUmrah::findOrFail($paketId);
-         $jadwal = JadwalKeberangkatan::findOrFail($jadwalId);
+            // Jika role-nya termasuk yang dilarang
+            if (in_array($user->role, ['Direktur Keuangan', 'Admin', 'Pimpinan'])) {
+                abort(403, 'Forbidden - Anda tidak memiliki akses ke halaman ini.');
+            }
+        }
 
-         return view('pengguna.formjamaah', compact('users', 'jadwalId', 'paketId', 'paketUmrahs', 'jadwal'));
-     }
+        // Lanjutkan proses form jamaah
+        $users = User::all();
+        $jadwalId = $request->input('jadwal_id');
+        $paketId = $request->input('paket_id');
 
+        $paketUmrahs = PaketUmrah::findOrFail($paketId);
+        $jadwal = JadwalKeberangkatan::findOrFail($jadwalId);
+
+        return view('pengguna.formjamaah', compact('users', 'jadwalId', 'paketId', 'paketUmrahs', 'jadwal'));
+    }
 
     /**
      * Store a newly created resource in storage.

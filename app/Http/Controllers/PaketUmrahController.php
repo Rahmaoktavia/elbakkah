@@ -158,42 +158,59 @@ class PaketUmrahController extends Controller
 
     public function listPaket(Request $request)
     {
+        // Cek apakah user login
+        if (auth()->check()) {
+            $user = auth()->user();
+
+            // Cek jika role termasuk yang dilarang
+            if (in_array($user->role, ['Direktur Keuangan', 'Admin', 'Pimpinan'])) {
+                abort(403, 'Forbidden - Anda tidak memiliki akses ke halaman ini.');
+            }
+        }
+
         $query = PaketUmrah::query();
-    
+
         if ($request->filled('search')) {
             $search = $request->input('search');
             $query->where('nama_paket', 'like', "%{$search}%")
-                  ->orWhere('fasilitas', 'like', "%{$search}%");
+                ->orWhere('fasilitas', 'like', "%{$search}%");
         }
-    
+
         if ($request->filled('hari')) {
             $query->where('jumlah_hari', $request->hari);
         }
-    
+
         if ($request->filled('harga')) {
             $query->where('harga', '<=', $request->harga);
         }
-    
+
         $paketUmrahs = $query->orderBy('created_at', 'desc')->paginate(9)->withQueryString();
-    
+
         return view('pengguna.paket', compact('paketUmrahs'));
-    }    
-    
+    }
 
     public function showPaket($id)
     {
+        // Cek apakah user login
+        if (auth()->check()) {
+            $user = auth()->user();
+
+            // Jika role user termasuk yang dilarang
+            if (in_array($user->role, ['Direktur Keuangan', 'Admin', 'Pimpinan'])) {
+                abort(403, 'Forbidden - Anda tidak memiliki akses untuk melihat paket ini.');
+            }
+        }
+
+        // Tamu (belum login) dan Jamaah bisa lanjut
+
         $paketUmrahs = PaketUmrah::with('jadwalKeberangkatan')->findOrFail($id);
         $jadwals = $paketUmrahs->jadwalKeberangkatan;
-    
+
         $otherPaketUmrahs = PaketUmrah::where('id', '!=', $paketUmrahs->id)
             ->latest()
             ->take(3)
             ->get();
-    
+
         return view('pengguna.detail_paket', compact('paketUmrahs', 'jadwals', 'otherPaketUmrahs'));
     }
-    
-
-
-
 }
