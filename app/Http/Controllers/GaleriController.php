@@ -170,7 +170,7 @@ class GaleriController extends Controller
                 ->orWhere('deskripsi', 'like', "%{$search}%");
         }
 
-        $galeris = $query->orderBy('created_at', 'desc')->paginate(9);
+        $galeris = $query->orderBy('created_at', 'desc')->paginate(6);
 
         return view('pengguna.galeri', compact('galeris'));
     }
