@@ -43,6 +43,30 @@
                 </div>
             </div>
 
+            <!-- Hotel Makkah -->
+            <div class="col-md-6 mb-4">
+                <label class="fw-bold text-dark">Hotel Makkah</label>
+                <div class="text-secondary border-bottom pb-1">
+                    {{ $pembayaran->pemesanan->jadwalKeberangkatan->paket->hotel_makkah ?? '-' }}
+                </div>
+            </div>
+
+            <!-- Hotel Madinah -->
+            <div class="col-md-6 mb-4">
+                <label class="fw-bold text-dark">Hotel Madinah</label>
+                <div class="text-secondary border-bottom pb-1">
+                    {{ $pembayaran->pemesanan->jadwalKeberangkatan->paket->hotel_madinah ?? '-' }}
+                </div>
+            </div>
+
+            <!-- Durasi -->
+            <div class="col-md-6 mb-4">
+                <label class="fw-bold text-dark">Durasi (Hari)</label>
+                <div class="text-secondary border-bottom pb-1">
+                    {{ $pembayaran->pemesanan->jadwalKeberangkatan->paket->jumlah_hari ?? '-' }} Hari
+                </div>
+            </div>
+
             <!-- Tanggal Pembayaran -->
             <div class="col-md-6 mb-4">
                 <label class="fw-bold text-dark">Tanggal Pembayaran</label>

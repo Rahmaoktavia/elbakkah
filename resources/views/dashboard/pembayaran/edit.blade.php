@@ -40,6 +40,27 @@
                 <input type="text" class="form-control bg-light" value="{{ \Carbon\Carbon::parse($pembayaran->pemesanan->jadwalKeberangkatan->tanggal_berangkat)->translatedFormat('d F Y') }}" readonly>
             </div>
 
+            <!-- Hotel Makkah -->
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Hotel Makkah</label>
+                <input type="text" class="form-control bg-light" 
+                    value="{{ $pembayaran->pemesanan->jadwalKeberangkatan->paket->hotel_makkah ?? '-' }}" readonly>
+            </div>
+
+            <!-- Hotel Madinah -->
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Hotel Madinah</label>
+                <input type="text" class="form-control bg-light" 
+                    value="{{ $pembayaran->pemesanan->jadwalKeberangkatan->paket->hotel_madinah ?? '-' }}" readonly>
+            </div>
+
+            <!-- Durasi (Jumlah Hari) -->
+            <div class="mb-3">
+                <label class="form-label fw-semibold">Durasi (Hari)</label>
+                <input type="text" class="form-control bg-light" 
+                    value="{{ $pembayaran->pemesanan->jadwalKeberangkatan->paket->jumlah_hari ?? '-' }} Hari" readonly>
+            </div>
+
             <!-- Tanggal Bayar -->
             <div class="mb-3">
                 <label class="form-label fw-semibold">Tanggal Pembayaran</label>
