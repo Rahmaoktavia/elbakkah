@@ -114,6 +114,7 @@
                 <th>Nama</th>
                 <th>NIK</th>
                 <th>TTL</th>
+                <th>Umur</th>
                 <th>Jenis Kelamin</th>
                 <th>Alamat</th>
                 <th>Telepon</th>
@@ -129,6 +130,7 @@
                     <td>{{ $jamaah->nama_jamaah }}</td>
                     <td>{{ $jamaah->nik }}</td>
                     <td>{{ $jamaah->tempat_lahir }}, {{ \Carbon\Carbon::parse($jamaah->tanggal_lahir)->translatedFormat('d F Y') }}</td>
+                    <td class="text-center">{{ $jamaah->umur }} tahun</td> 
                     <td class="text-center">{{ $jamaah->jenis_kelamin }}</td>
                     <td>{{ $jamaah->alamat }}</td>
                     <td>{{ $jamaah->no_telepon }}</td>

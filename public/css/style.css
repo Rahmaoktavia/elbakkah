@@ -9701,7 +9701,7 @@ textarea.form-control {
   .blog-entry .two {
     width: calc(100% - 55px); }
   .blog-entry span.day {
-    font-size: 50px;
+    font-size: 40px;
     font-weight: 300;
     color: #fff;
     line-height: 1; }

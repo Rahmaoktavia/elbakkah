@@ -29,17 +29,6 @@
                 @enderror
             </div>
 
-            <!-- Tanggal Terbit -->
-            <div class="mb-3">
-                <label for="tanggal_terbit" class="form-label fw-semibold">Tanggal Terbit</label>
-                <input type="date" class="form-control @error('tanggal_terbit') is-invalid @enderror"
-                       name="tanggal_terbit" id="tanggal_terbit"
-                       value="{{ old('tanggal_terbit', $artikel->tanggal_terbit) }}">
-                @error('tanggal_terbit')
-                    <div class="invalid-feedback">{{ $message }}</div>
-                @enderror
-            </div>
-
             <!-- Isi Artikel -->
             <div class="mb-3">
                 <label for="isi_artikel" class="form-label fw-semibold">Isi Artikel</label>
@@ -63,6 +52,13 @@
                 @error('gambar_sampul')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
+            </div>
+
+            <!-- Status is_published -->
+            <div class="mb-3 form-check">
+                <input type="checkbox" class="form-check-input" id="is_published" name="is_published" value="1"
+                    {{ old('is_published', $artikel->is_published) ? 'checked' : '' }}>
+                <label class="form-check-label fw-semibold" for="is_published">Tampilkan ke Publik</label>
             </div>
 
             <!-- Tombol -->

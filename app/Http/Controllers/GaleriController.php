@@ -46,7 +46,6 @@ class GaleriController extends Controller
         $validated = $request->validate([
             'judul_foto' => 'required|string|max:255',
             'file_foto' => 'required|image|mimes:jpg,jpeg,png|max:2048',
-            'tanggal_upload' => 'required|date',
             'deskripsi' => 'nullable|string',
         ]);
 
@@ -93,7 +92,6 @@ class GaleriController extends Controller
         // Validasi input
         $validated = $request->validate([
             'judul_foto' => 'required|string|max:255',
-            'tanggal_upload' => 'required|date',
             'deskripsi' => 'nullable|string',
             'file_foto' => 'nullable|image|mimes:jpeg,png,jpg,gif|max:2048',
         ]);

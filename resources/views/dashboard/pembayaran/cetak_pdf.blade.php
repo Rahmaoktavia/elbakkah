@@ -99,6 +99,24 @@
     <!-- Judul -->
     <h3 class="judul">Laporan Data Pembayaran</h3>
 
+    <!-- Periode Filter -->
+    @if (isset($bulan) || isset($tahun) || isset($status_verifikasi))
+        <p style="text-align:center; font-size: 12px; margin-top: 0;">
+            Periode:
+            @if ($bulan)
+                {{ \Carbon\Carbon::create()->month((int) $bulan)->translatedFormat('F') }}
+            @endif
+            {{ $tahun }}
+            @if ($status_verifikasi)
+                | Status Verifikasi: {{ $status_verifikasi }}
+            @endif
+        </p>
+    @else
+        <p style="text-align:center; font-size: 12px; margin-top: 0;">
+            Periode: Semua Data
+        </p>
+    @endif
+
     <!-- Tabel Pembayaran -->
     <table>
         <thead>

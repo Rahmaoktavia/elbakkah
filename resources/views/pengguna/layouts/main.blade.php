@@ -35,6 +35,60 @@
 
   <!-- Custom Inline Styles -->
   <style>
+.label-tipe-paket {
+  position: absolute;
+  top: 0;
+  left: 0;
+  padding: 6px 12px;
+  font-size: 12px;
+  font-weight: bold;
+  color: white;
+  background-color: #dc3545; /* default */
+  clip-path: polygon(0 0, 100% 0, 85% 100%, 0% 100%);
+  z-index: 1;
+  border-top-left-radius: 6px;
+}
+
+/* Warna berdasarkan tipe */
+.label-tipe-paket.promo {
+  background-color: #dc3545;
+}
+.label-tipe-paket.reguler {
+  background-color: #0d6efd;
+}
+.label-tipe-paket.gold {
+  background-color: #ffc107;
+}
+.label-tipe-paket.ramadhan {
+  background-color: #198754;
+}
+
+.label-tipe-sidebar {
+  position: absolute;
+  top: 5px;
+  left: 5px;
+  padding: 3px 8px;
+  font-size: 10px;
+  font-weight: 600;
+  color: white;
+  background-color: #198754;
+  border-radius: 4px;
+  z-index: 10;
+}
+
+.label-tipe-sidebar.ramadhan {
+  background-color: #198754; /* Hijau */
+}
+.label-tipe-sidebar.reguler {
+  background-color: #0d6efd; /* Biru */
+}
+.label-tipe-sidebar.gold {
+  background-color: #ffc107; /* Kuning */
+}
+.label-tipe-sidebar.promo {
+  background-color: #dc3545; /* Merah */
+}
+
     .pagination .page-link {
         border-radius: 50% !important;
         width: 40px;
@@ -174,6 +228,11 @@
     border-color: #1AC9E0;
     box-shadow: 0 0 0 0.1rem rgba(26, 201, 224, 0.25);
   }
+
+  .form-group:hover {
+  box-shadow: 0 4px 12px rgba(0, 123, 255, 0.15);
+  transition: all 0.2s ease-in-out;
+}
 
   .form-field .icon {
     color: #aaa;

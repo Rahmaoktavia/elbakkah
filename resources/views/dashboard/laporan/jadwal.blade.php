@@ -98,6 +98,20 @@
 
     <!-- Judul -->
     <h3 class="judul">Laporan Jadwal Keberangkatan Umrah</h3>
+    @if (!empty($bulan) || !empty($tahun) || !empty($nama_paket))
+        <p style="text-align:center; font-size: 12px; margin-top: 0;">
+            Periode: 
+            @if ($bulan)
+                {{ \Carbon\Carbon::create()->month((int)$bulan)->translatedFormat('F') }}
+            @endif
+            {{ $tahun }}
+            @if ($nama_paket)
+                | Paket: {{ $nama_paket }}
+            @endif
+        </p>
+    @else
+        <p style="text-align:center; font-size: 12px; margin-top: 0;">Periode: Semua Data</p>
+    @endif
 
     <!-- Tabel Jadwal -->
     <table>

@@ -98,6 +98,23 @@
 
     <!-- Judul -->
     <h3 class="judul">Laporan Data Pemesanan Umrah</h3>
+    <!-- Periode Filter -->
+    @if (isset($bulan) || isset($tahun))
+    <p style="text-align:center; font-size: 12px; margin-top: 0;">
+        Periode:
+        @if ($bulan)
+            {{ \Carbon\Carbon::create()->month((int) $bulan)->translatedFormat('F') }}
+        @endif
+        {{ $tahun }}
+        @if (isset($status))
+            | Status Pembayaran: {{ $status }}
+        @endif
+    </p>    
+    @else
+    <p style="text-align:center; font-size: 12px; margin-top: 0;">
+        Periode: Semua Data
+    </p>
+    @endif
 
     <!-- Tabel Pemesanan -->
     <table>

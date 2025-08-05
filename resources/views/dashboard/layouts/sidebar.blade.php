@@ -34,6 +34,14 @@
               <div class="text-truncate">Paket Umrah</div>
           </a>
       </li>
+
+      <!-- Tipe Paket -->
+    <li class="menu-item {{ request()->is('admin/tipe-paket*') ? 'active-custom' : '' }}">
+        <a href="{{ route('dashboard.tipe-paket.index') }}" class="menu-link">
+            <i class="menu-icon tf-icons bx bx-category"></i>
+            <div class="text-truncate">Tipe Paket</div>
+        </a>
+    </li>
   
       <!-- Jadwal Keberangkatan -->
       <li class="menu-item {{ request()->is('admin/jadwal*') ? 'active-custom' : '' }}">
@@ -112,6 +120,14 @@
               <div class="text-truncate">User</div>
           </a>
       </li>
+
+      <!-- Contact Us -->
+    <li class="menu-item {{ request()->is('admin/contact-us*') ? 'active-custom' : '' }}">
+        <a href="{{ route('dashboard.contact_us.index') }}" class="menu-link">
+            <i class="menu-icon tf-icons bx bx-message-square-detail"></i>
+            <div class="text-truncate">Contact Us</div>
+        </a>
+    </li>
   @endif
   
   <!-- Menu untuk Pimpinan -->

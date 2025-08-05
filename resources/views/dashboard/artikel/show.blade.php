@@ -22,7 +22,19 @@
             <div class="col-md-6 mb-4">
                 <label class="fw-bold text-dark">Tanggal Terbit</label>
                 <div class="text-secondary border-bottom pb-1">
-                    {{ \Carbon\Carbon::parse($artikel->tanggal_terbit)->translatedFormat('d F Y') }}
+                    {{ \Carbon\Carbon::parse($artikel->created_at)->translatedFormat('d F Y') }}
+                </div>
+            </div>
+
+            <!-- Status -->
+            <div class="col-md-3 mb-4">
+                <label class="fw-bold text-dark">Status</label>
+                <div class="text-secondary border-bottom pb-1">
+                    @if ($artikel->is_published)
+                        <span class="badge bg-success">Dipublikasi</span>
+                    @else
+                        <span class="badge bg-secondary">Draf</span>
+                    @endif
                 </div>
             </div>
 

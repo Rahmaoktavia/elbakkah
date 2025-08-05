@@ -31,6 +31,9 @@
 				<li class="nav-item {{ Request::is('tentangkami*') ? 'active' : '' }}">
 					<a href="/tentangkami" class="nav-link">Tentang Kami</a>
 				</li>
+				<li class="nav-item {{ Request::is('contact-us*') ? 'active' : '' }}">
+					<a href="{{ route('contact_us.contactUs') }}" class="nav-link">Contact Us</a>
+				</li>
 
 				@guest
 					<li class="nav-item {{ Request::is('login') ? 'active' : '' }}">

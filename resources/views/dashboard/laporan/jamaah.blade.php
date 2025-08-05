@@ -105,6 +105,20 @@
 
     <!-- Judul -->
     <h3 class="judul">Laporan Data Jamaah</h3>
+    @if (isset($jenis_kelamin) || isset($tahun))
+    <p style="text-align:center; font-size: 12px; margin-top: 0;">
+        @if ($tahun)
+            Tahun Pendaftaran: {{ $tahun }}
+        @endif
+        @if ($jenis_kelamin)
+            &nbsp; — Jenis Kelamin: {{ $jenis_kelamin }}
+        @endif
+    </p>
+@else
+    <p style="text-align:center; font-size: 12px; margin-top: 0;">
+        Filter: Semua Data
+    </p>
+@endif
 
     <!-- Tabel Jamaah -->
     <table>
@@ -114,6 +128,7 @@
                 <th>Nama</th>
                 <th>NIK</th>
                 <th>TTL</th>
+                <th>Umur</th>
                 <th>Jenis Kelamin</th>
                 <th>Alamat</th>
                 <th>Telepon</th>
@@ -129,6 +144,7 @@
                     <td>{{ $jamaah->nama_jamaah }}</td>
                     <td>{{ $jamaah->nik }}</td>
                     <td>{{ $jamaah->tempat_lahir }}, {{ \Carbon\Carbon::parse($jamaah->tanggal_lahir)->translatedFormat('d F Y') }}</td>
+                    <td class="text-center">{{ $jamaah->umur }} tahun</td> 
                     <td class="text-center">{{ $jamaah->jenis_kelamin }}</td>
                     <td>{{ $jamaah->alamat }}</td>
                     <td>{{ $jamaah->no_telepon }}</td>

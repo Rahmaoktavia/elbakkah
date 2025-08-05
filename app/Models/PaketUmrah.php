@@ -23,6 +23,7 @@ class PaketUmrah extends Model
     'hotel_madinah',
     'fasilitas',
     'deskripsi',
+    'tipe_paket_id',
     ];
 
        public function jadwalKeberangkatan()
@@ -42,4 +43,8 @@ class PaketUmrah extends Model
         );
     }
 
+    public function tipePaket()
+    {
+        return $this->belongsTo(TipePaket::class, 'tipe_paket_id');
+    }
 }

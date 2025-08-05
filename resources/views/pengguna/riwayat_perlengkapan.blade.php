@@ -42,8 +42,10 @@
                                 <td>{{ $index + 1 }}</td>
                                 <td class="text-start ps-3">{{ $item->perlengkapan->nama_perlengkapan }}</td>
                                 <td>
-                                    <span class="badge rounded-pill bg-success px-3 py-2">{{ $item->jumlah_diberikan }}</span>
-                                </td>
+                                    <span class="badge rounded-pill bg-success px-3 py-2">
+                                        {{ $item->jumlah_diberikan }} {{ $item->perlengkapan->satuan }}
+                                    </span>
+                                </td>                                
                                 <td>{{ \Carbon\Carbon::parse($item->tanggal_distribusi)->translatedFormat('d F Y') }}</td>
                             </tr>
                         @empty

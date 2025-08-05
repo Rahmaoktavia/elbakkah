@@ -42,8 +42,10 @@ class ArtikelController extends Controller
             'judul_artikel'   => 'required|string|max:255',
             'isi_artikel'     => 'required|string',
             'gambar_sampul'   => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
-            'tanggal_terbit'  => 'required|date',
+            'is_published'    => 'nullable|boolean', 
         ]);
+        
+        $validated['is_published'] = $request->has('is_published');
 
         if ($request->hasFile('gambar_sampul')) {
             $file = $request->file('gambar_sampul');
@@ -83,12 +85,14 @@ class ArtikelController extends Controller
      */
     public function update(Request $request, string $id)
     {
-         $validated = $request->validate([
+        $validated = $request->validate([
             'judul_artikel'   => 'required|string|max:255',
             'isi_artikel'     => 'required|string',
-            'tanggal_terbit'  => 'required|date',
-            'gambar_sampul'   => 'nullable|image|mimes:jpeg,png,jpg|max:2048',
+            'gambar_sampul'   => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
+            'is_published'    => 'nullable|boolean', 
         ]);
+        
+        $validated['is_published'] = $request->has('is_published');
 
         $artikel = Artikel::findOrFail($id);
 
@@ -147,17 +151,22 @@ class ArtikelController extends Controller
 
     public function artikel()
     {
-        $artikels = Artikel::orderBy('tanggal_terbit', 'desc')->paginate(6);
+        $artikels = Artikel::where('is_published', true)
+                    ->orderBy('created_at', 'desc')
+                    ->paginate(6);
+
         return view('pengguna.artikel', compact('artikels'));
     }
 
     public function detailArtikel($id)
     {
-        $artikel = Artikel::findOrFail($id);
+        $artikel = Artikel::where('id', $id)->where('is_published', true)->firstOrFail();
+
         $artikelTerbaru = Artikel::where('id', '!=', $id)
-        ->orderBy('tanggal_terbit', 'desc')
-        ->limit(5)
-        ->get();
+            ->where('is_published', true)
+            ->orderBy('created_at', 'desc')
+            ->limit(5)
+            ->get();
 
         return view('pengguna.detail_artikel', compact('artikel', 'artikelTerbaru'));
     }

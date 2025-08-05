@@ -29,17 +29,6 @@
                 @enderror
             </div>
 
-            <!-- Tanggal Upload -->
-            <div class="mb-3">
-                <label for="tanggal_upload" class="form-label fw-semibold">Tanggal Upload</label>
-                <input type="date" class="form-control @error('tanggal_upload') is-invalid @enderror"
-                       name="tanggal_upload" id="tanggal_upload"
-                       value="{{ old('tanggal_upload', $galeri->tanggal_upload) }}">
-                @error('tanggal_upload')
-                    <div class="invalid-feedback">{{ $message }}</div>
-                @enderror
-            </div>
-
             <!-- Deskripsi -->
             <div class="mb-3">
                 <label for="deskripsi" class="form-label fw-semibold">Deskripsi</label>

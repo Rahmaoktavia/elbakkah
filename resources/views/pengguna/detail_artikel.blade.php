@@ -29,7 +29,7 @@
         <div class="blog-entry">
           <div class="block-20 mb-4" style="background-image: url('{{ asset('img/' . $artikel->gambar_sampul) }}'); height: 400px; background-size: cover; border-radius: 10px;"></div>
           <div class="text">
-            <p class="text-muted">{{ \Carbon\Carbon::parse($artikel->tanggal_terbit)->translatedFormat('d F Y') }}</p>
+            <p class="text-muted">{{ \Carbon\Carbon::parse($artikel->created_at)->translatedFormat('d F Y') }}</p>
             <h2 class="mb-4">{{ $artikel->judul_artikel }}</h2>
             <div>{!! $artikel->isi_artikel !!}</div>
           </div>
@@ -60,7 +60,7 @@
                     {{ Str::limit($item->judul_artikel, 50) }}
                     </a>
                 </h6>
-                <small class="text-muted">{{ \Carbon\Carbon::parse($item->tanggal_terbit)->translatedFormat('d F Y') }}</small>
+                <small class="text-muted">{{ \Carbon\Carbon::parse($item->created_at)->translatedFormat('d F Y') }}</small>
                 </div>
             </div>
             @endforeach

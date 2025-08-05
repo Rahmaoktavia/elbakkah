@@ -99,6 +99,20 @@
     <!-- Judul -->
     <h3 class="judul">Laporan Distribusi Perlengkapan</h3>
 
+    @if (!empty($bulan) || !empty($tahun))
+        <p style="text-align:center; font-size: 12px; margin-top: 0;">
+            Periode:
+            @if ($bulan)
+                {{ \Carbon\Carbon::create()->month((int) $bulan)->translatedFormat('F') }}
+            @endif
+            {{ $tahun }}
+        </p>
+    @else
+        <p style="text-align:center; font-size: 12px; margin-top: 0;">
+            Periode: Semua Data
+        </p>
+    @endif
+
     <!-- Tabel Distribusi -->
     <table>
         <thead>

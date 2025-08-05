@@ -14,7 +14,6 @@ class Galeri extends Model
     protected $fillable = [
         'judul_foto',
         'file_foto',
-        'tanggal_upload',
         'deskripsi'
     ];
 

@@ -24,11 +24,11 @@
             <div class="text">
               <div class="d-flex align-items-center mb-4 topp">
                 <div class="one">
-                  <span class="day">{{ \Carbon\Carbon::parse($artikel->tanggal_terbit)->format('d') }}</span>
+                  <span class="day">{{ \Carbon\Carbon::parse($artikel->created_at)->format('d') }}</span>
                 </div>
                 <div class="two">
-                  <span class="yr">{{ \Carbon\Carbon::parse($artikel->tanggal_terbit)->format('Y') }}</span>
-                  <span class="mos">{{ \Carbon\Carbon::parse($artikel->tanggal_terbit)->translatedFormat('F') }}</span>
+                  <span class="yr">{{ \Carbon\Carbon::parse($artikel->created_at)->format('Y') }}</span>
+                  <span class="mos">{{ \Carbon\Carbon::parse($artikel->created_at)->translatedFormat('F') }}</span>
                 </div>
               </div>
               <h3 class="heading">

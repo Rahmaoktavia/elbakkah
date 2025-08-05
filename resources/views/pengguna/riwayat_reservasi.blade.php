@@ -73,6 +73,38 @@
         </div>
     </div>
 
+        @php
+        $tanggalBerangkat = \Carbon\Carbon::parse($pemesanan->jadwalKeberangkatan->tanggal_berangkat);
+        $hariIni = now();
+        $selisihHari = $hariIni->diffInDays($tanggalBerangkat, false);
+
+        $batasPelunasan = $tanggalBerangkat->copy()->subDays(40); // Deadline pelunasan
+        $mulaiWarning = $tanggalBerangkat->copy()->subDays(45); // Warning mulai ditampilkan
+    @endphp
+
+    @if ($pemesanan->status_pembayaran != 'Lunas')
+    <div class="card shadow-sm mb-5">
+        <div class="card-body d-flex justify-content-center align-items-center" style="min-height: 150px;">
+                @if ($hariIni->greaterThanOrEqualTo($tanggalBerangkat))
+                    <div class="alert alert-danger text-center w-100 mb-0">
+                        <strong>Jadwal keberangkatan sudah lewat!</strong> dan pembayaran belum lunas.
+                    </div>
+                @elseif ($hariIni->greaterThanOrEqualTo($batasPelunasan))
+                    <div class="alert alert-danger text-center w-100 mb-0">
+                        <strong>Perhatian!</strong> Batas akhir pelunasan sudah lewat (H-40).
+                        <br>Silakan segera selesaikan pembayaran Anda.
+                    </div>
+                @elseif ($hariIni->greaterThanOrEqualTo($mulaiWarning))
+                    <div class="alert alert-warning text-center w-100 mb-0">
+                        <strong>Perhatian!</strong> Pelunasan cicilan harus diselesaikan paling lambat 
+                        <strong>40 hari</strong> sebelum tanggal keberangkatan.
+                        <br>Hari tersisa menuju keberangkatan: <strong>{{ round($selisihHari) }} hari</strong>
+                    </div>
+                @endif
+        </div>
+    </div>
+    @endif
+
     {{-- PROGRESS PEMBAYARAN --}}
     @php
         $totalDibayar = $pemesanan->pembayarans->where('status_verifikasi', 'Diterima')->sum('jumlah_bayar');
@@ -104,7 +136,6 @@
                             <th>Jumlah Bayar</th>
                             <th>Bukti</th>
                             <th>Status</th>
-                            <th>Invoice</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -125,15 +156,6 @@
                                         {{ $bayar->status_verifikasi }}
                                     </span>
                                 </td>
-                                <td>
-                                    @if ($bayar->status_verifikasi == 'Diterima')
-                                        <a href="{{ route('pembayaran.invoice', $bayar->id) }}" target="_blank" class="btn btn-sm btn-outline-primary">
-                                            Cetak
-                                        </a>
-                                    @else
-                                        <span class="text-muted">-</span>
-                                    @endif
-                                </td>
                             </tr>
                         @empty
                             <tr>
@@ -142,6 +164,11 @@
                         @endforelse
                     </tbody>
                 </table>
+            </div>
+            <div class="d-flex justify-content-start">
+                <a href="{{ route('pembayaran.invoice.all', $pemesanan->id) }}" target="_blank" class="btn btn-primary">
+                    <i class="bi bi-printer me-1"></i> Cetak Invoice
+                </a>
             </div>
         </div>
     </div>
@@ -196,7 +223,7 @@
 
                         <div class="col-md-4 mb-3">
                             <label for="jumlah_bayar" class="form-label">Jumlah Bayar</label>
-                            <input type="number" name="jumlah_bayar" class="form-control @error('jumlah_bayar') is-invalid @enderror" placeholder="Masukkan Jumlah Pembayaran" required>
+                            <input type="text" name="jumlah_bayar" id="jumlah_bayar" class="form-control @error('jumlah_bayar') is-invalid @enderror" placeholder="Masukkan Jumlah Pembayaran" required>
                             @error('jumlah_bayar') <div class="invalid-feedback">{{ $message }}</div> @enderror
                         </div>
 
@@ -216,6 +243,22 @@
             @endif
         </div>
     </div>
-
 </div>
+@push('scripts')
+<script src="https://cdn.jsdelivr.net/npm/autonumeric@4.6.0/dist/autoNumeric.min.js"></script>
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        if (!AutoNumeric.getAutoNumericElement('#jumlah_bayar')) {
+            new AutoNumeric('#jumlah_bayar', {
+                digitGroupSeparator: '.',
+                decimalCharacter: ',',
+                decimalPlaces: 0,
+                unformatOnSubmit: true,
+                modifyValueOnWheel: false,
+            });
+        }
+    });
+</script>
+@endpush
+
 @endsection

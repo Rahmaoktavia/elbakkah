@@ -25,6 +25,10 @@
                 <div class="text-secondary border-bottom pb-1">{{ $jamaah->tempat_lahir }}, {{ \Carbon\Carbon::parse($jamaah->tanggal_lahir)->translatedFormat('d F Y') }}</div>
             </div>
             <div class="col-md-6 mb-4">
+                <label class="fw-bold text-dark">Umur</label>
+                <div class="text-secondary border-bottom pb-1">{{ $jamaah->umur }} tahun</div>
+            </div>
+            <div class="col-md-6 mb-4">
                 <label class="fw-bold text-dark">Jenis Kelamin</label>
                 <div class="text-secondary border-bottom pb-1">{{ $jamaah->jenis_kelamin }}</div>
             </div>

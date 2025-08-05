@@ -23,8 +23,8 @@ class JadwalKeberangkatanController extends Controller
             });
         }
 
-        $jadwals = $query->orderBy('tanggal_berangkat', 'asc')->paginate(10);
-        $paketUmrahs = PaketUmrah::all(); // ambil semua paket umrah untuk filter/dropdown (jika dibutuhkan)
+        $jadwals = $query->orderBy('tanggal_berangkat', 'desc')->paginate(10);
+        $paketUmrahs = PaketUmrah::all(); 
 
         return view('dashboard.jadwal.index', compact('jadwals', 'paketUmrahs'));
     }

@@ -147,13 +147,29 @@ class PemesananController extends Controller
         ]);
     }
 
-    public function cetakPDF()
+    public function cetakPDF(Request $request)
     {
-        $pemesanans = Pemesanan::with(['jamaah', 'jadwalKeberangkatan.paket'])->get();
+        $query = Pemesanan::with(['jamaah', 'jadwalKeberangkatan.paket']);
 
-        $pdf = Pdf::loadView('dashboard.pemesanan.cetak_pdf', compact('pemesanans'));
+        if ($request->filled('bulan')) {
+            $query->whereMonth('tanggal_pesan', $request->bulan);
+        }
+
+        if ($request->filled('tahun')) {
+            $query->whereYear('tanggal_pesan', $request->tahun);
+        }
+
+        if ($request->filled('status')) {
+            $query->where('status_pembayaran', $request->status);
+        }
+
+        $pemesanans = $query->get();
+
+        $bulan = $request->bulan;
+        $tahun = $request->tahun;
+        $status = $request->status;
+
+        $pdf = Pdf::loadView('dashboard.pemesanan.cetak_pdf', compact('pemesanans', 'bulan', 'tahun', 'status'));
         return $pdf->stream('laporan-pemesanan.pdf');
     }
-
-
 }

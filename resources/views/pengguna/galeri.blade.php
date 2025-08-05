@@ -30,7 +30,7 @@
               <p class="deskripsi">{{ $galeri->deskripsi ?? 'Tidak ada deskripsi.' }}</p>
               <div class="tanggal">
                 <i class="fa fa-calendar mr-1"></i>
-                {{ \Carbon\Carbon::parse($galeri->tanggal_upload)->translatedFormat('d F Y') }}
+                {{ \Carbon\Carbon::parse($galeri->created_at)->translatedFormat('d F Y') }}
               </div>
             </div>
           </div>

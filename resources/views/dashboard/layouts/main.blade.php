@@ -106,6 +106,29 @@
   }
 }
 
+    /* Styling khusus checkbox */
+    .form-check-input {
+        width: 1.3em;
+        height: 1.3em;
+        margin-top: 0.25em;
+        vertical-align: top;
+        background-color: #fff;
+        border: 1px solid #ced4da;
+        cursor: pointer;
+        transition: background-color 0.2s ease;
+    }
+    
+    /* Warna ketika dicentang */
+    .form-check-input:checked {
+        background-color: #0d6efd;
+        border-color: #0d6efd;
+    }
+    
+    /* Optional: efek hover */
+    .form-check-input:hover {
+        border-color: #86b7fe;
+    }
+
 .btn-biru {
         background-color: #1AC9E0;
         border-color: #1AC9E0;

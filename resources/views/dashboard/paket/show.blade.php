@@ -18,6 +18,13 @@
             </div>
 
             <div class="col-md-6 mb-4">
+                <label class="fw-bold text-dark">Tipe Paket</label>
+                <div class="text-secondary border-bottom pb-1">
+                    {{ $paket->tipePaket->nama_tipe ?? '-' }}
+                </div>
+            </div>
+
+            <div class="col-md-6 mb-4">
                 <label class="fw-bold text-dark">Harga</label>
                 <div class="text-secondary border-bottom pb-1">Rp {{ number_format($paket->harga, 2, ',', '.') }}</div>
             </div>

@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
+use Carbon\Carbon;
 
 class Jamaah extends Model
 {
@@ -36,5 +37,10 @@ class Jamaah extends Model
     public function pemesanans()
     {
         return $this->hasMany(Pemesanan::class);
+    }
+
+    public function getUmurAttribute()
+    {
+        return Carbon::parse($this->tanggal_lahir)->age;
     }
 }

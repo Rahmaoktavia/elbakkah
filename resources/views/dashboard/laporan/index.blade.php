@@ -24,28 +24,36 @@
                 <div class="flex-grow-1">
                     <h6 class="fw-semibold mb-2">Laporan Pembayaran</h6>
                     <form action="{{ route('laporan.cetakPembayaran') }}" method="GET" target="_blank" class="row g-2 align-items-end">
-                        <div class="col-md-4">
-                            <select name="bulan" class="form-select" required>
-                                <option value="">Pilih Bulan</option>
+                        <div class="col-md-3">
+                            <select name="bulan" class="form-select">
+                                <option value="">Semua Bulan</option> 
                                 @for ($m = 1; $m <= 12; $m++)
                                     <option value="{{ $m }}">{{ \Carbon\Carbon::create()->month($m)->translatedFormat('F') }}</option>
                                 @endfor
-                            </select>
+                            </select>                            
                         </div>
-                        <div class="col-md-4">
-                            <select name="tahun" class="form-select" required>
-                                <option value="">Pilih Tahun</option>
+                        <div class="col-md-3">
+                            <select name="tahun" class="form-select">
+                                <option value="">Semua Tahun</option> 
                                 @for ($y = now()->year; $y >= 2020; $y--)
                                     <option value="{{ $y }}">{{ $y }}</option>
                                 @endfor
                             </select>
                         </div>
-                        <div class="col-md-4 {{ $btnWrapper }}">
-                            <button class="{{ $btnClass }}" type="submit">
-                                <i class="{{ $btnIcon }}"></i> Unduh PDF
+                        <div class="col-md-3">
+                            <select name="status" class="form-select">
+                                <option value="">Semua Status</option>
+                                <option value="Menunggu">Menunggu</option>
+                                <option value="Diterima">Diterima</option>
+                                <option value="Ditolak">Ditolak</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3 d-flex justify-content-end align-items-center">
+                            <button class="btn btn-primary d-flex align-items-center gap-2" type="submit">
+                                <i class="bi bi-download"></i> Unduh PDF
                             </button>
                         </div>
-                    </form>
+                    </form>                    
                 </div>
             </div>
 
@@ -57,25 +65,179 @@
                 <div class="flex-grow-1">
                     <h6 class="fw-semibold mb-2">Laporan Pemesanan</h6>
                     <form action="{{ route('laporan.cetakPemesanan') }}" method="GET" target="_blank" class="row g-2 align-items-end">
+                        <div class="col-md-3">
+                            <select name="bulan" class="form-select">
+                                <option value="">Semua Bulan</option> 
+                                @for ($m = 1; $m <= 12; $m++)
+                                    <option value="{{ $m }}">{{ \Carbon\Carbon::create()->month($m)->translatedFormat('F') }}</option>
+                                @endfor
+                            </select>     
+                        </div>
+                        <div class="col-md-3">
+                            <select name="tahun" class="form-select">
+                                <option value="">Semua Tahun</option> 
+                                @for ($y = now()->year; $y >= 2020; $y--)
+                                    <option value="{{ $y }}">{{ $y }}</option>
+                                @endfor
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <select name="status_pembayaran" class="form-select">
+                                <option value="">Semua Status</option>
+                                <option value="Lunas">Lunas</option>
+                                <option value="Belum Lunas">Belum Lunas</option>
+                            </select>
+                        </div>
+                        <div class="col-md-3 d-flex justify-content-end align-items-center">
+                            <button class="btn btn-primary d-flex align-items-center gap-2" type="submit">
+                                <i class="bi bi-download"></i> Unduh PDF
+                            </button>
+                        </div>
+                    </form>                    
+                </div>
+            </div>
+
+            {{-- JADWAL KEBERANGKATAN --}}
+            <div class="d-flex gap-3 align-items-start mb-3 p-3 bg-white rounded shadow-sm">
+                <div style="{{ $iconStyle }}">
+                    <i class="bi bi-calendar-check {{ $iconClass }}"></i>
+                </div>
+                <div class="flex-grow-1">
+                    <h6 class="fw-semibold mb-2">Laporan Jadwal Keberangkatan</h6>
+                    <form action="{{ route('laporan.cetakJadwal') }}" method="GET" target="_blank" class="row g-2 align-items-end">
+                        <div class="col-md-3">
+                            <select name="bulan" class="form-select">
+                                <option value="">Semua Bulan</option>
+                                @for ($m = 1; $m <= 12; $m++)
+                                    <option value="{{ $m }}">{{ \Carbon\Carbon::create()->month($m)->translatedFormat('F') }}</option>
+                                @endfor
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <select name="tahun" class="form-select">
+                                <option value="">Semua Tahun</option>
+                                @for ($y = now()->year; $y >= 2020; $y--)
+                                    <option value="{{ $y }}">{{ $y }}</option>
+                                @endfor
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <select name="nama_paket" class="form-select">
+                                <option value="">Semua Paket</option>
+                                @foreach ($namaPaketList as $nama)
+                                    <option value="{{ $nama }}">{{ $nama }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-md-3 d-flex justify-content-end align-items-center">
+                            <button class="btn btn-primary d-flex align-items-center gap-2" type="submit">
+                                <i class="bi bi-download"></i> Unduh PDF
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            {{-- INVENTARIS --}}
+            <div class="d-flex gap-3 align-items-start mb-3 p-3 bg-white rounded shadow-sm">
+                <div style="{{ $iconStyle }}">
+                    <i class="bi bi-archive-fill {{ $iconClass }}"></i>
+                </div>
+                <div class="flex-grow-1">
+                    <h6 class="fw-semibold mb-2">Laporan Inventaris Perlengkapan</h6>
+                    <form action="{{ route('laporan.cetakInventaris') }}" method="GET" target="_blank" class="row g-2 align-items-end">
+                        <div class="col-md-3">
+                            <select name="bulan" class="form-select">
+                                <option value="">Semua Bulan</option>
+                                @for ($m = 1; $m <= 12; $m++)
+                                    <option value="{{ $m }}">{{ \Carbon\Carbon::create()->month($m)->translatedFormat('F') }}</option>
+                                @endfor
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <select name="tahun" class="form-select">
+                                <option value="">Semua Tahun</option>
+                                @for ($y = now()->year; $y >= 2020; $y--)
+                                    <option value="{{ $y }}">{{ $y }}</option>
+                                @endfor
+                            </select>
+                        </div>                        
+                        <div class="col-md-3">
+                            <select name="nama_perlengkapan" class="form-select">
+                                <option value="">Semua Perlengkapan</option>
+                                @foreach ($namaPerlengkapanList as $nama)
+                                    <option value="{{ $nama }}">{{ $nama }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-md-3 d-flex justify-content-end align-items-center">
+                            <button class="btn btn-primary d-flex align-items-center gap-2" type="submit">
+                                <i class="bi bi-download"></i> Unduh PDF
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            {{-- DISTRIBUSI PERLENGKAPAN --}}
+            <div class="d-flex gap-3 align-items-start mb-3 p-3 bg-white rounded shadow-sm">
+                <div style="{{ $iconStyle }}">
+                    <i class="bi bi-truck {{ $iconClass }}"></i>
+                </div>
+                <div class="flex-grow-1">
+                    <h6 class="fw-semibold mb-2">Laporan Distribusi Perlengkapan</h6>
+                    <form action="{{ route('laporan.cetakDistribusi') }}" method="GET" target="_blank" class="row g-2 align-items-end">
                         <div class="col-md-4">
-                            <select name="bulan" class="form-select" required>
-                                <option value="">Pilih Bulan</option>
+                            <select name="bulan" class="form-select">
+                                <option value="">Semua Bulan</option>
                                 @for ($m = 1; $m <= 12; $m++)
                                     <option value="{{ $m }}">{{ \Carbon\Carbon::create()->month($m)->translatedFormat('F') }}</option>
                                 @endfor
                             </select>
                         </div>
                         <div class="col-md-4">
-                            <select name="tahun" class="form-select" required>
-                                <option value="">Pilih Tahun</option>
+                            <select name="tahun" class="form-select">
+                                <option value="">Semua Tahun</option>
                                 @for ($y = now()->year; $y >= 2020; $y--)
                                     <option value="{{ $y }}">{{ $y }}</option>
                                 @endfor
                             </select>
                         </div>
-                        <div class="col-md-4 {{ $btnWrapper }}">
-                            <button class="{{ $btnClass }}" type="submit">
-                                <i class="{{ $btnIcon }}"></i> Unduh PDF
+                        <div class="col-md-4 d-flex justify-content-end align-items-center">
+                            <button class="btn btn-primary d-flex align-items-center gap-2" type="submit">
+                                <i class="bi bi-download"></i> Unduh PDF
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+
+            {{-- JAMA'AH --}}
+            <div class="d-flex gap-3 align-items-start mb-3 p-3 bg-white rounded shadow-sm">
+                <div style="{{ $iconStyle }}">
+                    <i class="bi bi-people-fill {{ $iconClass }}"></i>
+                </div>
+                <div class="flex-grow-1">
+                    <h6 class="fw-semibold mb-2">Laporan Jamaah</h6>
+                    <form action="{{ route('laporan.cetakJamaah') }}" method="GET" target="_blank" class="row g-2 align-items-end">
+                        <div class="col-md-4">
+                            <select name="jenis_kelamin" class="form-select">
+                                <option value="">Semua Jenis Kelamin</option>
+                                <option value="Laki-laki">Laki-laki</option>
+                                <option value="Perempuan">Perempuan</option>
+                            </select>
+                        </div>
+                        <div class="col-md-4">
+                            <select name="tahun" class="form-select">
+                                <option value="">Semua Tahun</option>
+                                @for ($y = now()->year; $y >= 2020; $y--)
+                                    <option value="{{ $y }}">{{ $y }}</option>
+                                @endfor
+                            </select>
+                        </div>
+                        <div class="col-md-4 d-flex justify-content-end align-items-center">
+                            <button class="btn btn-primary d-flex align-items-center gap-2" type="submit">
+                                <i class="bi bi-download"></i> Unduh PDF
                             </button>
                         </div>
                     </form>
@@ -85,11 +247,7 @@
             {{-- LAPORAN LAINNYA --}}
             @php
                 $laporanList = [
-                    ['icon' => 'people-fill', 'title' => 'Laporan Jamaah', 'route' => 'laporan.cetakJamaah'],
-                    ['icon' => 'archive-fill', 'title' => 'Laporan Inventaris Perlengkapan', 'route' => 'laporan.cetakInventaris'],
-                    ['icon' => 'truck', 'title' => 'Laporan Distribusi Perlengkapan', 'route' => 'laporan.cetakDistribusi'],
                     ['icon' => 'gift-fill', 'title' => 'Laporan Paket Umrah', 'route' => 'laporan.cetakPaket'],
-                    ['icon' => 'calendar-check-fill', 'title' => 'Laporan Jadwal Keberangkatan', 'route' => 'laporan.cetakJadwal'],
                 ];
             @endphp
 

@@ -122,7 +122,16 @@
       {{-- KIRI --}}
       <div class="col-lg-7">
 
-        <img src="{{ asset('img/' . $paketUmrahs->gambar_paket) }}" class="img-fluid rounded shadow mb-4" alt="{{ $paketUmrahs->nama_paket }}">
+        <div class="position-relative mb-4">
+          <img src="{{ asset('img/' . $paketUmrahs->gambar_paket) }}" class="img-fluid rounded shadow" alt="{{ $paketUmrahs->nama_paket }}">
+        
+          {{-- Label Tipe Paket --}}
+          @if ($paketUmrahs->tipePaket)
+            <div class="label-tipe-paket {{ strtolower($paketUmrahs->tipePaket->nama_tipe) }}">
+              {{ strtoupper($paketUmrahs->tipePaket->nama_tipe) }}
+            </div>
+          @endif
+        </div>        
 
         <div class="custom-card mb-4">
           <div class="section-title">Informasi Paket</div>
@@ -177,8 +186,17 @@
                       <strong>{{ \Carbon\Carbon::parse($jadwal->tanggal_berangkat)->translatedFormat('d F Y') }}</strong><br>
                       <small>Kuota: {{ $jadwal->kuota }}</small>
                     </div>
-                    <a href="{{ route('pengguna.formjamaah', ['jadwal_id' => $jadwal->id, 'paket_id' => $paketUmrahs->id]) }}"
-                       class="btn btn-sm btn-outline-success btn-reservasi">Reservasi</a>
+                    @php
+                      $tanggalBerangkat = \Carbon\Carbon::parse($jadwal->tanggal_berangkat);
+                    @endphp
+
+                    @if (now()->lessThanOrEqualTo($tanggalBerangkat))
+                      <a href="{{ route('pengguna.formjamaah', ['jadwal_id' => $jadwal->id, 'paket_id' => $paketUmrahs->id]) }}"
+                        class="btn btn-sm btn-outline-success btn-reservasi">Reservasi</a>
+                    @else
+                      <button class="btn btn-sm btn-secondary btn-reservasi" disabled>Reservasi Ditutup</button>
+                    @endif
+
                   </div>
                 </li>
               @endforeach

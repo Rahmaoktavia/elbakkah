@@ -49,6 +49,10 @@
                                 @error($field) <div class="invalid-feedback">{{ $message }}</div> @enderror
                             </div>
                         @endforeach
+                        <div class="mb-3">
+                            <label class="form-label">Umur</label>
+                            <input type="text" class="form-control" value="{{ $jamaah->umur }} tahun" readonly>
+                        </div>
 
                         <div class="mb-3">
                             <label class="form-label">Jenis Kelamin</label>

@@ -15,6 +15,6 @@ class Artikel extends Model
         'judul_artikel',
         'isi_artikel',
         'gambar_sampul',
-        'tanggal_terbit',
+        'is_published',
     ];
 }

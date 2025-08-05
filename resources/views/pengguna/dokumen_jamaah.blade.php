@@ -32,8 +32,7 @@
     <div class="alert" style="background-color: {{ $bgColor }}; color: {{ $textColor }}; border-left: 6px solid {{ $textColor }}; padding: 16px; margin-bottom: 24px;">
         <strong>{{ session('success') }}</strong>
     </div>
-@endif
-
+    @endif
 
     <div class="card shadow-sm">
         <div class="card-body">
@@ -41,29 +40,50 @@
                 Dokumen Saya
                 <a href="{{ route('jamaah.editDokumenSaya') }}" class="btn btn-sm btn-primary">
                     <i class="bi bi-pencil-square"></i> Edit
-                  </a>                  
+                </a>
             </h4>
 
             <table class="table table-bordered">
                 <tbody>
-                    @foreach ([
-                        'nama_jamaah' => 'Nama Jamaah',
-                        'nik' => 'NIK',
-                        'tempat_lahir' => 'Tempat Lahir',
-                        'tanggal_lahir' => 'Tanggal Lahir',
-                        'alamat' => 'Alamat',
-                        'no_telepon' => 'No Telepon',
-                        'nama_ayah' => 'Nama Ayah',
-                        'pekerjaan' => 'Pekerjaan',
-                        'jenis_kelamin' => 'Jenis Kelamin'
-                    ] as $field => $label)
                     <tr>
-                        <th>{{ $label }}</th>
-                        <td>{{ $jamaah->$field }}</td>
+                        <th>Nama Jamaah</th>
+                        <td>{{ $jamaah->nama_jamaah }}</td>
                     </tr>
-                    @endforeach
+                    <tr>
+                        <th>NIK</th>
+                        <td>{{ $jamaah->nik }}</td>
+                    </tr>
+                    <tr>
+                        <th>Tempat & Tanggal Lahir</th>
+                        <td>{{ $jamaah->tempat_lahir }}, {{ \Carbon\Carbon::parse($jamaah->tanggal_lahir)->translatedFormat('d F Y') }}</td>
+                    </tr>
+                    <tr>
+                        <th>Umur</th>
+                        <td>{{ $jamaah->umur }} tahun</td>
+                    </tr>
+                    <tr>
+                        <th>Alamat</th>
+                        <td>{{ $jamaah->alamat }}</td>
+                    </tr>
+                    <tr>
+                        <th>No Telepon</th>
+                        <td>{{ $jamaah->no_telepon }}</td>
+                    </tr>
+                    <tr>
+                        <th>Nama Ayah</th>
+                        <td>{{ $jamaah->nama_ayah }}</td>
+                    </tr>
+                    <tr>
+                        <th>Pekerjaan</th>
+                        <td>{{ $jamaah->pekerjaan }}</td>
+                    </tr>
+                    <tr>
+                        <th>Jenis Kelamin</th>
+                        <td>{{ $jamaah->jenis_kelamin }}</td>
+                    </tr>
 
-                    @foreach ([
+                    {{-- Dokumen --}}
+                    @foreach([
                         'pas_foto' => 'Pas Foto',
                         'file_ktp' => 'KTP',
                         'file_kk' => 'Kartu Keluarga',
@@ -75,7 +95,7 @@
                             @php
                                 $file = $jamaah->$field;
                                 $ext = pathinfo($file, PATHINFO_EXTENSION);
-                                $isImage = in_array(strtolower($ext), ['jpg','jpeg','png']);
+                                $isImage = in_array(strtolower($ext), ['jpg','jpeg','png','webp']);
                             @endphp
 
                             @if ($file)

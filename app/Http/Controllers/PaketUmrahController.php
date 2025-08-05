@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\PaketUmrah;
+use App\Models\TipePaket;
 use Illuminate\Http\Request;
 use Barryvdh\DomPDF\Facade\Pdf;
 
@@ -31,7 +32,8 @@ class PaketUmrahController extends Controller
      */
     public function create()
     {
-        return view('dashboard.paket.create');
+        $tipePakets = TipePaket::all();
+        return view('dashboard.paket.create', compact('tipePakets'));
     }
 
     /**
@@ -48,6 +50,7 @@ class PaketUmrahController extends Controller
             'hotel_madinah' => 'required|string|max:255',
             'fasilitas'     => 'required|string',
             'deskripsi'     => 'required|string',
+            'tipe_paket_id' => 'nullable|exists:tipe_pakets,id',
         ]);
 
         if ($request->hasFile('gambar_paket')) {
@@ -70,7 +73,7 @@ class PaketUmrahController extends Controller
      */
     public function show(string $id)
     {
-        $paket = PaketUmrah::findOrFail($id);
+        $paket = PaketUmrah::with('tipePaket')->findOrFail($id);
         return view('dashboard.paket.show', compact('paket'));
     }
 
@@ -80,7 +83,8 @@ class PaketUmrahController extends Controller
     public function edit(string $id)
     {
         $paket = PaketUmrah::findOrFail($id);
-        return view('dashboard.paket.edit', compact('paket'));
+        $tipePakets = TipePaket::all();
+        return view('dashboard.paket.edit', compact('paket', 'tipePakets'));
     }
 
     /**
@@ -97,6 +101,7 @@ class PaketUmrahController extends Controller
             'hotel_madinah' => 'required|string|max:255',
             'fasilitas'     => 'required|string',
             'deskripsi'     => 'required|string',
+            'tipe_paket_id' => 'nullable|exists:tipe_pakets,id',
         ]);
 
         $paket = PaketUmrah::findOrFail($id);
@@ -184,9 +189,15 @@ class PaketUmrahController extends Controller
             $query->where('harga', '<=', $request->harga);
         }
 
-        $paketUmrahs = $query->orderBy('created_at', 'desc')->paginate(9)->withQueryString();
+        if ($request->filled('tipe')) {
+            $query->where('tipe_paket_id', $request->tipe);
+        }
 
-        return view('pengguna.paket', compact('paketUmrahs'));
+        $paketUmrahs = $query->orderBy('created_at', 'desc')->paginate(6)->withQueryString();
+
+        $tipePaketList = TipePaket::all();
+
+        return view('pengguna.paket', compact('paketUmrahs', 'tipePaketList'));
     }
 
     public function showPaket($id)

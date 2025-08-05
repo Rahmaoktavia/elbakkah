@@ -14,10 +14,19 @@ use Barryvdh\DomPDF\Facade\Pdf;
 
 class LaporanPimpinanController extends Controller
 {
+    public function indexLaporan()
+    {
+        $namaPerlengkapanList = InventarisPerlengkapan::select('nama_perlengkapan')->distinct()->pluck('nama_perlengkapan');
+        $namaPaketList = PaketUmrah::select('nama_paket')->distinct()->pluck('nama_paket');
+
+        return view('dashboard.laporan.index', compact('namaPerlengkapanList', 'namaPaketList'));
+    }
+
     public function cetakPembayaran(Request $request)
     {
         $bulan = $request->bulan;
         $tahun = $request->tahun;
+        $status = $request->status;
 
         $query = Pembayaran::with(['pemesanan.jamaah', 'pemesanan.jadwalKeberangkatan.paket']);
 
@@ -29,9 +38,13 @@ class LaporanPimpinanController extends Controller
             $query->whereYear('tanggal_bayar', $tahun);
         }
 
+        if ($status) {
+            $query->where('status_verifikasi', $status);
+        }
+
         $pembayarans = $query->get();
 
-        $pdf = Pdf::loadView('dashboard.laporan.pembayaran', compact('pembayarans', 'bulan', 'tahun'))
+        $pdf = Pdf::loadView('dashboard.laporan.pembayaran', compact('pembayarans', 'bulan', 'tahun', 'status'))
                     ->setPaper('A4', 'portrait');
 
         return $pdf->stream('laporan-pembayaran.pdf');
@@ -41,39 +54,73 @@ class LaporanPimpinanController extends Controller
     {
         $bulan = $request->bulan;
         $tahun = $request->tahun;
-    
+        $status = $request->status_pembayaran;
+
         $query = Pemesanan::with(['jamaah', 'jadwalKeberangkatan.paket']);
-    
+
         if ($bulan) {
             $query->whereMonth('tanggal_pesan', $bulan);
         }
-    
+
         if ($tahun) {
             $query->whereYear('tanggal_pesan', $tahun);
         }
-    
+
+        if ($status) {
+            $query->where('status_pembayaran', $status);
+        }
+
         $pemesanans = $query->get();
-    
-        $pdf = Pdf::loadView('dashboard.laporan.pemesanan', compact('pemesanans', 'bulan', 'tahun'))
+
+        $pdf = Pdf::loadView('dashboard.laporan.pemesanan', compact('pemesanans', 'bulan', 'tahun', 'status'))
                     ->setPaper('A4', 'portrait');
-    
+
         return $pdf->stream('laporan-pemesanan.pdf');
     }
     
-
-    public function cetakJamaah()
+    public function cetakJamaah(Request $request)
     {
-        $jamaahs = Jamaah::with('user')->get();
+        $jenis_kelamin = $request->jenis_kelamin;
+        $tahun = $request->tahun;
 
-        $pdf = Pdf::loadView('dashboard.laporan.jamaah', compact('jamaahs'));
+        $query = Jamaah::query();
+
+        if ($jenis_kelamin) {
+            $query->where('jenis_kelamin', $jenis_kelamin);
+        }
+
+        if ($tahun) {
+            $query->whereYear('created_at', $tahun);
+        }
+
+        $jamaahs = $query->get();
+
+        $pdf = Pdf::loadView('dashboard.laporan.jamaah', compact('jamaahs', 'jenis_kelamin', 'tahun'));
         return $pdf->stream('laporan-jamaah.pdf');
     }
 
-    public function cetakInventaris()
+    public function cetakInventaris(Request $request)
     {
-        $inventaris = InventarisPerlengkapan::all();
+        $query = InventarisPerlengkapan::query();
 
-        $pdf = Pdf::loadView('dashboard.laporan.inventaris', compact('inventaris'));
+        if ($request->filled('bulan') && $request->filled('tahun')) {
+            $query->whereMonth('tanggal_input', $request->bulan)
+                ->whereYear('tanggal_input', $request->tahun);
+        }
+
+        if ($request->filled('nama_perlengkapan')) {
+            $query->where('nama_perlengkapan', $request->nama_perlengkapan);
+        }
+
+        $inventaris = $query->get();
+
+        $pdf = Pdf::loadView('dashboard.laporan.inventaris', [
+            'inventaris' => $inventaris,
+            'bulan' => $request->bulan,
+            'tahun' => $request->tahun,
+            'nama_perlengkapan' => $request->nama_perlengkapan,
+        ]);
+
         return $pdf->stream('laporan-inventaris.pdf');
     }
 
@@ -85,19 +132,51 @@ class LaporanPimpinanController extends Controller
         return $pdf->stream('laporan-paket-umrah.pdf');
     }
 
-    public function cetakJadwal()
+    public function cetakJadwal(Request $request)
     {
-        $jadwals = JadwalKeberangkatan::with('paket')->get();
+        $query = JadwalKeberangkatan::with('paket');
 
-        $pdf = Pdf::loadView('dashboard.laporan.jadwal', compact('jadwals'));
+        if ($request->filled('bulan')) {
+            $query->whereMonth('tanggal_berangkat', $request->bulan);
+        }
+
+        if ($request->filled('tahun')) {
+            $query->whereYear('tanggal_berangkat', $request->tahun);
+        }
+
+        if ($request->filled('nama_paket')) {
+            $query->whereHas('paket', function ($q) use ($request) {
+                $q->where('nama_paket', $request->nama_paket);
+            });
+        }
+
+        $jadwals = $query->get();
+        $bulan = $request->bulan;
+        $tahun = $request->tahun;
+        $nama_paket = $request->nama_paket;
+
+        $pdf = Pdf::loadView('dashboard.laporan.jadwal', compact('jadwals', 'bulan', 'tahun', 'nama_paket'));
         return $pdf->stream('laporan-jadwal-keberangkatan.pdf');
     }
 
-    public function cetakDistribusi()
+    public function cetakDistribusi(Request $request)
     {
-        $distribusi = DistribusiPerlengkapan::with(['jamaah.user', 'perlengkapan'])->get();
-        
-        $pdf = Pdf::loadView('dashboard.laporan.distribusi', compact('distribusi'));
+        $query = DistribusiPerlengkapan::with(['jamaah.user', 'perlengkapan']);
+    
+        if ($request->filled('bulan')) {
+            $query->whereMonth('tanggal_distribusi', $request->bulan);
+        }
+    
+        if ($request->filled('tahun')) {
+            $query->whereYear('tanggal_distribusi', $request->tahun);
+        }
+    
+        $distribusi = $query->get();
+    
+        $bulan = $request->bulan;
+        $tahun = $request->tahun;
+    
+        $pdf = Pdf::loadView('dashboard.laporan.distribusi', compact('distribusi', 'bulan', 'tahun'));
         return $pdf->stream('laporan-distribusi-perlengkapan.pdf');
     }
 }

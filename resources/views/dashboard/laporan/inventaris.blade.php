@@ -99,6 +99,24 @@
     <!-- Judul -->
     <h3 class="judul">Laporan Inventaris Perlengkapan</h3>
 
+    @if (!empty($bulan) || !empty($tahun) || !empty($nama_perlengkapan))
+        <p style="text-align:center; font-size: 12px; margin-top: 0;">
+            Periode:
+            @if ($bulan)
+                {{ \Carbon\Carbon::create()->month((int) $bulan)->translatedFormat('F') }}
+            @endif
+            {{ $tahun }}
+            
+            @if ($nama_perlengkapan)
+                | Nama Perlengkapan: {{ $nama_perlengkapan }}
+            @endif
+        </p>
+    @else
+        <p style="text-align:center; font-size: 12px; margin-top: 0;">
+            Periode: Semua Data
+        </p>
+    @endif
+
     <!-- Tabel Inventaris -->
     <table>
         <thead>
@@ -108,7 +126,7 @@
                 <th>Jumlah Total</th>
                 <th>Jumlah Tersedia</th>
                 <th>Satuan</th>
-                <th>Tanggal Input</th>
+                <th>Tanggal Masuk</th>
             </tr>
         </thead>
         <tbody>

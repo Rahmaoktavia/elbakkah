@@ -108,7 +108,7 @@
                 <th>Jumlah Total</th>
                 <th>Jumlah Tersedia</th>
                 <th>Satuan</th>
-                <th>Tanggal Input</th>
+                <th>Tanggal Masuk</th>
             </tr>
         </thead>
         <tbody>

@@ -28,8 +28,18 @@
 				@foreach($paketUmrahs->take(3) as $paket)
 				<div class="col-md-6 col-lg-4">
 				<div class="card h-100 border-0 paket-card shadow-lg">
-					{{-- Gambar --}}
-					<img src="{{ asset('img/'.$paket->gambar_paket) }}" class="card-img-top card-img-custom" alt="Gambar Paket">
+					{{-- Gambar + Label --}}
+					<div class="position-relative">
+						{{-- Gambar --}}
+						<img src="{{ asset('img/'.$paket->gambar_paket) }}" class="card-img-top card-img-custom" alt="Gambar Paket" style="height: 270px; object-fit: cover;">
+			  
+						{{-- Label Tipe Paket --}}
+						@if ($paket->tipePaket)
+						  <div class="label-tipe-paket {{ strtolower($paket->tipePaket->nama_tipe) }}">
+							{{ strtoupper($paket->tipePaket->nama_tipe) }}
+						  </div>
+						@endif
+					  </div>
 		
 					{{-- Konten --}}
 					<div class="card-body p-4 d-flex flex-column">
@@ -175,7 +185,7 @@
 						<p class="deskripsi">{{ $galeri->deskripsi ?? 'Tidak ada deskripsi.' }}</p>
 						<div class="tanggal">
 						  <i class="fa fa-calendar mr-1"></i>
-						  {{ \Carbon\Carbon::parse($galeri->tanggal_upload)->translatedFormat('d F Y') }}
+						  {{ \Carbon\Carbon::parse($galeri->created_at)->translatedFormat('d F Y') }}
 						</div>
 					  </div>
 					</div>
@@ -215,11 +225,11 @@
 					  <div class="text">
 						<div class="d-flex align-items-center mb-4 topp">
 						  <div class="one">
-							<span class="day">{{ \Carbon\Carbon::parse($artikel->tanggal_terbit)->format('d') }}</span>
+							<span class="day">{{ \Carbon\Carbon::parse($artikel->created_at)->format('d') }}</span>
 						  </div>
 						  <div class="two">
-							<span class="yr">{{ \Carbon\Carbon::parse($artikel->tanggal_terbit)->format('Y') }}</span>
-							<span class="mos">{{ \Carbon\Carbon::parse($artikel->tanggal_terbit)->translatedFormat('F') }}</span>
+							<span class="yr">{{ \Carbon\Carbon::parse($artikel->created_at)->format('Y') }}</span>
+							<span class="mos">{{ \Carbon\Carbon::parse($artikel->created_at)->translatedFormat('F') }}</span>
 						  </div>
 						</div>
 						<h3 class="heading">

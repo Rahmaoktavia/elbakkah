@@ -31,7 +31,7 @@
             <div class="col-md-6 mb-4">
                 <label class="fw-bold text-dark">Harga Paket</label>
                 <div class="text-secondary border-bottom pb-1">
-                    Rp {{ number_format($pembayaran->pemesanan->jadwalKeberangkatan->paket->harga ?? 0, 0, ',', '.') }}
+                    Rp {{ number_format($pembayaran->pemesanan->total_tagihan ?? 0, 0, ',', '.') }}
                 </div>
             </div>
 

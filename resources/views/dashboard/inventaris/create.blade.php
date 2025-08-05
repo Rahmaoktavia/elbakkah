@@ -64,9 +64,9 @@
                 @enderror
             </div>
 
-            <!-- Tanggal Input -->
+            <!-- Tanggal Masuk -->
             <div class="mb-4">
-                <label for="tanggal_input" class="form-label fw-semibold">Tanggal Input</label>
+                <label for="tanggal_input" class="form-label fw-semibold">Tanggal Masuk</label>
                 <input type="date" class="form-control @error('tanggal_input') is-invalid @enderror"
                        name="tanggal_input" id="tanggal_input"
                        value="{{ old('tanggal_input') }}">

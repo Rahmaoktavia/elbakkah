@@ -8,22 +8,64 @@
     <div class="card-header bg-white">
         <h4 class="fw-bold text-dark mb-3">Data Pembayaran</h4>
 
-        <div class="d-flex justify-content-between align-items-center">
-            <div class="d-flex">
-                <a href="{{ route('dashboard.pembayaran.cetak_pdf') }}" target="_blank" class="btn btn-outline-danger d-flex align-items-center justify-content-center">
+        <div class="row align-items-end g-2">
+            <!-- Tombol Cetak PDF -->
+            <div class="col-md-1">
+                <a href="{{ route('dashboard.pembayaran.cetak_pdf', [
+                    'bulan' => request('bulan'),
+                    'tahun' => request('tahun'),
+                    'status_verifikasi' => request('status_verifikasi')
+                ]) }}" target="_blank" class="btn btn-outline-danger w-100 d-flex align-items-center justify-content-center">
                     <i class='bx bxs-file-pdf fs-5'></i>
                 </a>
             </div>
-
-            <form class="d-flex" method="GET" action="{{ route('dashboard.pembayaran.index') }}" style="max-width: 300px; width: 100%;">
-                <div class="input-group">
-                    <input class="form-control" type="search" name="search" value="{{ request()->get('search') }}" placeholder="Cari Jamaah..." aria-label="Search">
-                    <button class="btn btn-primary" type="submit">
-                        <i class='bx bx-search'></i>
-                    </button>
-                </div>
-            </form>
-        </div>
+        
+            <!-- Filter: Bulan -->
+            <div class="col-md-2">
+                <form method="GET" action="{{ route('dashboard.pembayaran.index') }}" class="d-flex">
+                    <select class="form-select me-2" name="bulan" onchange="this.form.submit()">
+                        <option value="">-- Pilih Bulan --</option>
+                        @foreach(range(1, 12) as $b)
+                            <option value="{{ $b }}" {{ request('bulan') == $b ? 'selected' : '' }}>
+                                {{ \Carbon\Carbon::create()->month($b)->translatedFormat('F') }}
+                            </option>
+                        @endforeach
+                    </select>
+            </div>
+        
+            <!-- Filter: Tahun -->
+            <div class="col-md-2">
+                    <select class="form-select me-2" name="tahun" onchange="this.form.submit()">
+                        <option value="">-- Pilih Tahun --</option>
+                        @foreach(range(date('Y'), 2020) as $t)
+                            <option value="{{ $t }}" {{ request('tahun') == $t ? 'selected' : '' }}>{{ $t }}</option>
+                        @endforeach
+                    </select>
+            </div>
+        
+            <!-- Filter: Status Verifikasi -->
+            <div class="col-md-2">
+                    <select class="form-select me-2" name="status_verifikasi" onchange="this.form.submit()">
+                        <option value="">-- Status --</option>
+                        <option value="Diterima" {{ request('status_verifikasi') == 'Diterima' ? 'selected' : '' }}>Diterima</option>
+                        <option value="Ditolak" {{ request('status_verifikasi') == 'Ditolak' ? 'selected' : '' }}>Ditolak</option>
+                        <option value="Menunggu" {{ request('status_verifikasi') == 'Menunggu' ? 'selected' : '' }}>Menunggu</option>
+                    </select>
+                </form>
+            </div>
+        
+            <!-- Search -->
+            <div class="col-md-4 ms-auto">
+                <form class="d-flex" method="GET" action="{{ route('dashboard.pembayaran.index') }}">
+                    <div class="input-group">
+                        <input class="form-control" type="search" name="search" value="{{ request()->get('search') }}" placeholder="Cari Jamaah..." aria-label="Search">
+                        <button class="btn btn-primary" type="submit">
+                            <i class='bx bx-search'></i>
+                        </button>
+                    </div>
+                </form>
+            </div>
+        </div>        
     </div>
 
     <div class="card-body">
@@ -72,7 +114,7 @@
                     <td>{{ $loop->iteration }}</td>
                     <td>{{ $pembayaran->pemesanan->jamaah->nama_jamaah ?? '-' }}</td>
                     <td>{{ $pembayaran->pemesanan->jadwalKeberangkatan->paket->nama_paket ?? '-' }}</td>
-                    <td>Rp {{ number_format($pembayaran->pemesanan->jadwalKeberangkatan->paket->harga ?? 0, 0, ',', '.') }}</td>
+                    <td>Rp {{ number_format($pembayaran->pemesanan->total_tagihan ?? 0, 0, ',', '.') }}</td>
                     <td>Rp {{ number_format($pembayaran->jumlah_bayar, 0, ',', '.') }}</td>
                     <td>
                         <span class="badge bg-{{ $pembayaran->status_verifikasi === 'Diterima' ? 'success' : ($pembayaran->status_verifikasi === 'Ditolak' ? 'danger' : 'warning') }}">

@@ -169,7 +169,7 @@ class PembayaranController extends Controller
             $pemesanan = $pembayaran->pemesanan;
     
             // Ambil harga dari paket (relasi jadwal -> paket)
-            $hargaPaket = $pemesanan->jadwalKeberangkatan->paket->harga;
+            $hargaPaket = $pemesanan->total_tagihan;
     
             // Hitung total pembayaran yang sudah Diterima
             $totalDibayar = $pemesanan->pembayarans()
@@ -190,23 +190,49 @@ class PembayaranController extends Controller
     }
 
 
-    public function cetakPDF()
+    public function cetakPDF(Request $request)
     {
-        $pembayarans = Pembayaran::with([
+        $query = Pembayaran::with([
             'pemesanan.jamaah',
             'pemesanan.jadwalKeberangkatan.paket'
-        ])->get();
+        ]);
 
-        $pdf = Pdf::loadView('dashboard.pembayaran.cetak_pdf', compact('pembayarans'));
+        if ($request->filled('bulan')) {
+            $query->whereMonth('tanggal_bayar', $request->bulan);
+        }
+
+        if ($request->filled('tahun')) {
+            $query->whereYear('tanggal_bayar', $request->tahun);
+        }
+
+        if ($request->filled('status_verifikasi')) {
+            $query->where('status_verifikasi', $request->status_verifikasi);
+        }
+
+        $pembayarans = $query->get();
+
+        $bulan = $request->bulan;
+        $tahun = $request->tahun;
+        $status_verifikasi = $request->status_verifikasi;
+
+        $pdf = Pdf::loadView('dashboard.pembayaran.cetak_pdf', compact('pembayarans', 'bulan', 'tahun', 'status_verifikasi'));
         return $pdf->stream('laporan-pembayaran.pdf');
     }
 
-    public function cetakInvoice($id)
+    public function cetakInvoiceKeseluruhan($pemesanan_id)
     {
-        $pembayaran = Pembayaran::with('pemesanan.jamaah')->findOrFail($id);
+        $pemesanan = Pemesanan::with(['jamaah', 'jadwalKeberangkatan.paket', 'pembayarans' => function ($q) {
+            $q->where('status_verifikasi', 'Diterima');
+        }])->findOrFail($pemesanan_id);
 
-        $pdf = Pdf::loadView('pengguna.invoice_pdf', compact('pembayaran'));
-        return $pdf->stream('invoice-pembayaran.pdf');
+        $totalBayar = $pemesanan->pembayarans->sum('jumlah_bayar');
+
+        $pdf = Pdf::loadView('pengguna.invoice_pdf', [
+            'pemesanan' => $pemesanan,
+            'totalBayar' => $totalBayar
+        ]);
+
+        return $pdf->stream('invoice-umrah-semua-pembayaran.pdf');
     }
 
     public function riwayat()
@@ -223,10 +249,10 @@ class PembayaranController extends Controller
     {
         $monthlyPayments = Pembayaran::select(
                 DB::raw("MONTH(tanggal_bayar) as month"),
-                DB::raw("SUM(jumlah_bayar) as total")
+                DB::raw("COUNT(DISTINCT pemesanan_id) as total") // ganti dari SUM jadi COUNT DISTINCT
             )
             ->whereYear('tanggal_bayar', now()->year)
-            ->where('status_verifikasi', 'Diterima') // opsional filter
+            ->where('status_verifikasi', 'Diterima')
             ->groupBy(DB::raw("MONTH(tanggal_bayar)"))
             ->orderBy(DB::raw("MONTH(tanggal_bayar)"))
             ->get();
@@ -234,7 +260,7 @@ class PembayaranController extends Controller
         $labels = [];
         $totals = [];
 
-        // Biar urut dan lengkap dari Jan - Dec
+        // Biar tetap urut dan lengkap dari Jan - Dec
         for ($i = 1; $i <= 12; $i++) {
             $labels[] = \Carbon\Carbon::create()->month($i)->format('M');
             $bulanIni = $monthlyPayments->firstWhere('month', $i);

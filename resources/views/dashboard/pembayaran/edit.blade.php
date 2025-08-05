@@ -31,7 +31,7 @@
             <!-- Harga Paket -->
             <div class="mb-3">
                 <label class="form-label fw-semibold">Harga Paket</label>
-                <input type="text" class="form-control bg-light" value="Rp {{ number_format($pembayaran->pemesanan->jadwalKeberangkatan->paket->harga, 0, ',', '.') }}" readonly>
+                <input type="text" class="form-control bg-light" value="Rp {{ number_format($pembayaran->pemesanan->total_tagihan, 0, ',', '.') }}" readonly>
             </div>
 
             <!-- Tanggal Keberangkatan -->

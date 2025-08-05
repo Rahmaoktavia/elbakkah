@@ -15,62 +15,75 @@
   </section>
 
 {{-- FILTER PENCARIAN --}}
-<section class="ftco-section bg-white py-5">
+<section class="ftco-section py-5 bg-white">
   <div class="container">
-    <div class="p-4 rounded shadow-lg bg-light"> {{-- Shadow Card --}}
-      <form action="{{ route('pengguna.paket') }}" method="GET" class="search-property-1">
-        <div class="row g-3 justify-content-center">
+    <form action="{{ route('pengguna.paket') }}" method="GET"
+      class="bg-white p-4 rounded border"
+      style="box-shadow: 0 15px 45px rgba(0, 0, 0, 0.2); transition: all 0.3s ease;">
+      
+      <div class="d-flex flex-nowrap overflow-x-auto gap-3">
 
-          {{-- Search Nama Paket --}}
-          <div class="col-md-4">
-            <div class="form-group">
-              <label class="fw-bold">Nama Paket</label>
-              <div class="form-field">
-                <input type="text" name="search" class="form-control" placeholder="Cari nama paket..." value="{{ request('search') }}">
-              </div>
-            </div>
-          </div>
-
-          {{-- Durasi (Jumlah Hari) --}}
-          <div class="col-md-3">
-            <div class="form-group">
-              <label class="fw-bold">Durasi (Hari)</label>
-              <select name="hari" class="form-control">
-                <option value="">Semua Durasi</option>
-                @foreach(range(7, 35) as $hari)
-                  <option value="{{ $hari }}" {{ request('hari') == $hari ? 'selected' : '' }}>{{ $hari }} Hari</option>
-                @endforeach
-              </select>
-            </div>
-          </div>
-
-          {{-- Harga Maksimum --}}
-          <div class="col-md-3">
-            <div class="form-group">
-              <label class="fw-bold">Harga Maksimal</label>
-              <select name="harga" class="form-control">
-                <option value="">Semua Harga</option>
-                @foreach(range(5000000, 50000000, 5000000) as $harga)
-                  <option value="{{ $harga }}" {{ request('harga') == $harga ? 'selected' : '' }}>
-                    Maks Rp {{ number_format($harga, 0, ',', '.') }}
-                  </option>
-                @endforeach
-              </select>
-            </div>
-          </div>
-
-          {{-- Tombol Submit --}}
-          <div class="col-md-2 d-flex align-items-end">
-            <div class="form-group w-100">
-              <button type="submit" class="btn btn-primary w-100 shadow-sm">
-                <i class="fa fa-search me-2"></i>Cari
-              </button>
-            </div>
-          </div>
-
+        {{-- Nama Paket --}}
+        <div class="d-flex align-items-center px-3 py-2 bg-light rounded border shadow-sm" style="min-width: 220px;">
+          <i class="fas fa-kaaba me-2"
+            style="font-size: 18px; background: linear-gradient(45deg, #3498db, #6dd5fa); 
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;"></i>
+          <input type="text" name="search" class="form-control border-0 bg-light"
+            placeholder="Cari Nama Paket..." value="{{ request('search') }}">
         </div>
-      </form>
-    </div>
+
+        {{-- Durasi --}}
+        <div class="d-flex align-items-center px-3 py-2 bg-light rounded border shadow-sm" style="min-width: 160px;">
+          <i class="fas fa-clock me-2"
+            style="font-size: 18px; background: linear-gradient(45deg, #3498db, #6dd5fa);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;"></i>
+          <select name="hari" class="form-select border-0 bg-light">
+            <option value="">Durasi</option>
+            @foreach(range(7, 35) as $hari)
+              <option value="{{ $hari }}" {{ request('hari') == $hari ? 'selected' : '' }}>{{ $hari }} H</option>
+            @endforeach
+          </select>
+        </div>
+
+        {{-- Harga --}}
+        <div class="d-flex align-items-center px-3 py-2 bg-light rounded border shadow-sm" style="min-width: 220px;">
+          <i class="fas fa-money-bill-wave me-2"
+            style="font-size: 18px; background: linear-gradient(45deg, #3498db, #6dd5fa);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;"></i>
+          <select name="harga" class="form-select border-0 bg-light">
+            <option value="">Harga Maks</option>
+            @foreach(range(5000000, 50000000, 5000000) as $harga)
+              <option value="{{ $harga }}" {{ request('harga') == $harga ? 'selected' : '' }}>
+                ≤ Rp {{ number_format($harga, 0, ',', '.') }}
+              </option>
+            @endforeach
+          </select>
+        </div>
+
+        {{-- Tipe Paket --}}
+        <div class="d-flex align-items-center px-3 py-2 bg-light rounded border shadow-sm" style="min-width: 200px;">
+          <i class="fas fa-tag me-2"
+            style="font-size: 18px; background: linear-gradient(45deg, #3498db, #6dd5fa);
+            -webkit-background-clip: text; -webkit-text-fill-color: transparent;"></i>
+          <select name="tipe" class="form-select border-0 bg-light">
+            <option value="">Tipe Paket</option>
+            @foreach($tipePaketList as $tipe)
+              <option value="{{ $tipe->id }}" {{ request('tipe') == $tipe->id ? 'selected' : '' }}>
+                {{ $tipe->nama_tipe }}
+              </option>
+            @endforeach
+          </select>
+        </div>
+
+        {{-- Tombol Cari --}}
+        <div class="d-flex align-items-center px-3 py-2">
+          <button type="submit" class="btn btn-primary fw-bold shadow-sm px-4 py-2">
+            <i class="fas fa-search me-1"></i> 
+          </button>
+        </div>
+
+      </div>
+    </form>
   </div>
 </section>
 
@@ -82,8 +95,18 @@
       @forelse($paketUmrahs as $paket)
       <div class="col-md-6 col-lg-4">
         <div class="card h-100 border-0 paket-card shadow-lg">
+        {{-- Gambar + Label --}}
+        <div class="position-relative">
           {{-- Gambar --}}
-          <img src="{{ asset('img/'.$paket->gambar_paket) }}" class="card-img-top card-img-custom" alt="Gambar Paket">
+          <img src="{{ asset('img/'.$paket->gambar_paket) }}" class="card-img-top card-img-custom" alt="Gambar Paket" style="height: 270px; object-fit: cover;">
+
+          {{-- Label Tipe Paket --}}
+          @if ($paket->tipePaket)
+            <div class="label-tipe-paket {{ strtolower($paket->tipePaket->nama_tipe) }}">
+              {{ strtoupper($paket->tipePaket->nama_tipe) }}
+            </div>
+          @endif
+        </div>
 
           {{-- Konten --}}
           <div class="card-body p-4 d-flex flex-column">
@@ -153,5 +176,4 @@
     </div>
   </div>
 </section>
-
 @endsection

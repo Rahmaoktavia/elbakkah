@@ -16,6 +16,8 @@ use App\Http\Controllers\PemesananController;
 use App\Http\Controllers\TentangKamiController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\LaporanPimpinanController;
+use App\Http\Controllers\ContactUsController;
+use App\Http\Controllers\TipePaketController;
 use App\Models\PaketUmrah;
 use App\Models\Galeri;
 use App\Models\Artikel;
@@ -31,7 +33,7 @@ use App\Models\Artikel;
 Route::get('/', function () {
     $paketUmrahs = PaketUmrah::latest()->take(3)->get();
     $galeris = Galeri::latest()->paginate(6);
-    $artikels = Artikel::latest()->get(); 
+    $artikels = Artikel::where('is_published', true)->latest()->get();
     return view('pengguna.home', compact('paketUmrahs', 'galeris', 'artikels'));
 })->name('home'); 
 
@@ -86,6 +88,9 @@ Route::middleware(['auth', 'role:Admin'])->prefix('admin')->name('dashboard.')->
     Route::get('user/cetak_pdf', [UserController::class, 'cetakPDF'])->name('user.cetak_pdf');
     Route::resource('user', UserController::class);
 
+    // Tipe Paket Umrah
+    Route::resource('tipe-paket', TipePaketController::class);
+
     // Pembayaran
     // Route::get('pembayaran/cetak_pdf', [PembayaranController::class, 'cetakPDF'])->name('pembayaran.cetak_pdf');
     // Route::resource('pembayaran', PembayaranController::class);
@@ -129,7 +134,7 @@ Route::get('/reservasi/{id}', function ($id) {
 
 Route::resource('pembayaran', PembayaranController::class);
 
-Route::get('/invoice/{id}', [PembayaranController::class, 'cetakInvoice'])->name('pembayaran.invoice')->middleware(['auth', 'role:Jamaah']);
+Route::get('/pemesanan/{id}/invoice', [PembayaranController::class, 'cetakInvoiceKeseluruhan'])->name('pembayaran.invoice.all')->middleware(['auth', 'role:Jamaah']);
 
 Route::get('/riwayat-reservasi', [PembayaranController::class, 'riwayat'])->name('riwayat.reservasi')->middleware(['auth', 'role:Jamaah']);
 
@@ -143,6 +148,7 @@ Route::get('/laporan', function () {
 })->name('laporan.index')->middleware(['auth', 'role:Pimpinan']);
 
 // Laporan PDF
+Route::get('/laporan', [LaporanPimpinanController::class, 'indexLaporan'])->name('laporan.index')->middleware(['auth', 'role:Pimpinan']);
 Route::get('/laporan/pembayaran', [LaporanPimpinanController::class, 'cetakPembayaran'])->name('laporan.cetakPembayaran')->middleware(['auth', 'role:Pimpinan']);
 Route::get('/laporan/pemesanan', [LaporanPimpinanController::class, 'cetakPemesanan'])->name('laporan.cetakPemesanan')->middleware(['auth', 'role:Pimpinan']);
 Route::get('/laporan/jamaah', [LaporanPimpinanController::class, 'cetakJamaah'])->name('laporan.cetakJamaah')->middleware(['auth', 'role:Pimpinan']);
@@ -158,3 +164,16 @@ Route::middleware(['auth', 'role:Jamaah'])->group(function () {
 });
 
 Route::get('/dashboard/chart/pembayaran', [PembayaranController::class, 'getMonthlyChartData'])->name('dashboard.chart.pembayaran')->middleware(['auth', 'role:Admin,Direktur Keuangan,Pimpinan']);
+
+// Halaman pengguna
+Route::get('/contact-us', [ContactUsController::class, 'contactUs'])->name('contact_us.contactUs');
+Route::post('/contact-us', [ContactUsController::class, 'store'])->name('contact_us.store');
+
+// Dashboard admin
+Route::prefix('admin')->middleware(['auth', 'role:Admin'])->group(function () {
+    Route::get('/contact-us', [ContactUsController::class, 'index'])->name('dashboard.contact_us.index');
+    Route::get('/contact-us/{id}/edit', [ContactUsController::class, 'edit'])->name('dashboard.contact_us.edit');
+    Route::get('/contact-us/{id}', [ContactUsController::class, 'show'])->name('dashboard.contact_us.show');
+    Route::put('/contact-us/{id}', [ContactUsController::class, 'update'])->name('dashboard.contact_us.update');
+    Route::get('/contact-us/cetak/pdf', [ContactUsController::class, 'cetakPDF'])->name('dashboard.contact_us.cetak_pdf');
+});

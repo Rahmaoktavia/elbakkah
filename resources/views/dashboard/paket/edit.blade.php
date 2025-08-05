@@ -29,13 +29,33 @@
                 @enderror
             </div>
 
+            <!-- Tipe Paket -->
+            <div class="mb-3">
+                <label for="tipe_paket_id" class="form-label fw-semibold">Tipe Paket</label>
+                <select class="form-select @error('tipe_paket_id') is-invalid @enderror"
+                        name="tipe_paket_id" id="tipe_paket_id">
+                    <option value="">-- Pilih Tipe Paket --</option>
+                    @foreach ($tipePakets as $tipe)
+                        <option value="{{ $tipe->id }}" {{ old('tipe_paket_id', $paket->tipe_paket_id) == $tipe->id ? 'selected' : '' }}>
+                            {{ ucfirst($tipe->nama_tipe) }}
+                        </option>
+                    @endforeach
+                </select>
+                @error('tipe_paket_id')
+                    <div class="invalid-feedback">{{ $message }}</div>
+                @enderror
+            </div>
+
             <!-- Harga -->
             <div class="mb-3">
                 <label for="harga" class="form-label fw-semibold">Harga</label>
-                <input type="number" step="0.01" class="form-control @error('harga') is-invalid @enderror"
-                       name="harga" id="harga"
-                       placeholder="Masukkan harga paket"
-                       value="{{ old('harga', $paket->harga) }}">
+                <input 
+                    type="text" 
+                    class="form-control @error('harga') is-invalid @enderror"
+                    name="harga" 
+                    id="harga"
+                    placeholder="Masukkan harga paket"
+                    value="{{ old('harga', number_format($paket->harga, 0, ',', '.')) }}">
                 @error('harga')
                     <div class="invalid-feedback">{{ $message }}</div>
                 @enderror
@@ -125,5 +145,21 @@
         </form>
     </div>
 </div>
+@push('scripts')
+<script src="https://cdn.jsdelivr.net/npm/autonumeric@4.6.0/dist/autoNumeric.min.js"></script>
+<script>
+    window.addEventListener('load', function () {
+        if (!AutoNumeric.getAutoNumericElement('#harga')) {
+            new AutoNumeric('#harga', {
+                digitGroupSeparator: '.',
+                decimalCharacter: ',',
+                decimalPlaces: 0,
+                unformatOnSubmit: true,
+                modifyValueOnWheel: false,
+            });
+        }
+    });
+</script>
+@endpush
 
 @endsection
