@@ -82,7 +82,9 @@
         $mulaiWarning = $tanggalBerangkat->copy()->subDays(45); // Warning mulai ditampilkan
     @endphp
 
-    @if ($pemesanan->status_pembayaran != 'Lunas')
+    @if ($pemesanan->status_pembayaran != 'Lunas'&& (
+        $hariIni->greaterThanOrEqualTo($mulaiWarning)
+    ))
     <div class="card shadow-sm mb-5">
         <div class="card-body d-flex justify-content-center align-items-center" style="min-height: 150px;">
                 @if ($hariIni->greaterThanOrEqualTo($tanggalBerangkat))

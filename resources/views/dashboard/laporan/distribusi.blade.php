@@ -121,6 +121,7 @@
                 <th>Nama Jamaah</th>
                 <th>Nama Perlengkapan</th>
                 <th>Jumlah Diberikan</th>
+                <th>Satuan</th>
                 <th>Tanggal Distribusi</th>
             </tr>
         </thead>
@@ -131,6 +132,7 @@
                     <td>{{ $item->jamaah->nama_jamaah ?? '-' }}</td>
                     <td>{{ $item->perlengkapan->nama_perlengkapan ?? '-' }}</td>
                     <td class="text-center">{{ $item->jumlah_diberikan }}</td>
+                    <td class="text-center">{{ $item->perlengkapan->satuan ?? '-' }}</td>
                     <td class="text-center">
                         {{ \Carbon\Carbon::parse($item->tanggal_distribusi)->translatedFormat('d F Y') }}
                     </td>
