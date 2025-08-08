@@ -117,7 +117,6 @@
                 <th>Hotel Makkah</th>
                 <th>Hotel Madinah</th>
                 <th>Fasilitas</th>
-                <th>Deskripsi</th>
                 <th>Gambar</th>
             </tr>
         </thead>
@@ -131,7 +130,6 @@
                     <td>{{ $paket->hotel_makkah ?? '-' }}</td>
                     <td>{{ $paket->hotel_madinah ?? '-' }}</td>
                     <td>{!! nl2br(e($paket->fasilitas)) !!}</td>
-                    <td>{{ $paket->deskripsi ?? '-' }}</td>
                     <td class="text-center">
                         @php
                             $imgPath = public_path('img/' . $paket->gambar_paket);

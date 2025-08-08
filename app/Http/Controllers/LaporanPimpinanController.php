@@ -11,6 +11,7 @@ use App\Models\InventarisPerlengkapan;
 use App\Models\DistribusiPerlengkapan;
 use App\Models\JadwalKeberangkatan;
 use Barryvdh\DomPDF\Facade\Pdf;
+use Carbon\Carbon;
 
 class LaporanPimpinanController extends Controller
 {
@@ -124,12 +125,31 @@ class LaporanPimpinanController extends Controller
         return $pdf->stream('laporan-inventaris.pdf');
     }
 
-    public function cetakPaket()
+    public function cetakPaketDenganJamaah(Request $request)
     {
-        $paketUmrahs = PaketUmrah::all();
+        $query = PaketUmrah::with(['pemesanan.jamaah']);
 
-        $pdf = Pdf::loadView('dashboard.laporan.paket', compact('paketUmrahs'));
-        return $pdf->stream('laporan-paket-umrah.pdf');
+        if ($request->nama_paket) {
+            $query->where('nama_paket', $request->nama_paket);
+        }
+
+        $bulan = $request->bulan;
+        $tahun = $request->tahun;
+
+        $paketUmrahs = $query->get()->map(function ($paket) use ($bulan, $tahun) {
+            $paket->filteredPemesanans = $paket->pemesanan->filter(function ($p) use ($bulan, $tahun) {
+                $tanggal = Carbon::parse($p->created_at);
+                $matchBulan = $bulan ? $tanggal->month == $bulan : true;
+                $matchTahun = $tahun ? $tanggal->year == $tahun : true;
+                return $matchBulan && $matchTahun;
+            });
+            return $paket;
+        });
+
+        $nama_paket = $request->nama_paket;
+
+        return Pdf::loadView('dashboard.laporan.paket', compact('paketUmrahs', 'bulan', 'tahun', 'nama_paket'))
+            ->stream('laporan-paket-dan-jamaah.pdf');
     }
 
     public function cetakJadwal(Request $request)

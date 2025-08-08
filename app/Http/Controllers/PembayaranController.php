@@ -146,49 +146,51 @@ class PembayaranController extends Controller
 
     public function updateStatus(Request $request, $id)
     {
+        // Hanya Direktur Keuangan yang diizinkan mengakses
         if (auth()->user()->role !== 'Direktur Keuangan') {
             return abort(403, 'Unauthorized');
         }
-        
+
+        // Validasi request
         $request->validate([
             'status_verifikasi' => 'required|in:Menunggu,Diterima,Ditolak',
             'catatan' => 'nullable|string',
         ]);
-    
-        // Ambil data pembayaran berdasarkan id
+
+        // Ambil data pembayaran berdasarkan ID
         $pembayaran = Pembayaran::findOrFail($id);
-    
+
+        // Ambil data pemesanan terkait
+        $pemesanan = $pembayaran->pemesanan;
+
         // Update status verifikasi dan catatan
         $pembayaran->update([
             'status_verifikasi' => $request->status_verifikasi,
             'catatan' => $request->catatan,
         ]);
-    
-        // Jika status verifikasi pembayaran adalah Diterima
-        if ($request->status_verifikasi === 'Diterima') {
-            $pemesanan = $pembayaran->pemesanan;
-    
-            // Ambil harga dari paket (relasi jadwal -> paket)
-            $hargaPaket = $pemesanan->total_tagihan;
-    
-            // Hitung total pembayaran yang sudah Diterima
-            $totalDibayar = $pemesanan->pembayarans()
-                ->where('status_verifikasi', 'Diterima')
-                ->sum('jumlah_bayar');
-    
-            // Jika total pembayaran >= harga paket, set status pembayaran menjadi Lunas
-            if ($totalDibayar >= $hargaPaket) {
-                $pemesanan->status_pembayaran = 'Lunas';
-                $pemesanan->save();
-            }
+
+        // Hitung ulang total pembayaran yang sudah Diterima
+        $hargaPaket = $pemesanan->total_tagihan;
+        $totalDibayar = $pemesanan->pembayarans()
+            ->where('status_verifikasi', 'Diterima')
+            ->sum('jumlah_bayar');
+
+        // Tentukan status pembayaran berdasarkan total yang dibayar
+        if ($totalDibayar >= $hargaPaket) {
+            $pemesanan->status_pembayaran = 'Lunas';
+        } else {
+            $pemesanan->status_pembayaran = 'Belum Lunas';
         }
-    
+
+        // Simpan status pembayaran baru
+        $pemesanan->save();
+
+        // Redirect dengan pesan sukses
         return redirect()->route('dashboard.pembayaran.index')->with([
             'success' => 'Status verifikasi pembayaran berhasil diperbarui.',
             'alert_type' => 'edit'
         ]);
     }
-
 
     public function cetakPDF(Request $request)
     {

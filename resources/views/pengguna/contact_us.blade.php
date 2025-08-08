@@ -102,20 +102,33 @@
     <div class="row justify-content-center">
       <div class="col-lg-8">
         <div class="bg-white p-4 rounded-4 shadow-sm">
-          <h4 class="fw-bold text-dark mb-4 border-bottom pb-2">Pertanyaan Umum (FAQ)</h4>
+          <h4 class="fw-bold text-dark mb-4 border-bottom pb-2 d-flex align-items-center">
+            <i class="bi bi-question-circle-fill me-2 text-primary"></i> 
+            Pertanyaan Umum (FAQ)
+          </h4>
 
           @if($faqs->count())
             <div class="accordion" id="faqAccordion">
               @foreach ($faqs as $index => $faq)
-                <div class="accordion-item mb-2 border rounded">
+                <div class="accordion-item border-0 mb-3 rounded shadow-sm overflow-hidden">
                   <h2 class="accordion-header" id="heading{{ $index }}">
-                    <button class="accordion-button collapsed fw-bold text-dark" type="button" data-bs-toggle="collapse" data-bs-target="#collapse{{ $index }}" aria-expanded="false" aria-controls="collapse{{ $index }}">
+                    <button class="accordion-button collapsed fw-bold text-dark bg-light" 
+                            type="button" 
+                            data-bs-toggle="collapse" 
+                            data-bs-target="#collapse{{ $index }}" 
+                            aria-expanded="false" 
+                            aria-controls="collapse{{ $index }}">
+                      <i class="bi bi-chat-right-dots-fill me-2 text-primary"></i>
                       {{ $faq->pertanyaan }}
                     </button>
                   </h2>
-                  <div id="collapse{{ $index }}" class="accordion-collapse collapse" aria-labelledby="heading{{ $index }}" data-bs-parent="#faqAccordion">
-                    <div class="accordion-body text-muted">
-                      {{ $faq->jawaban ?? '-' }}
+                  <div id="collapse{{ $index }}" 
+                       class="accordion-collapse collapse" 
+                       aria-labelledby="heading{{ $index }}" 
+                       data-bs-parent="#faqAccordion">
+                    <div class="accordion-body bg-white text-muted d-flex align-items-start">
+                      <i class="bi bi-lightbulb-fill text-warning me-2 mt-1"></i>
+                      <span>{{ $faq->jawaban ?? '-' }}</span>
                     </div>
                   </div>
                 </div>
@@ -130,7 +143,6 @@
   </div>
 </section>
 
-{{-- Optional Styling --}}
 <style>
   .form-control:focus {
     box-shadow: 0 0 0 0.2rem rgba(13,110,253,.25);
@@ -146,6 +158,20 @@
   .btn-primary:hover {
     background-color: #0b5ed7;
     border-color: #0a58ca;
+  }
+
+  .accordion-button:not(.collapsed) {
+    background-color: #e7f1ff !important; /* Biru muda langsung */
+    box-shadow: none !important;
+    color: #000 !important; /* Teks hitam */
+  }
+
+  .accordion-button i {
+    color: #1ac9e0 !important;
+  }
+
+  .accordion-button:focus {
+    box-shadow: none !important;
   }
 </style>
 

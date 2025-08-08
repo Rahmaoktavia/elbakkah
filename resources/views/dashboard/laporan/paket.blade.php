@@ -104,7 +104,25 @@
     </div>
 
     <!-- Judul -->
-    <h3 class="judul">Laporan Paket Umrah El-Bakkah Travel</h3>
+    <h3 class="judul">Laporan Paket Umrah</h3>
+    <!-- Periode Filter -->
+@if (!empty($bulan) || !empty($tahun) || !empty($nama_paket))
+<p style="text-align:center; font-size: 12px; margin-top: 0;">
+    Periode:
+    @if ($bulan)
+        {{ \Carbon\Carbon::create()->month((int) $bulan)->translatedFormat('F') }}
+    @endif
+    {{ $tahun }}
+
+    @if ($nama_paket)
+        | Nama Paket: {{ $nama_paket }}
+    @endif
+</p>
+@else
+<p style="text-align:center; font-size: 12px; margin-top: 0;">
+    Periode: Semua Data
+</p>
+@endif
 
     <!-- Tabel Paket Umrah -->
     <table>
@@ -114,11 +132,11 @@
                 <th>Nama Paket</th>
                 <th>Harga</th>
                 <th>Jumlah Hari</th>
-                <th>Hotel Makkah</th>
+                <th>Hotel Mekkah</th>
                 <th>Hotel Madinah</th>
                 <th>Fasilitas</th>
-                <th>Deskripsi</th>
-                <th>Gambar</th>
+                <th>Jumlah Jamaah</th>
+                <th>Daftar Jamaah</th>
             </tr>
         </thead>
         <tbody>
@@ -128,25 +146,25 @@
                     <td>{{ $paket->nama_paket }}</td>
                     <td>Rp {{ number_format($paket->harga, 0, ',', '.') }}</td>
                     <td class="text-center">{{ $paket->jumlah_hari }} Hari</td>
-                    <td>{{ $paket->hotel_makkah ?? '-' }}</td>
-                    <td>{{ $paket->hotel_madinah ?? '-' }}</td>
+                    <td class="text-center">{{ $paket->hotel_makkah }} </td>
+                    <td class="text-center">{{ $paket->hotel_madinah }} </td>
                     <td>{!! nl2br(e($paket->fasilitas)) !!}</td>
-                    <td>{{ $paket->deskripsi ?? '-' }}</td>
-                    <td class="text-center">
-                        @php
-                            $imgPath = public_path('img/' . $paket->gambar_paket);
-                            $imgData = file_exists($imgPath) ? base64_encode(file_get_contents($imgPath)) : null;
-                        @endphp
-                        @if ($imgData)
-                            <img src="data:image/jpeg;base64,{{ $imgData }}" alt="gambar" class="thumb">
+                    <td class="text-center">{{ $paket->filteredPemesanans->count() }} Jamaah</td>
+                    <td>
+                        @if ($paket->filteredPemesanans->count())
+                            <ul style="padding-left: 16px; margin: 0;">
+                                @foreach ($paket->filteredPemesanans as $pemesanan)
+                                    <li>{{ $pemesanan->jamaah->nama_jamaah ?? '-' }}</li>
+                                @endforeach
+                            </ul>
                         @else
-                            <span style="color: red;">Tidak ada gambar</span>
+                            <em>Tidak ada jamaah</em>
                         @endif
                     </td>
                 </tr>
             @endforeach
         </tbody>
-    </table>
+    </table>    
 
     <!-- Footer -->
     <div class="footer">

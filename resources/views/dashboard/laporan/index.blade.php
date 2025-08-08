@@ -244,27 +244,46 @@
                 </div>
             </div>
 
-            {{-- LAPORAN LAINNYA --}}
-            @php
-                $laporanList = [
-                    ['icon' => 'gift-fill', 'title' => 'Laporan Paket Umrah', 'route' => 'laporan.cetakPaket'],
-                ];
-            @endphp
-
-            @foreach ($laporanList as $laporan)
-                <div class="d-flex gap-3 align-items-center mb-3 p-3 bg-white rounded shadow-sm">
-                    <div style="{{ $iconStyle }}">
-                        <i class="bi bi-{{ $laporan['icon'] }} {{ $iconClass }}"></i>
-                    </div>
-                    <div class="flex-grow-1 d-flex justify-content-between align-items-center">
-                        <h6 class="fw-semibold mb-0">{{ $laporan['title'] }}</h6>
-                        <a href="{{ route($laporan['route']) }}" class="btn btn-primary d-flex align-items-center gap-2" target="_blank">
-                            <i class="bi bi-download"></i> Unduh PDF
-                        </a>                        
-                    </div>
+            {{-- PAKET UMRAH + JAMAAH --}}
+            <div class="d-flex gap-3 align-items-start mb-3 p-3 bg-white rounded shadow-sm">
+                <div style="{{ $iconStyle }}">
+                    <i class="bi bi-gift {{ $iconClass }}"></i>
                 </div>
-            @endforeach
-
+                <div class="flex-grow-1">
+                    <h6 class="fw-semibold mb-2">Laporan Paket Umrah</h6>
+                    <form action="{{ route('laporan.cetakPaketDenganJamaah') }}" method="GET" target="_blank" class="row g-2 align-items-end">
+                        <div class="col-md-4">
+                            <select name="nama_paket" class="form-select">
+                                <option value="">Semua Paket</option>
+                                @foreach ($namaPaketList as $nama_paket)
+                                    <option value="{{ $nama_paket }}">{{ $nama_paket }}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <select name="bulan" class="form-select">
+                                <option value="">Semua Bulan</option>
+                                @for ($m = 1; $m <= 12; $m++)
+                                    <option value="{{ $m }}">{{ \Carbon\Carbon::create()->month($m)->translatedFormat('F') }}</option>
+                                @endfor
+                            </select>
+                        </div>
+                        <div class="col-md-3">
+                            <select name="tahun" class="form-select">
+                                <option value="">Semua Tahun</option>
+                                @for ($y = now()->year; $y >= 2020; $y--)
+                                    <option value="{{ $y }}">{{ $y }}</option>
+                                @endfor
+                            </select>
+                        </div>
+                        <div class="col-md-2 d-flex justify-content-end align-items-center">
+                            <button class="btn btn-primary d-flex align-items-center gap-2" type="submit">
+                                <i class="bi bi-download"></i> Unduh PDF
+                            </button>
+                        </div>
+                    </form>
+                </div>
+            </div>
         </div>
     </div>
 </div>
