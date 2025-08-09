@@ -2,14 +2,14 @@
   class="layout-menu menu-vertical menu bg-white shadow-sm border-end"
   style="height: 100vh; border-radius: 0;">
 
-    <!-- Logo El-Bakkah + Nama -->
+    <!-- Logo El Bakkah + Nama -->
     <div class="app-brand d-flex align-items-center px-3 py-3">
-        <img src="{{ asset('img/icons/brands/el-bakkah.png') }}"
-            alt="Logo El-Bakkah"
+        <img src="{{ asset('img/icons/brands/elbakkah.png') }}"
+            alt="Logo El Bakkah"
             style="height: 48px; width: auto; object-fit: contain; margin-right: 12px;">
 
         <span class="fw-bold text-dark fs-5 text-wrap" style="line-height: 1.3;">
-            El-Bakkah Travel Umrah
+            El Bakkah Travel 
         </span>
     </div>
 

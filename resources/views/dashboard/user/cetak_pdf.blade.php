@@ -2,7 +2,7 @@
 <html lang="id">
 <head>
     <meta charset="UTF-8">
-    <title>Laporan Data User</title>
+    <title>Laporan User</title>
     <style>
         body {
             font-family: 'Times New Roman', Times, serif;
@@ -88,16 +88,16 @@
 
     <!-- Kop Surat -->
     <div class="kop-surat">
-        <img src="{{ public_path('img/icons/brands/el-bakkah.png') }}" alt="Logo El-Bakkah">
+        <img src="{{ public_path('img/icons/brands/elbakkah.png') }}" alt="Logo El Bakkah">
         <div class="info">
-            <h2>EL-BAKKAH TRAVEL</h2>
+            <h2>EL BAKKAH TRAVEL</h2>
             <p>Jl. Lolong Karan no. 14 C, Sungai Sapih, Kec. Kuranji, Sumatera Barat 25173</p>
             <p>Telp: +62 822-8600-3630 | Email: elbakkah4@gmail.com</p>
         </div>
     </div>
 
     <!-- Judul -->
-    <h3 class="judul">Laporan Data User</h3>
+    <h3 class="judul">Laporan User</h3>
 
     <!-- Tabel User -->
     <table>

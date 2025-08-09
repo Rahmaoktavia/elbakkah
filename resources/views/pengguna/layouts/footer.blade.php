@@ -3,8 +3,8 @@
 				<div class="row mb-5">
 					<div class="col-md pt-5">
 						<div class="ftco-footer-widget pt-md-5 mb-4">
-							<h2 class="ftco-heading-2">El-Bakkah Travel</h2>
-							<p>El-Bakkah Travel – PT Bakkah Ihsan Mubarakah merupakan sebuah perusahaan yang bergerak di bidang jasa pelayanan ibadah umrah yang berusaha mewujudkan penyelengaraan perjalanan umrah mulai dari pendaftaran sampai dengan keberangkatan dan kepulangan dengan prinsip kehati-hatian dan profesional.</p>
+							<h2 class="ftco-heading-2">El Bakkah Travel</h2>
+							<p>El Bakkah Travel – PT Bakkah Ihsan Mubarakah merupakan sebuah perusahaan yang bergerak di bidang jasa pelayanan ibadah umrah yang berusaha mewujudkan penyelengaraan perjalanan umrah mulai dari pendaftaran sampai dengan keberangkatan dan kepulangan dengan prinsip kehati-hatian dan profesional.</p>
 							<ul class="ftco-footer-social list-unstyled float-md-left float-lft">
 								<li class="ftco-animate"><a href="https://www.facebook.com/el.bakkah"><span class="fa fa-facebook"></span></a></li>
 								<li class="ftco-animate"><a href="https://www.instagram.com/elbakkah_travel_umrah?igsh=bnpxdzFubWJ6NnI3"><span class="fa fa-instagram"></span></a></li>
@@ -28,7 +28,7 @@
 					<div class="col-md-12 text-center">
 
 						<p><!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
-							Copyright &copy;<script>document.write(new Date().getFullYear());</script> El-Bakkah Travel Umrah</a>
+							Copyright &copy;<script>document.write(new Date().getFullYear());</script> El Bakkah Travel Umrah</a>
 							<!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. --></p>
 						</div>
 					</div>

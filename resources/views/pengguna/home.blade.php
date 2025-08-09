@@ -6,7 +6,7 @@
 			<div class="container">
 				<div class="row no-gutters slider-text js-fullheight align-items-center" data-scrollax-parent="true">
 					<div class="col-md-7 ftco-animate">
-						<span class="subheading">Selamat Datang di El-Bakkah Travel</span>
+						<span class="subheading">Selamat Datang di El Bakkah Travel</span>
 						<h1 class="mb-4">Temani Langkah Suci Anda Menuju Tanah Haram</h1>
 						<p class="caps">Perjalanan spiritual yang nyaman, aman, dan penuh keberkahan</p>
 					</div>
@@ -96,9 +96,9 @@
 		<section class="ftco-section bg-light py-5">
 			<div class="container">
 			  <div class="text-center mb-5">
-				<h2 class="font-weight-bold text-dark">Alasan Kenapa Harus Memilih El-Bakkah Travel</h2>
+				<h2 class="font-weight-bold text-dark">Alasan Kenapa Harus Memilih El Bakkah Travel</h2>
 				<p class="text-muted" style="max-width: 700px; margin: 0 auto;">
-				  El-Bakkah Travel berkomitmen menjadi mitra perjalanan spiritual Anda dengan pelayanan terbaik, amanah, dan penuh keberkahan.
+				  El Bakkah Travel berkomitmen menjadi mitra perjalanan spiritual Anda dengan pelayanan terbaik, amanah, dan penuh keberkahan.
 				</p>
 			  </div>
 		  
@@ -172,7 +172,7 @@
 			  <div class="row justify-content-center mb-4">
 				<div class="col-md-10 text-center">
 				  <h2 class="font-weight-bold text-dark">Galeri Kegiatan Jamaah Umrah</h2>
-				  <p class="text-muted">Potret momen kebersamaan, ibadah penuh makna, dan perjalanan spiritual para jamaah El-Bakkah Travel.</p>
+				  <p class="text-muted">Potret momen kebersamaan, ibadah penuh makna, dan perjalanan spiritual para jamaah El Bakkah Travel.</p>
 				</div>
 			  </div>
 		  

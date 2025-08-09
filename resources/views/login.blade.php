@@ -3,7 +3,7 @@
   <head>
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no" />
-    <title>El-Bakkah Travel</title>
+    <title>El Bakkah Travel</title>
 
     <!-- Favicon -->
     <link rel="icon" type="image/x-icon" href="{{ asset('img/favicon/favicon.ico') }}" />
@@ -88,10 +88,10 @@
           <div class="card">
             <div class="card-body">
               <div class="app-brand justify-content-center mb-2">
-                <img src="{{ asset('img/icons/brands/el-bakkah.png') }}" alt="El-Bakkah Logo">
+                <img src="{{ asset('img/icons/brands/elbakkah.png') }}" alt="El Bakkah Logo">
               </div>
 
-              <h4 class="text-center text-brand-title">El-Bakkah Travel Umrah</h4>
+              <h4 class="text-center text-brand-title">El Bakkah Travel</h4>
 
               @if(session('error'))
                 <div class="alert alert-danger">{{ session('error') }}</div>

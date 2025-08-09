@@ -7,7 +7,7 @@
         <script>
           document.write(new Date().getFullYear());
         </script>
-        El-Bakkah Travel Umrah
+        El Bakkah Travel Umrah
       </div>
     </div>
   </div>

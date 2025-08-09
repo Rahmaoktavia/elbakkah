@@ -36,7 +36,7 @@
         <p class="lead mx-auto text-dark">Pada Februari 2020, kantor berpindah ke By Pass (samping Pegadaian), namun hanya sebulan karena pandemi. Kini, El Bakkah beralamat di Jl. Lolong Karan No. 14 C, Sungai Sapih, Kuranji, Padang.</p>
       </div>
       <div class="col-md-6 text-center">
-        <img src="{{ asset('img/icons/brands/el-bakkah.png') }}" alt="Kantor El Bakkah" class="img-fluid rounded shadow" style="max-width: 80%;">
+        <img src="{{ asset('img/icons/brands/elbakkah.png') }}" alt="Kantor El Bakkah" class="img-fluid rounded shadow" style="max-width: 80%;">
       </div>
     </div>
 

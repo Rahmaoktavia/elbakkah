@@ -67,7 +67,7 @@
   function swalLogout() {
     Swal.fire({
       title: 'Yakin ingin logout?',
-      text: 'Kamu akan keluar dari akun El-Bakkah Travel.',
+      text: 'Kamu akan keluar dari akun El Bakkah Travel.',
       icon: 'warning',
       showCancelButton: true,
       confirmButtonColor: '#3085d6',

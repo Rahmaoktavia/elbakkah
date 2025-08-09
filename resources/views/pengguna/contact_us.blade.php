@@ -26,7 +26,7 @@
       <div class="col-lg-6">
         <div class="bg-white p-4 rounded-4 shadow-sm">
           <h4 class="fw-bold text-dark mb-4 border-bottom pb-2">Kantor Pusat</h4>
-          <p class="mb-2"><strong class="text-dark">El-Bakkah Travel Umrah</strong></p>
+          <p class="mb-2"><strong class="text-dark">El Bakkah Travel Umrah</strong></p>
           <ul class="list-unstyled">
             <li class="mb-3 d-flex align-items-start">
               <i class="fa fa-map-marker text-primary me-2 mt-1"></i>
