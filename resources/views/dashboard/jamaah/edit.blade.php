@@ -20,23 +20,23 @@
             <div class="row mb-4 gx-5">
                 <div class="col-md-6 mb-3">
                     <label class="form-label fw-bold text-dark">Nama Jamaah</label>
-                    <input type="text" class="form-control" value="{{ $jamaah->nama_jamaah }}" readonly>
+                    <input type="text" class="form-control" name="nama_jamaah" value="{{ $jamaah->nama_jamaah }}">
                 </div>
 
                 <div class="col-md-6 mb-3">
                     <label class="form-label fw-bold text-dark">NIK</label>
-                    <input type="text" class="form-control" value="{{ $jamaah->nik }}" readonly>
+                    <input type="text" class="form-control" name="nik" value="{{ $jamaah->nik }}">
                 </div>
 
                 <div class="col-md-6 mb-3">
                     <label class="form-label fw-bold text-dark">Tempat Lahir</label>
-                    <input type="text" class="form-control" value="{{ $jamaah->tempat_lahir }}" readonly>
+                    <input type="text" class="form-control" name="tempat_lahir" value="{{ $jamaah->tempat_lahir }}">
                 </div>
 
                 <div class="col-md-6 mb-3">
                     <label class="form-label fw-bold text-dark">Tanggal Lahir</label>
-                    <input type="text" class="form-control" value="{{ \Carbon\Carbon::parse($jamaah->tanggal_lahir)->translatedFormat('d F Y') }}" readonly>
-                  </div>
+                    <input type="date" class="form-control" name="tanggal_lahir" value="{{ $jamaah->tanggal_lahir }}">
+                </div>
                 
                 <div class="col-md-6 mb-3">
                     <label class="form-label fw-bold text-dark">Umur</label>
@@ -45,27 +45,30 @@
 
                 <div class="col-md-6 mb-3">
                     <label class="form-label fw-bold text-dark">Jenis Kelamin</label>
-                    <input type="text" class="form-control" value="{{ $jamaah->jenis_kelamin }}" readonly>
+                    <select name="jenis_kelamin" class="form-control">
+                        <option value="Laki-laki" {{ $jamaah->jenis_kelamin == 'Laki-laki' ? 'selected' : '' }}>Laki-laki</option>
+                        <option value="Perempuan" {{ $jamaah->jenis_kelamin == 'Perempuan' ? 'selected' : '' }}>Perempuan</option>
+                    </select>
                 </div>
 
                 <div class="col-md-6 mb-3">
                     <label class="form-label fw-bold text-dark">Nomor Telepon</label>
-                    <input type="text" class="form-control" value="{{ $jamaah->no_telepon }}" readonly>
+                    <input type="text" class="form-control" name="no_telepon" value="{{ $jamaah->no_telepon }}">
                 </div>
 
                 <div class="col-md-12 mb-3">
                     <label class="form-label fw-bold text-dark">Alamat</label>
-                    <textarea class="form-control" rows="2" readonly>{{ $jamaah->alamat }}</textarea>
+                    <textarea class="form-control" name="alamat" rows="2">{{ $jamaah->alamat }}</textarea>
                 </div>
 
                 <div class="col-md-6 mb-3">
                     <label class="form-label fw-bold text-dark">Nama Ayah</label>
-                    <input type="text" class="form-control" value="{{ $jamaah->nama_ayah }}" readonly>
+                    <input type="text" class="form-control" name="nama_ayah" value="{{ $jamaah->nama_ayah }}">
                 </div>
 
                 <div class="col-md-6 mb-3">
                     <label class="form-label fw-bold text-dark">Pekerjaan</label>
-                    <input type="text" class="form-control" value="{{ $jamaah->pekerjaan }}" readonly>
+                    <input type="text" class="form-control" name="pekerjaan" value="{{ $jamaah->pekerjaan }}">
                 </div>
             </div>
 
