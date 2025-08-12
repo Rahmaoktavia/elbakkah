@@ -56,17 +56,18 @@
         </div>
 
         {{-- Gambar Paket --}}
-        <div class="text-center mb-4">
-            <label class="fw-bold text-dark d-block mb-3 fs-5">Gambar Paket Umrah</label>
+        <div class="mb-4">
+            <label class="fw-bold text-dark d-block mb-3 fs-5 text-center">Gambar Paket Umrah</label>
             @if ($paket->gambar_paket)
-                <div class="card mx-auto shadow-sm border-0 p-4" style="max-width: 600px; background-color: #ffffff;">
+                <div class="shadow-sm border-0" 
+                    style="background-color: #ffffff; max-width: 500px; margin: 0 auto;">
                     <img src="{{ asset('img/' . $paket->gambar_paket) }}"
-                         alt="Gambar Paket"
-                         class="img-fluid rounded"
-                         style="max-height: 400px; object-fit: cover; width: 100%;">
+                        alt="Gambar Paket"
+                        class="img-fluid rounded w-100"
+                        style="object-fit: contain;">
                 </div>
             @else
-                <p class="text-secondary">Tidak ada gambar.</p>
+                <p class="text-secondary text-center">Tidak ada gambar.</p>
             @endif
         </div>
 

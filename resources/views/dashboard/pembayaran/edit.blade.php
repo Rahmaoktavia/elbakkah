@@ -83,9 +83,11 @@
                             class="img-fluid rounded shadow"
                             style="max-height: 400px; object-fit: contain;">
                         <div class="mt-2">
-                            <a href="{{ asset($pembayaran->bukti_transfer) }}" target="_blank" class="btn btn-outline-primary btn-sm">
-                                <i class="bx bx-download me-1"></i> Unduh Bukti
-                            </a>
+                            <a href="{{ asset($pembayaran->bukti_transfer) }}" 
+                                download 
+                                class="btn btn-outline-primary btn-sm">
+                                 <i class="bx bx-download me-1"></i> Unduh Bukti
+                             </a>                             
                         </div>
                     </div>
                 @else

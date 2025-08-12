@@ -19,102 +19,6 @@
   </div>
 </section>
 
-<style>
-  .icon-circle2 {
-    width: 44px;
-    height: 44px;
-    background-color: #1AC9E0;
-    color: #fff;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: 50%;
-    font-size: 18px;
-  }
-
-  .info-item {
-    display: flex;
-    align-items: center;
-    margin-bottom: 1rem;
-    gap: 15px;
-  }
-
-  .info-item .text-muted {
-    font-size: 0.9rem;
-    margin-bottom: 4px;
-  }
-
-  .info-item .text-dark {
-    font-weight: 600;
-    font-size: 1rem;
-  }
-
-  .custom-card {
-    border-radius: 14px;
-    box-shadow: 0 8px 24px rgba(0,0,0,0.06);
-    border: none;
-    background: #fff;
-    padding: 24px;
-  }
-
-  .section-title {
-    font-size: 1.3rem;
-    font-weight: 700;
-    color: #343a40;
-    margin-bottom: 1rem;
-    border-bottom: 2px solid #eee;
-    padding-bottom: 6px;
-  }
-
-  .btn-reservasi {
-    border-radius: 30px;
-    font-weight: 600;
-  }
-
-  .other-paket-item {
-    padding: 12px 0;
-    border-bottom: 1px solid #eee;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-  }
-
-  .other-paket-item img {
-    width: 80px;
-    height: 60px;
-    object-fit: cover;
-    border-radius: 8px;
-  }
-
-  .other-paket-item:last-child {
-    border-bottom: none;
-  }
-
-  .btn-wa {
-    background-color: #25D366;
-    color: white;
-    font-weight: bold;
-    font-size: 1rem;
-    border-radius: 8px;
-    transition: all 0.3s ease;
-  }
-
-  .btn-wa:hover {
-    background-color: #1ebe5d;
-  }
-
-  .paket-link {
-  color: #000000; /* warna hitam */
-  font-weight: 600;
-  text-decoration: none;
-}
-
-.paket-link:hover {
-  text-decoration: underline;
-}
-
-</style>
-
 <section class="py-5 bg-light">
   <div class="container">
     <div class="row">
@@ -131,6 +35,13 @@
               {{ strtoupper($paketUmrahs->tipePaket->nama_tipe) }}
             </div>
           @endif
+
+          {{-- Tombol Download Brosur --}}
+          <a href="{{ asset('img/' . $paketUmrahs->gambar_paket) }}" 
+            download="{{ $paketUmrahs->nama_paket }}_brosur.jpg"
+            class="btn btn-download-brosur">
+            <i class="fa fa-download me-1"></i> Download Brosur
+        </a>
         </div>        
 
         <div class="custom-card mb-4">
