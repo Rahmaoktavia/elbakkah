@@ -22,13 +22,6 @@ use App\Models\PaketUmrah;
 use App\Models\Galeri;
 use App\Models\Artikel;
 
-// Route::get('/', function () {
-//     return view('dashboard.index');
-// })->name('dashboard.index');
-
-// Route::get('/', function () {
-//     return view('pengguna.home');
-// })->name('home');
 
 Route::get('/', function () {
     $paketUmrahs = PaketUmrah::latest()->take(3)->get();
@@ -51,6 +44,7 @@ Route::middleware(['auth', 'role:Admin,Direktur Keuangan,Pimpinan'])->group(func
     Route::get('/dashboard', [DashboardController::class, 'dashboard'])->name('dashboard.index');
 });
 
+// Route Admin
 Route::middleware(['auth', 'role:Admin'])->prefix('admin')->name('dashboard.')->group(function () {
     // Galeri
     Route::get('galeri/cetak_pdf', [GaleriController::class, 'cetakPDF'])->name('galeri.cetak_pdf');
@@ -72,10 +66,6 @@ Route::middleware(['auth', 'role:Admin'])->prefix('admin')->name('dashboard.')->
     Route::get('jamaah/cetak_pdf', [JamaahController::class, 'cetakPDF'])->name('jamaah.cetak_pdf');
     Route::resource('jamaah', JamaahController::class);
 
-    // Pemesanan
-    // Route::get('pemesanan/cetak_pdf', [PemesananController::class, 'cetakPDF'])->name('pemesanan.cetak_pdf');
-    // Route::resource('pemesanan', PemesananController::class);
-
     // Inventaris Perlengkapan
     Route::get('inventaris/cetak_pdf', [InventarisPerlengkapanController::class, 'cetakPDF'])->name('inventaris.cetak_pdf');
     Route::resource('inventaris', InventarisPerlengkapanController::class);
@@ -91,14 +81,9 @@ Route::middleware(['auth', 'role:Admin'])->prefix('admin')->name('dashboard.')->
     // Tipe Paket Umrah
     Route::resource('tipe-paket', TipePaketController::class);
 
-    // Pembayaran
-    // Route::get('pembayaran/cetak_pdf', [PembayaranController::class, 'cetakPDF'])->name('pembayaran.cetak_pdf');
-    // Route::resource('pembayaran', PembayaranController::class);
-
-    // Route::patch('/pembayaran/{id}/status', [PembayaranController::class, 'updateStatus'])->name('pembayaran.updateStatus');
 });
 
-
+// Route Admin, Direktur Keuangan
 Route::middleware(['auth', 'role:Admin,Direktur Keuangan'])->prefix('manajemen')->name('dashboard.')->group(function () {
     Route::get('pemesanan/cetak_pdf', [PemesananController::class, 'cetakPDF'])->name('pemesanan.cetak_pdf');
     Route::resource('pemesanan', PemesananController::class);
