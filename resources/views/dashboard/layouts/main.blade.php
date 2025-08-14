@@ -106,6 +106,26 @@
   }
 }
 
+/* Warna pagination */
+.page-item.active .page-link {
+    background-color: #1AC9E0; /* biru khas El Bakkah */
+    border-color: #1AC9E0;
+    color: #fff;
+}
+
+.page-link {
+    color: #1AC9E0; 
+}
+
+.page-link:hover {
+    background-color: #E0FBFF;
+    color: #1AC9E0;
+}
+
+.page-item.disabled .page-link {
+    background-color: #f8f9fa; /* abu muda, tapi lebih soft */
+    color: #ccc;
+}
     /* Styling khusus checkbox */
     .form-check-input {
         width: 1.3em;

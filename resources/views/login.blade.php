@@ -112,7 +112,7 @@
                 <div class="mb-3 form-password-toggle">
                   <div class="d-flex justify-content-between">
                     <label class="form-label form-label-capitalize" for="password">Password</label>
-                    <a href="#" class="forgot-link"><small>Lupa password?</small></a>
+                    {{-- <a href="#" class="forgot-link"><small>Lupa password?</small></a> --}}
                   </div>
                   <div class="input-group input-group-merge" id="toggle-password">
                     <input
