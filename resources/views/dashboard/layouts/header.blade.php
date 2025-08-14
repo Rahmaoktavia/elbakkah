@@ -15,7 +15,7 @@
           <ul class="navbar-nav flex-row align-items-center ms-auto">
             <li class="nav-item d-flex align-items-center me-2">
               <div class="avatar avatar-online me-2">
-                <img src="{{ Auth::user()->foto_profil ? asset('storage/foto_profil/' . Auth::user()->foto_profil) : asset('img/avatars/1.png') }}" alt="User" class="w-px-40 h-auto rounded-circle" />
+                <i class="fas fa-user-circle" style="font-size: 40px; color: #555;"></i>
               </div>
               <span class="badge" style="background-color: #1AC9E0; text-transform: capitalize;">
                 {{ strtolower(Auth::user()->role) }}
@@ -31,7 +31,7 @@
                 <li class="px-3 py-2">
                   <div class="d-flex align-items-center">
                     <div class="avatar me-3">
-                      <img src="{{ Auth::user()->foto_profil ? asset('storage/foto_profil/' . Auth::user()->foto_profil) : asset('img/avatars/1.png') }}" alt="User" class="w-px-40 h-auto rounded-circle" />
+                      <i class="fas fa-user-circle" style="font-size: 40px; color: #555;"></i>
                     </div>
                     <div>
                       <h6 class="mb-0">{{ Auth::user()->name }}</h6>
