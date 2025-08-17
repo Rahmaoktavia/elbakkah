@@ -37,17 +37,6 @@ class PembayaranController extends Controller
     /**
      * Show the form for creating a new resource.
      */
-    public function create($pemesananId)
-    {
-        $pemesanan = Pemesanan::with(['jamaah.user', 'jadwalKeberangkatan.paket'])
-            ->where('id', $pemesananId)
-            ->whereHas('jamaah', function ($q) {
-                $q->where('user_id', Auth::id());
-            })
-            ->firstOrFail();
-
-        return view('pengguna.pembayaran', compact('pemesanan'));
-    }
 
     /**
      * Store a newly created resource in storage.
@@ -125,24 +114,6 @@ class PembayaranController extends Controller
     {
         //
     }
-
-    // public function updateStatus(Request $request, $id)
-    // {
-    //     $request->validate([
-    //         'status_verifikasi' => 'required|in:Menunggu,Diterima,Ditolak',
-    //         'catatan' => 'nullable|string|max:1000',
-    //     ]);
-
-    //     $pembayaran = Pembayaran::findOrFail($id);
-    //     $pembayaran->status_verifikasi = $request->status_verifikasi;
-    //     $pembayaran->catatan = $request->catatan;
-    //     $pembayaran->save();
-
-    //     return redirect()->route('dashboard.pembayaran.index')->with([
-    //         'success' => 'Status verifikasi pembayaran berhasil diperbarui.',
-    //         'alert_type' => 'edit'
-    //     ]);
-    // }
 
     public function updateStatus(Request $request, $id)
     {

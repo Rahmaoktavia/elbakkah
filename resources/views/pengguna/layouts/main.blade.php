@@ -156,6 +156,9 @@
 .label-tipe-paket.ramadhan {
   background-color: #198754;
 }
+.label-tipe-paket.hemat {
+  background-color: #cc26b9;
+}
 
 .label-tipe-sidebar {
   position: absolute;

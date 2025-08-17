@@ -101,7 +101,7 @@
                       $tanggalBerangkat = \Carbon\Carbon::parse($jadwal->tanggal_berangkat);
                     @endphp
 
-                    @if (now()->lessThanOrEqualTo($tanggalBerangkat))
+                    @if (now()->lessThanOrEqualTo($tanggalBerangkat) && $jadwal->kuota > 0)
                       <a href="{{ route('pengguna.formjamaah', ['jadwal_id' => $jadwal->id, 'paket_id' => $paketUmrahs->id]) }}"
                         class="btn btn-sm btn-outline-success btn-reservasi">Reservasi</a>
                     @else

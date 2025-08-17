@@ -15,12 +15,12 @@ class DistribusiPerlengkapanController extends Controller
      */
     public function index(Request $request)
     {
-        $query = DistribusiPerlengkapan::with(['jamaah.user', 'perlengkapan']);
+        $query = DistribusiPerlengkapan::with(['jamaah', 'perlengkapan']);
 
         if ($request->filled('search')) {
             $search = $request->input('search');
-            $query->whereHas('jamaah.user', function ($q) use ($search) {
-                $q->where('name', 'like', "%{$search}%");
+            $query->whereHas('jamaah', function ($q) use ($search) {
+                $q->where('nama_jamaah', 'like', "%{$search}%");
             })->orWhereHas('perlengkapan', function ($q) use ($search) {
                 $q->where('nama_perlengkapan', 'like', "%{$search}%");
             });

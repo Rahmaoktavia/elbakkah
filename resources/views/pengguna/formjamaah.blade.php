@@ -127,7 +127,7 @@
 
               {{-- Uploads --}}
               @foreach ([
-                ['label' => 'Pas Foto', 'name' => 'pas_foto'],
+                ['label' => 'Pas Foto 4x6', 'name' => 'pas_foto'],
                 ['label' => 'File KTP', 'name' => 'file_ktp'],
                 ['label' => 'File KK', 'name' => 'file_kk'],
                 ['label' => 'File Paspor', 'name' => 'file_paspor']

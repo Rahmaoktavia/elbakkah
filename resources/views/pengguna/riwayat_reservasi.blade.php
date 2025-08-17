@@ -211,6 +211,14 @@
         <div class="card-body">
             <h4 class="fw-bold mb-4 border-bottom pb-2">Tambah Pembayaran</h4>
 
+            {{-- Pesan sukses --}}
+            @if(session('success'))
+                <div class="alert alert-success alert-dismissible fade show" role="alert">
+                    {{ session('success') }}
+                    <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+                </div>
+            @endif
+
             @if ($pemesanan->status_pembayaran != 'Lunas')
                 <form action="{{ route('pembayaran.store') }}" method="POST" enctype="multipart/form-data">
                     @csrf

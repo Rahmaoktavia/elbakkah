@@ -135,18 +135,6 @@ class PemesananController extends Controller
         ]);
     }
 
-    public function updateStatus(Request $request, $id)
-    {
-        $pemesanan = Pemesanan::findOrFail($id);
-        $pemesanan->status_pembayaran = 'Lunas';
-        $pemesanan->save();
-
-        return redirect()->back()->with([
-            'success' => 'Status pembayaran diperbarui menjadi Lunas.',
-            'alert_type' => 'edit'
-        ]);
-    }
-
     public function cetakPDF(Request $request)
     {
         $query = Pemesanan::with(['jamaah', 'jadwalKeberangkatan.paket']);

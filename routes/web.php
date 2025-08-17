@@ -151,11 +151,11 @@ Route::middleware(['auth', 'role:Jamaah'])->group(function () {
 
 Route::get('/dashboard/chart/pembayaran', [PembayaranController::class, 'getMonthlyChartData'])->name('dashboard.chart.pembayaran')->middleware(['auth', 'role:Admin,Direktur Keuangan,Pimpinan']);
 
-// Halaman pengguna
+// Halaman Pengguna Contact Us
 Route::get('/contact-us', [ContactUsController::class, 'contactUs'])->name('contact_us.contactUs');
 Route::post('/contact-us', [ContactUsController::class, 'store'])->name('contact_us.store');
 
-// Dashboard admin
+// Halaman Admin Contact Us
 Route::prefix('admin')->middleware(['auth', 'role:Admin'])->group(function () {
     Route::get('/contact-us', [ContactUsController::class, 'index'])->name('dashboard.contact_us.index');
     Route::get('/contact-us/{id}/edit', [ContactUsController::class, 'edit'])->name('dashboard.contact_us.edit');
