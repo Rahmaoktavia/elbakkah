@@ -126,9 +126,12 @@
                 @error('password') <small class="text-danger">{{ $message }}</small> @enderror
               </div>
 
-              <div class="mb-3">
+              <div class="mb-3 form-password-toggle">
                 <label for="password_confirmation" class="form-label form-label-capitalize">Konfirmasi password</label>
-                <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" placeholder="Masukkan konfirmasi password" required />
+                <div class="input-group input-group-merge">
+                  <input type="password" class="form-control" id="password_confirmation" name="password_confirmation" placeholder="Masukkan konfirmasi password" required />
+                  <span class="input-group-text cursor-pointer"><i class="bx bx-hide"></i></span>
+                </div>
               </div>
 
               <div class="mb-3">
